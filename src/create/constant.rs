@@ -21,12 +21,29 @@ nav{
   border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
+.file li{
+  border-radius: 0.3rem;
+}
+.file > li:hover{
+  background-color: #a4a8d4aa;
+}
+.func li{
+  padding-left: 1rem;
+  border-radius: 0.3rem;
+}
+.func li:hover{
+  background-color: #a4a8d455;
+}
+.display{
+  display: none;
+}
 ul{
+  list-style: none;
   position: fixed;
   padding: 0;
   margin: 0;
   width: 200px;
-  height: 95vh;
+  /* height: 95vh; */
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -37,8 +54,7 @@ ul::-webkit-scrollbar {
 li{
   font-size: 0.95rem;
   margin-top: 0.2rem;
-  margin-left: 0.5rem;
-  list-style: none;
+  padding-left: 0.5rem;
 }
 main{
   width: 800px;
@@ -62,14 +78,14 @@ code{
 a{
   color: inherit;
   text-decoration: none;
-  border-radius: 0.3rem;
 }
-ul a{
-  display: block;
-  width: 100%;
-}
-ul a:hover{
-  background-color: #a4a8d455;
+footer{
+  position: fixed;
+  width: calc(200px - 1rem);
+  bottom: 1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  border-top: solid 1px #734f9655;
 }
 </style>
 <title></title>
@@ -80,7 +96,11 @@ ul a:hover{
 pub const HTML_END: &str = r#"
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 <script>
-
+let file = document.getElementById("csv");
+let func = document.getElementsByClassName("csv")[0];
+csv.onclick = () => {
+    func.classList.toggle("display");
+};
 </script>
 </body>
 </html>"#;
