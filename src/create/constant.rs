@@ -6,37 +6,70 @@ pub const HTML_START: &str = r#"<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
-  background-color: lavender;
+  background-color: #e6e6fa88;
 }
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
 }
 .wrap{
+  width: fit-content;
   display: flex;
   margin: 0 auto;
 }
-main{
-}
 .nav{
-  width: 180px;
+  width: 200px;
+  border-right: solid 1px #734f9633;
+  background-color: #e6e6faee;
+}
+ul{
+  position: fixed;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;
+  height: 95vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+ul::-webkit-scrollbar {
+  display: none;
+}
+li{
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  margin-left: 0.5rem;
+}
+main{
+  width: 800px;
 }
 .pair{
   padding: 1rem;
   border-radius: 1rem;
-  border-bottom: solid 3px #000;
 }
 h3{
-  border-bottom: solid 2px #000;
+  color: #734f96;
+  border-bottom: solid 2px #734f96;
 }
 p{
   margin-left: 2rem;
   font-size: 1rem;
 }
-code {
+code{
   font-size: 1rem;
-  padding: 0.1em 0.25em;
 }
-
+a{
+  color: inherit;
+  text-decoration: none;
+  border-radius: 0.3rem;
+}
+ul a{
+  display: block;
+  width: 100%;
+}
+ul a:hover{
+  background-color: #a4a8d455;
+}
 </style>
 <title></title>
 </head>
