@@ -4,6 +4,8 @@ use std::{fs::File, io::Write};
 pub fn create_main(file: &mut File, file_vec: &Vec<(String, Vec<String>, Vec<String>)>) {
     // main
     file.write_all("<main>".as_bytes()).unwrap();
+
+    file.write_all("".as_bytes()).unwrap();
     for (name, doc, func) in file_vec {
         // .pair
         file.write_all(r#"<div class="pair">"#.as_bytes()).unwrap();

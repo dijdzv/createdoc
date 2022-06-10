@@ -16,14 +16,13 @@ body{
   display: flex;
   margin: 0 auto;
 }
-.nav{
+nav{
   width: 200px;
   border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
 ul{
   position: fixed;
-  list-style: none;
   padding: 0;
   margin: 0;
   width: 200px;
@@ -39,6 +38,7 @@ li{
   font-size: 0.95rem;
   margin-top: 0.2rem;
   margin-left: 0.5rem;
+  list-style: none;
 }
 main{
   width: 800px;
@@ -50,6 +50,7 @@ main{
 h3{
   color: #734f96;
   border-bottom: solid 2px #734f96;
+  padding-top: 1rem;
 }
 p{
   margin-left: 2rem;
@@ -78,6 +79,9 @@ ul a:hover{
 
 pub const HTML_END: &str = r#"
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
+<script>
+
+</script>
 </body>
 </html>"#;
 

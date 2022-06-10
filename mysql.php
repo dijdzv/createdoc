@@ -8,3 +8,13 @@
 //   }
 //   return $escaped_strings;
 // }
+
+
+function read_mysql(object $result): array
+{
+  $row_list = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $row_list[] = $row;
+  }
+  return $row_list;
+}

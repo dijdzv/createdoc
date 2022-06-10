@@ -16,14 +16,13 @@ body{
   display: flex;
   margin: 0 auto;
 }
-.nav{
+nav{
   width: 200px;
   border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
 ul{
   position: fixed;
-  list-style: none;
   padding: 0;
   margin: 0;
   width: 200px;
@@ -39,6 +38,7 @@ li{
   font-size: 0.95rem;
   margin-top: 0.2rem;
   margin-left: 0.5rem;
+  list-style: none;
 }
 main{
   width: 800px;
@@ -50,6 +50,7 @@ main{
 h3{
   color: #734f96;
   border-bottom: solid 2px #734f96;
+  padding-top: 1rem;
 }
 p{
   margin-left: 2rem;
@@ -74,7 +75,7 @@ ul a:hover{
 <title></title>
 </head>
 <body>
-<div class="wrap"><div class="nav"><ul><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div><main><div class="pair"><a id="add_csv_record"><h3>add_csv_record</h3></a><pre><p>
+<div class="wrap"><nav><li>csv</li><ul class="func csv"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></nav><main><div class="pair"><a id="add_csv_record"><h3>add_csv_record</h3></a><pre><p>
 csvファイルにレコードを追加する
 自動でidを付与する
 
@@ -220,98 +221,10 @@ csvファイルを上書きする
   }
   return false;
 }
-</code></pre></div><div class="pair"><a id="two_to_one"><h3>two_to_one</h3></a><pre><p>
-2次元配列から1次元配列を抜き取る
-
-@param  array $row_list 抜き取られる2次元配列
-@param  int $colNum 抜き取りたいカラム番号
-@return array 抜き取られた1次元配列
-
-</p></pre><pre class="prettyprint linenums"><code>function two_to_one(array $row_list, int $colNum): array
-{
-  $list = [];
-  foreach ($row_list as $row) {
-    $list[] = $row[$colNum];
-  }
-  return $list;
-}
-</code></pre></div><div class="pair"><a id="what_num"><h3>what_num</h3></a><pre><p>
-ファイルに追加せずに追加したい値が何番目(key)か返す
-
-@param  array $list 1次元配列のみの配列
-@param  int $add_num 追加したい値
-@return int 何番目
-
-</p></pre><pre class="prettyprint linenums"><code>function what_num(array $list, int $add_num): int
-{
-  usort($list, function ($point_1, $point_2) {
-    return $point_1 <=> $point_2;
-  });
-  $list[] = $add_num;
-
-  return array_keys($list, $add_num)[count(array_keys($list, $add_num)) - 1];
-}
-</code></pre></div><div class="pair"><a id="read_txt_file"><h3>read_txt_file</h3></a><pre><p>
-txtファイルを読み込み配列に格納する
-
-@param string $filepath
-@return array
-
-</p></pre><pre class="prettyprint linenums"><code>function read_txt_file(string $filepath): array
-{
-  $fp = fopen($filepath, 'r');
-  flock($fp, LOCK_SH);
-  $row_list = [];
-  while ($row = fgets($fp)) {
-    $row = str_replace("\r", '', $row);
-    $row = str_replace("\n", '', $row);
-    $row_list[] = $row;
-  }
-  fclose($fp);
-  return $row_list;
-}
-</code></pre></div><div class="pair"><a id="add_txt_data"><h3>add_txt_data</h3></a><pre><p>
-txtファイルに
-
-@param string $filepath
-@param array $content
-@return void
-
-</p></pre><pre class="prettyprint linenums"><code>function add_txt_data(string $filepath, array $content)
-{
-  $fp = fopen($filepath, 'a');
-  flock($fp, LOCK_EX);
-  fputs($fp, $content . "\r\n");
-  fclose($fp);
-}
-</code></pre></div><div class="pair"><a id="write_txt_file"><h3>write_txt_file</h3></a><pre><p>
-</p></pre><pre class="prettyprint linenums"><code>function write_txt_file($filepath, $row_list)
-{
-  $fp = fopen($filepath, 'w');
-  flock($fp, LOCK_EX);
-  foreach ($row_list as $row) {
-    fputs($fp, $row . "\r\n");
-  }
-  fclose($fp);
-}
-</code></pre></div><div class="pair"><a id="count_num"><h3>count_num</h3></a><pre><p>
-実行する度に+1するカウント
-
-@param  string $filepath ファイルパス
-@param  int    $row_num   カウントしたい行番号
-@return void
-
-</p></pre><pre class="prettyprint linenums"><code>function count_num($filepath, $row_num)
-{
-  $file = file($filepath);
-  $count = $file[$row_num];
-  $count = str_replace("\r", '', $count);
-  $count = str_replace("\n", '', $count);
-  $count++;
-  $file[$row_num] = $count . "\r\n";
-  file_put_contents($filepath, $file);
-}
 </code></pre></div></main></div>
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
+<script>
+
+</script>
 </body>
 </html>

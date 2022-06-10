@@ -6,7 +6,7 @@ mod add;
 mod create;
 
 fn main() {
-    let path = Path::new("./file.php");
+    let path = Path::new("./csv.php");
 
     let mut buf = Vec::new();
     let mut pair = Vec::new();
