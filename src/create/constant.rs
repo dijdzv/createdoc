@@ -5,6 +5,9 @@ pub const HTML_START: &str = r#"<!DOCTYPE html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+body{
+  background-color: lavender;
+}
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
 }
@@ -12,17 +15,19 @@ pub const HTML_START: &str = r#"<!DOCTYPE html>
   display: flex;
 }
 main{
-  width: 80%;
+  // width: 80%;
 }
 .nav{
   width: 180px;
-  border: solid 1px #000;
+  // border: solid 1px #000;
 }
 .pair{
-  background-color: lavender;
-  margin-bottom: 3rem;
   padding: 1rem;
   border-radius: 1rem;
+  border-bottom: solid 3px #000;
+}
+h3{
+  border-bottom: solid 2px #000;
 }
 p{
   margin-left: 2rem;

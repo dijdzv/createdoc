@@ -4,7 +4,7 @@ mod main;
 mod nav;
 
 /// htmlファイルを生成
-pub fn create_html(file_vec: &mut [Vec<Vec<String>>]) {
+pub fn create_html(file_vec: &Vec<(String, Vec<String>, Vec<String>)>) {
     let mut file = File::create("rsdoc.html").unwrap();
     // html
     file.write_all(constant::HTML_START.as_bytes()).unwrap();

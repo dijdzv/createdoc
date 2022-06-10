@@ -5,6 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+body{
+  background-color: lavender;
+}
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
 }
@@ -12,17 +15,19 @@
   display: flex;
 }
 main{
-  width: 80%;
+  // width: 80%;
 }
 .nav{
-  width: 200px;
-  border: solid 1px #000;
+  width: 180px;
+  // border: solid 1px #000;
 }
 .pair{
-  background-color: lavender;
-  margin-bottom: 3rem;
   padding: 1rem;
   border-radius: 1rem;
+  border-bottom: solid 3px #000;
+}
+h3{
+  border-bottom: solid 2px #000;
 }
 p{
   margin-left: 2rem;
@@ -37,7 +42,7 @@ code {
 <title></title>
 </head>
 <body>
-<div class="wrap"><div class="nav"></div><main><div class="pair"><pre><p>
+<div class="wrap"><div class="nav"><ul><li>add_csv_record</li><li>read_csv_file</li><li>write_csv_file</li><li>del_csv_record</li><li>edit_csv_data</li><li>edit_csv_record</li><li>create_id_csv_record</li><li>get_csv_record</li><li>two_to_one</li><li>what_num</li><li>read_txt_file</li><li>add_txt_data</li><li>write_txt_file</li><li>count_num</li></ul></div><main><div class="pair"><h3>add_csv_record</h3><pre><p>
 csvファイルにレコードを追加する
 自動でidを付与する
 
@@ -53,7 +58,7 @@ csvファイルにレコードを追加する
   fputs($fp, implode(',', [$new_id, ...$contents]) . "\r\n");
   fclose($fp);
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>read_csv_file</h3><pre><p>
 csvファイルを読み込み配列に格納する
 
 @param string $filepath ファイルパス
@@ -72,7 +77,7 @@ csvファイルを読み込み配列に格納する
   fclose($fp);
   return $row_list;
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>write_csv_file</h3><pre><p>
 csvファイルを上書きする
 
 @param string $filepath ファイルパス
@@ -88,7 +93,7 @@ csvファイルを上書きする
   }
   fclose($fp);
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>del_csv_record</h3><pre><p>
 指定したidのレコードを削除する
 
 @param string $filepath ファイルパス
@@ -106,7 +111,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>edit_csv_data</h3><pre><p>
 指定したidとカラム番号のデータを書き換えてidを更新する
 
 @param  string $filepath ファイルパス
@@ -128,7 +133,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>edit_csv_record</h3><pre><p>
 指定したidのレコードを書き換えてidを更新する
 
 @param string $filepath ファイルパス
@@ -148,7 +153,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>create_id_csv_record</h3><pre><p>
 レコードに付加するidを生成する
 
 @param string $filepath ファイルパス
@@ -166,7 +171,7 @@ csvファイルを上書きする
   $id = $max + 1;
   return $id;
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>get_csv_record</h3><pre><p>
 指定したidのレコードを取得する
 
 @param string $filepath ファイルパス
@@ -183,7 +188,7 @@ csvファイルを上書きする
   }
   return false;
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>two_to_one</h3><pre><p>
 2次元配列から1次元配列を抜き取る
 
 @param  array $row_list 抜き取られる2次元配列
@@ -198,7 +203,7 @@ csvファイルを上書きする
   }
   return $list;
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>what_num</h3><pre><p>
 ファイルに追加せずに追加したい値が何番目(key)か返す
 
 @param  array $list 1次元配列のみの配列
@@ -214,7 +219,7 @@ csvファイルを上書きする
 
   return array_keys($list, $add_num)[count(array_keys($list, $add_num)) - 1];
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>read_txt_file</h3><pre><p>
 txtファイルを読み込み配列に格納する
 
 @param string $filepath
@@ -233,7 +238,7 @@ txtファイルを読み込み配列に格納する
   fclose($fp);
   return $row_list;
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>add_txt_data</h3><pre><p>
 txtファイルに
 
 @param string $filepath
@@ -247,7 +252,7 @@ txtファイルに
   fputs($fp, $content . "\r\n");
   fclose($fp);
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>write_txt_file</h3><pre><p>
 </p></pre><pre class="prettyprint linenums"><code>function write_txt_file($filepath, $row_list)
 {
   $fp = fopen($filepath, 'w');
@@ -257,7 +262,7 @@ txtファイルに
   }
   fclose($fp);
 }
-</code></pre></div><div class="pair"><pre><p>
+</code></pre></><div class="pair"><h3>count_num</h3><pre><p>
 実行する度に+1するカウント
 
 @param  string $filepath ファイルパス
@@ -274,7 +279,7 @@ txtファイルに
   $file[$row_num] = $count . "\r\n";
   file_put_contents($filepath, $file);
 }
-</code></pre></div></main></div>
+</code></pre></></main></div>
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 </body>
 </html>
