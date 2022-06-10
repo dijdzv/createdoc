@@ -13,13 +13,12 @@ body{
 }
 .wrap{
   display: flex;
+  margin: 0 auto;
 }
 main{
-  // width: 80%;
 }
 .nav{
   width: 180px;
-  // border: solid 1px #000;
 }
 .pair{
   padding: 1rem;
