@@ -19,7 +19,7 @@ fn main() {
     let mut is_fn = false;
 
     let filenames = read::read_dir(dir).unwrap();
-    // dbg!(filenames);
+    dbg!(filenames);
 
     // fileに格納
     for (i, result) in BufReader::new(File::open(filename).unwrap())
