@@ -22,14 +22,14 @@ nav{
   background-color: #e6e6faee;
 }
 .file li{
-  border-radius: 0.3rem;
+  font-size: 1.4rem;
 }
 .file > li:hover{
   background-color: #a4a8d4aa;
 }
 .func li{
+  font-size: 0.95rem;
   padding-left: 1rem;
-  border-radius: 0.3rem;
 }
 .func li:hover{
   background-color: #a4a8d455;
@@ -52,9 +52,9 @@ ul::-webkit-scrollbar {
   display: none;
 }
 li{
-  font-size: 0.95rem;
   margin-top: 0.2rem;
   padding-left: 0.5rem;
+  border-radius: 0.3rem;
 }
 main{
   width: 800px;
