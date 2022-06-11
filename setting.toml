@@ -1,2 +1,13 @@
-[setting]
-dir = "./"
+[dir]
+read_dir = "./"
+create_dir = "./"
+
+[file]
+# 読み込みたいファイル名
+filename = ["*"]
+# 読み込みたい拡張子
+filename_extension = ["*"]
+
+[exclude_file]
+ex_filename = [""]
+ex_filename_extension = [""]
