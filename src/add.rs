@@ -1,5 +1,5 @@
 /// 関数とDocのvecを生成
-pub fn add_buf(
+pub fn add_line(
     l: &str,
     (i, pre): (usize, &mut usize),
     (is_doc, is_fn): (&mut bool, &mut bool),
