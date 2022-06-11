@@ -1,15 +1,19 @@
+[file]
+filename = "phpdoc"
+
 [dir]
 read_dir = "./"
 create_dir = "./"
 
-[file]
+[read_file]
 # 読み込みたいファイル名
-filename = ["*"]
+read_filename = ["*"]
 # 読み込みたい拡張子
-filename_extension = "php"
+read_filename_extension = "php"
 
 [exclude_file]
 ex_filename = [""]
+
 
 # 優先度
 # * < 指定

@@ -7,7 +7,7 @@ mod create;
 mod read;
 
 fn main() {
-    let dir = Path::new("./");
+    let (read_dir, create_dir, filename, filename_extension, ex_filename) = read::read_toml();
     let filename = Path::new("./csv.php");
 
     let mut buf = Vec::new(); // 一時保管
@@ -18,7 +18,7 @@ fn main() {
     let mut is_doc = false;
     let mut is_fn = false;
 
-    let filenames = read::read_dir(dir).unwrap();
+    let filenames = read::read_dir(read_dir).unwrap();
     dbg!(filenames);
 
     // fileに格納
@@ -39,5 +39,5 @@ fn main() {
         );
     }
 
-    create::create_html(&file_vec);
+    create::create_html(&create_dir, &file_vec);
 }
