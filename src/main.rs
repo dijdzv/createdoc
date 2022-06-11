@@ -4,9 +4,11 @@ use std::path::Path;
 
 mod add;
 mod create;
+mod read;
 
 fn main() {
-    let path = Path::new("./csv.php");
+    let dir = Path::new("./");
+    let filename = Path::new("./csv.php");
 
     let mut buf = Vec::new(); // 一時保管
     let mut pair = Vec::new(); //docとfuncのペア
@@ -16,14 +18,17 @@ fn main() {
     let mut is_doc = false;
     let mut is_fn = false;
 
-    // 行ごとに格納
-    for (i, result) in BufReader::new(File::open(path).unwrap())
+    let filenames = read::read_dir(dir).unwrap();
+    dbg!(filenames);
+
+    // fileに格納
+    for (i, result) in BufReader::new(File::open(filename).unwrap())
         .lines()
         .enumerate()
     {
         let l = result.ok().unwrap();
 
-        // vecに中身を追加
+        // vecに行毎追加
         add::add_line(
             &l,
             (i, &mut pre),
