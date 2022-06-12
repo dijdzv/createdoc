@@ -7,14 +7,16 @@ mod nav;
 /// htmlファイルを生成
 pub fn create_html(
     create_dir: &str,
-    create_filename: &str,
+    create_filename: &mut String,
     file_vec: &Vec<(String, Vec<String>, Vec<String>)>,
 ) {
-    let mut create_filepath = create_dir.to_string() + create_filename;
-    if create_filepath.contains('.') {
-        let cp = create_filepath.find('.').unwrap();
-        create_filepath = create_filepath[..cp].to_string();
+    if create_filename.contains('.') {
+        let cp = create_filename.find('.').unwrap();
+        *create_filename = create_filename[..cp].to_string();
     }
+    let create_filepath = create_dir.to_string() + create_filename;
+    println!("{}", create_filepath);
+
     let mut file = File::create(create_filepath + ".html").unwrap();
     // html
     file.write_all(constant::HTML_START.as_bytes()).unwrap();

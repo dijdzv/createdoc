@@ -8,7 +8,7 @@ mod read;
 
 fn main() {
     let (
-        create_filename,
+        mut create_filename,
         read_dir,
         create_dir,
         read_filename,
@@ -46,5 +46,5 @@ fn main() {
         );
     }
 
-    create::create_html(&create_dir, &create_filename, &file_vec);
+    create::create_html(&create_dir, &mut create_filename, &file_vec);
 }
