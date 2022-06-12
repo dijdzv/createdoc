@@ -8,7 +8,7 @@ mod nav;
 pub fn create_html(
     create_dir: &str,
     create_filename: &mut String,
-    file_vec: &Vec<(String, Vec<String>, Vec<String>)>,
+    folder_vec: &Vec<(&String, Vec<(String, Vec<String>, Vec<String>)>)>,
 ) {
     if create_filename.contains('.') {
         let cp = create_filename.find('.').unwrap();
@@ -23,9 +23,9 @@ pub fn create_html(
     // wrap
     file.write_all(r#"<div class="wrap">"#.as_bytes()).unwrap();
 
-    nav::create_nav(&mut file, file_vec);
+    nav::create_nav(&mut file, folder_vec);
 
-    main::create_main(&mut file, file_vec);
+    main::create_main(&mut file, folder_vec);
 
     // /wrap
     file.write_all("</div>".as_bytes()).unwrap();

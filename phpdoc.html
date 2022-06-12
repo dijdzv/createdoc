@@ -21,40 +21,50 @@ nav{
   border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
-.file li{
-  font-size: 1.4rem;
-}
-.file > li:hover{
-  background-color: #a4a8d4aa;
-}
-.func li{
-  font-size: 0.95rem;
-  padding-left: 1rem;
-}
-.func li:hover{
-  background-color: #a4a8d455;
-}
-.display{
-  display: none;
-}
-ul{
-  list-style: none;
+.n-folder{
   position: fixed;
   padding: 0;
   margin: 0;
   width: 200px;
-  /* height: 95vh; */
+  height: 90%;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-ul::-webkit-scrollbar {
+.n-folder::-webkit-scrollbar {
   display: none;
+}
+.n-file{
+  font-size: 1.4rem;
+}
+.n-file:hover{
+  background-color: #a4a8d4aa;
+}
+.n-func li{
+  font-size: 0.95rem;
+  padding-left: 1rem;
+}
+.n-func li:hover{
+  background-color: #a4a8d455;
+}
+.dn{
+  display: none;
+}
+ul{
+  list-style: none;
 }
 li{
   margin-top: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 0.3rem;
+}
+footer{
+  position: fixed;
+  width: calc(200px - 1rem);
+  bottom: 1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  border-top: solid 1px #734f9655;
 }
 main{
   width: 800px;
@@ -79,19 +89,11 @@ a{
   color: inherit;
   text-decoration: none;
 }
-footer{
-  position: fixed;
-  width: calc(200px - 1rem);
-  bottom: 1rem;
-  padding-top: 1rem;
-  padding-left: 1rem;
-  border-top: solid 1px #734f9655;
-}
 </style>
 <title></title>
 </head>
 <body>
-<div class="wrap"><nav><ul class="file"><li id="csv">csv -</li><ul class="func csv"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></ul><footer>2022年06月12日 18:56:25</footer></nav><main><div class="pair"><a id="two_to_one"><h3>two_to_one</h3></a><pre><p>
+<div class="wrap"><nav><div class="n-folder"><h4 class="n-file" id="n-array.php">array.php -</h4><ul class="n-func n-array.php dn"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul><h4 class="n-file" id="n-check.php">check.php -</h4><ul class="n-func n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul><h4 class="n-file" id="n-csv.php">csv.php -</h4><ul class="n-func n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul><h4 class="n-file" id="n-format.php">format.php -</h4><ul class="n-func n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul><h4 class="n-file" id="n-get.php">get.php -</h4><ul class="n-func n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul><h4 class="n-file" id="n-mysql.php">mysql.php -</h4><ul class="n-func n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul><h4 class="n-file" id="n-session.php">session.php -</h4><ul class="n-func n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul><h4 class="n-file" id="n-sort.php">sort.php -</h4><ul class="n-func n-sort.php dn"><a href="#order"><li>order</li></a></ul><h4 class="n-file" id="n-txt.php">txt.php -</h4><ul class="n-func n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div><footer>2022年06月12日 23:34:32</footer></nav><main><div class="m-file m-array.php"><h2>array.php</h2><div class="pair"><a id="two_to_one"><h3>two_to_one</h3></a><pre><p>
 2次元配列から1次元配列を抜き取る
 
 @param  array $row_list 抜き取られる2次元配列
@@ -122,14 +124,419 @@ footer{
 
   return array_keys($list, $add_num)[count(array_keys($list, $add_num)) - 1];
 }
-</code></pre></div></main></div>
+</code></pre></div></div><div class="m-file m-check.php"><h2>check.php</h2><div class="pair"><a id="check_exist_csv"><h3>check_exist_csv</h3></a><pre><p>
+存在チェック csv
+
+@param string $filepath ファイルパス
+@param integer $col_num チェックしたいcol番号
+@param string $login_id チェックする値
+@return boolean 存在していればtrue。存在していなければfalse
+
+</p></pre><pre class="prettyprint linenums"><code>function check_exist_csv(string $filepath, int $col_num, string $value): bool
+{
+  $row_list = read_csv_file($filepath);
+  foreach ($row_list as $row) {
+    if ($row[$col_num] === $value) {
+      return true;
+    }
+  }
+  return false;
+}
+</code></pre></div><div class="pair"><a id="check_multiple_exist_csv_record"><h3>check_multiple_exist_csv_record</h3></a><pre><p>
+同じレコードに指定した複数個の値がすべて存在しているかどうか
+
+@param array ...$values チェックしたい複数個の 値とcol番号の配列 [値,col番号]....
+@return boolean すべて存在していればtrue。すべて存在していなければfalse
+
+</p></pre><pre class="prettyprint linenums"><code>function check_multiple_exist_csv_record(string $filepath, array ...$values): bool
+{
+  $row_list = read_csv_file($filepath);
+  $count = count($values);
+  foreach ($row_list as $row) {
+    foreach ($values as $key => $value) {
+      if ($row[$value[1]] === $value[0]) {
+        if ($count === $key + 1) {
+          return true;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  return false;
+}
+</code></pre></div></div><div class="m-file m-csv.php"><h2>csv.php</h2><div class="pair"><a id="add_csv_record"><h3>add_csv_record</h3></a><pre><p>
+csvファイルにレコードを追加する
+自動でidを付与する
+
+@param string $filepath ファイルパス
+@param array $contents  追加する配列(idを除く)
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function add_csv_record(string $filepath, array $contents)
+{
+  $new_id = create_id_csv_record($filepath);
+  $fp = fopen($filepath, 'a');
+  flock($fp, LOCK_EX);
+  fputs($fp, implode(',', [$new_id, ...$contents]) . "\r\n");
+  fclose($fp);
+}
+</code></pre></div><div class="pair"><a id="read_csv_file"><h3>read_csv_file</h3></a><pre><p>
+csvファイルを読み込み配列に格納する
+
+@param string $filepath ファイルパス
+@return array             配列化したcsvファイル
+
+</p></pre><pre class="prettyprint linenums"><code>function read_csv_file(string $filepath): array
+{
+  $fp = fopen($filepath, 'r');
+  flock($fp, LOCK_SH);
+  $row_list = [];
+  while ($row = fgets($fp)) {
+    $row = str_replace("\r", '', $row);
+    $row = str_replace("\n", '', $row);
+    $row_list[] = explode(',', $row);
+  }
+  fclose($fp);
+  return $row_list;
+}
+</code></pre></div><div class="pair"><a id="write_csv_file"><h3>write_csv_file</h3></a><pre><p>
+csvファイルを上書きする
+
+@param string $filepath ファイルパス
+@param array $row_list  上書きする配列
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function write_csv_file(string $filepath, array $row_list)
+{
+  $fp = fopen($filepath, 'w');
+  flock($fp, LOCK_EX);
+  foreach ($row_list as $row) {
+    fputs($fp, implode(',', $row) . "\r\n");
+  }
+  fclose($fp);
+}
+</code></pre></div><div class="pair"><a id="del_csv_record"><h3>del_csv_record</h3></a><pre><p>
+指定したidのレコードを削除する
+
+@param string $filepath ファイルパス
+@param int $id 指定するid
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function del_csv_record(string $filepath, int $id)
+{
+  $row_list = read_csv_file($filepath);
+  foreach ($row_list as $key => $row) {
+    if ((int)$row[0] === $id) {
+      unset($row_list[$key]);
+      write_csv_file($filepath, $row_list);
+      return;
+    }
+  }
+}
+</code></pre></div><div class="pair"><a id="edit_csv_data"><h3>edit_csv_data</h3></a><pre><p>
+指定したidとカラム番号のデータを書き換えてidを更新する
+
+@param  string $filepath ファイルパス
+@param  int $id 指定するid
+@param  int $colNum 指定するカラム番号
+@param  int|string $content 編集に使用する値
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function edit_csv_data(string $filepath, int $id, int $col_num, string $content)
+{
+  $row_list = read_csv_file($filepath);
+  $new_id = create_id_csv_record($filepath);
+  foreach ($row_list as $key => $row) {
+    if ((int)$row[0] === $id) {
+      $row_list[$key][$col_num] = $content;
+      $row_list[$key][0] = $new_id;
+      write_csv_file($filepath, $row_list);
+      return;
+    }
+  }
+}
+</code></pre></div><div class="pair"><a id="edit_csv_record"><h3>edit_csv_record</h3></a><pre><p>
+指定したidのレコードを書き換えてidを更新する
+
+@param string $filepath ファイルパス
+@param int $id id
+@param array $contents 編集に使用する配列
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function edit_csv_record(string $filepath, int $id, array $contents)
+{
+  $row_list = read_csv_file($filepath);
+  $new_id = create_id_csv_record($filepath);
+  foreach ($row_list as $key => $row) {
+    if ((int)$row[0] === $id) {
+      $row_list[$key] = [$new_id, ...$contents];
+      write_csv_file($filepath, $row_list);
+      return;
+    }
+  }
+}
+</code></pre></div><div class="pair"><a id="create_id_csv_record"><h3>create_id_csv_record</h3></a><pre><p>
+レコードに付加するidを生成する
+
+@param string $filepath ファイルパス
+@return int 付加するid
+
+</p></pre><pre class="prettyprint linenums"><code>function create_id_csv_record(string $filepath): int
+{
+  $row_list = read_csv_file($filepath);
+  $max = 0;
+  foreach ($row_list as $row) {
+    if ($max < (int)$row[0]) {
+      $max = $row[0];
+    }
+  }
+  $id = $max + 1;
+  return $id;
+}
+</code></pre></div><div class="pair"><a id="get_csv_record"><h3>get_csv_record</h3></a><pre><p>
+指定したidのレコードを取得する
+
+@param string $filepath ファイルパス
+@param int $id id
+@return array|false レコードかfalseを返す
+
+</p></pre><pre class="prettyprint linenums"><code>function get_csv_record(string $filepath, int $id): array|false
+{
+  $row_list = read_csv_file($filepath);
+  foreach ($row_list as $row) {
+    if ((int)$row[0] === $id) {
+      return $row;
+    }
+  }
+  return false;
+}
+</code></pre></div></div><div class="m-file m-format.php"><h2>format.php</h2><div class="pair"><a id="date_from_8digit_number"><h3>date_from_8digit_number</h3></a><pre><p>
+8桁の数字を年月日に変換したものを返す
+
+@param  int    $eight_digit 8桁の数字
+@return string              年月日
+
+</p></pre><pre class="prettyprint linenums"><code>function date_from_8digit_number(int|string $eight_digit): string
+{
+  $date = substr_replace($eight_digit, '日', '8', 0);
+  $date = substr_replace($date, '月', '6', 0);
+  $date = substr_replace($date, '年', '4', 0);
+
+  return $date;
+}
+</code></pre></div><div class="pair"><a id="println"><h3>println</h3></a><pre><p>
+改行あり出力
+
+@param string $string 表示したい文字列
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function println(string $string)
+{
+  echo $string . '<br>';
+}
+</code></pre></div><div class="pair"><a id="print_ary"><h3>print_ary</h3></a><pre><p>
+配列を並べて出力(改行あり)
+
+@param string $separator 区切り
+@param array $array 出力したい配列
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function print_ary(string $separator, array $array)
+{
+  $string = implode($separator, $array);
+  echo $string . '<br>';
+}
+</code></pre></div><div class="pair"><a id="garbling"><h3>garbling</h3></a><pre><p>
+文字化けさせる
+
+@param string $string 文字化けさせたい文字列
+@return string 文字化けした文字列
+
+</p></pre><pre class="prettyprint linenums"><code>function garbling(string $string): string
+{
+  $salt = -9000;
+
+  $array = mb_str_split($string);
+
+  $new_array = [];
+  foreach ($array as $key => $value) {
+    $new_array[$key] = mb_chr(mb_ord($value) + $salt);
+  }
+
+  $garbling = implode($new_array);
+
+  return $garbling;
+}
+</code></pre></div></div><div class="m-file m-get.php"><h2>get.php</h2><div class="pair"><a id="get_id_multiple_exist_csv_record"><h3>get_id_multiple_exist_csv_record</h3></a><pre><p>
+指定した複数のデータが同レコードに存在しているidを得る
+
+@param string $filepath ファイルパス
+@param array ...$values 指定するデータ [値,col番号]...
+@return string|boolean idかfalse
+
+</p></pre><pre class="prettyprint linenums"><code>function get_id_multiple_exist_csv_record(string $filepath, array ...$values): string|bool
+{
+  $row_list = read_csv_file($filepath);
+  $count = count($values);
+  foreach ($row_list as $row) {
+    foreach ($values as $key => $value) {
+      if ($row[$value[1]] === $value[0]) {
+        if ($count === $key + 1) {
+          return $row[0];
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  return false;
+}
+</code></pre></div><div class="pair"><a id="get_data_from_id_csv_file"><h3>get_data_from_id_csv_file</h3></a><pre><p>
+一意の値からデータを得る
+
+@param string $filepath ファイルパス
+@param string $id 指定するid
+@param integer $id_col_num idのcol番号
+@param integer $col_num 得たいデータのcol番号
+@return string|boolean データかfalse
+
+</p></pre><pre class="prettyprint linenums"><code>function get_data_from_id_csv_file(string $filepath, string $id, int $id_col_num, int $col_num): string|bool
+{
+  $row_list = read_csv_file($filepath);
+  foreach ($row_list as $row) {
+    if ($row[$id_col_num] === $id) {
+      return $row[$col_num];
+    }
+  }
+  return false;
+}
+</code></pre></div></div><div class="m-file m-mysql.php"><h2>mysql.php</h2><div class="pair"><a id="read_mysql"><h3>read_mysql</h3></a><pre><p>
+</p></pre><pre class="prettyprint linenums"><code>function read_mysql(object $result): array
+{
+  $row_list = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $row_list[] = $row;
+  }
+  return $row_list;
+}
+</code></pre></div></div><div class="m-file m-session.php"><h2>session.php</h2><div class="pair"><a id="get_session"><h3>get_session</h3></a><pre><p>
+セッション変数を配列に格納する
+
+@param string ...$session_names 格納したいセッションの名前
+@return array セッションの値が格納された配列
+
+</p></pre><pre class="prettyprint linenums"><code>function get_session(string ...$session_names): array
+{
+  $data = [];
+  foreach ($session_names as $name) {
+    $data[] = $_SESSION[$name];
+  }
+  return $data;
+}
+</code></pre></div></div><div class="m-file m-sort.php"><h2>sort.php</h2><div class="pair"><a id="order"><h3>order</h3></a><pre><p>
+昇順・降順
+
+@param array $array_2D ソートしたい2次元配列
+@param int $col_num 比較する配列番号
+@param string $order ASCかDESC
+@return array ソート後の2次元配列
+
+</p></pre><pre class="prettyprint linenums"><code>function order(array $array_2D, int $col_num, string $order): array
+{
+  for ($j = 0; $j < count($array_2D) - 1; $j++) {
+    for ($i = 0; $i < count($array_2D) - 1 - $j; $i++) {
+      if ($order === 'ASC') {
+        if ($array_2D[$i][$col_num] > $array_2D[$i + 1][$col_num]) {
+          $buf = $array_2D[$i];
+          $array_2D[$i] = $array_2D[$i + 1];
+          $array_2D[$i + 1] = $buf;
+        }
+      } else if ($order === 'DESC') {
+        if ($array_2D[$i][$col_num] < $array_2D[$i + 1][$col_num]) {
+          $buf = $array_2D[$i];
+          $array_2D[$i] = $array_2D[$i + 1];
+          $array_2D[$i + 1] = $buf;
+        }
+      }
+    }
+  }
+  return $array_2D;
+}
+</code></pre></div></div><div class="m-file m-txt.php"><h2>txt.php</h2><div class="pair"><a id="read_txt_file"><h3>read_txt_file</h3></a><pre><p>
+txtファイルを読み込み配列に格納する
+
+@param string $filepath
+@return array
+
+</p></pre><pre class="prettyprint linenums"><code>function read_txt_file(string $filepath): array
+{
+  $fp = fopen($filepath, 'r');
+  flock($fp, LOCK_SH);
+  $row_list = [];
+  while ($row = fgets($fp)) {
+    $row = str_replace("\r", '', $row);
+    $row = str_replace("\n", '', $row);
+    $row_list[] = $row;
+  }
+  fclose($fp);
+  return $row_list;
+}
+</code></pre></div><div class="pair"><a id="add_txt_data"><h3>add_txt_data</h3></a><pre><p>
+txtファイルに
+
+@param string $filepath
+@param array $content
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function add_txt_data(string $filepath, array $content)
+{
+  $fp = fopen($filepath, 'a');
+  flock($fp, LOCK_EX);
+  fputs($fp, $content . "\r\n");
+  fclose($fp);
+}
+</code></pre></div><div class="pair"><a id="write_txt_file"><h3>write_txt_file</h3></a><pre><p>
+</p></pre><pre class="prettyprint linenums"><code>function write_txt_file($filepath, $row_list)
+{
+  $fp = fopen($filepath, 'w');
+  flock($fp, LOCK_EX);
+  foreach ($row_list as $row) {
+    fputs($fp, $row . "\r\n");
+  }
+  fclose($fp);
+}
+</code></pre></div><div class="pair"><a id="count_num"><h3>count_num</h3></a><pre><p>
+実行する度に+1するカウント
+
+@param  string $filepath ファイルパス
+@param  int    $row_num   カウントしたい行番号
+@return void
+
+</p></pre><pre class="prettyprint linenums"><code>function count_num($filepath, $row_num)
+{
+  $file = file($filepath);
+  $count = $file[$row_num];
+  $count = str_replace("\r", '', $count);
+  $count = str_replace("\n", '', $count);
+  $count++;
+  $file[$row_num] = $count . "\r\n";
+  file_put_contents($filepath, $file);
+}
+</code></pre></div></div></main></div>
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 <script>
-let file = document.getElementById("csv");
-let func = document.getElementsByClassName("csv")[0];
-csv.onclick = () => {
-    func.classList.toggle("display");
-};
+let nFile = document.getElementsByClassName("n-file");
+
+for (let f of nFile) {
+  f.addEventListener("click", () => {
+    let id = f.getAttribute("id");
+    let cls = document.getElementsByClassName(id)[0];
+    cls.classList.toggle("dn");
+  });
+}
+
+
 </script>
 </body>
 </html>

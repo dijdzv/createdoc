@@ -1,11 +1,11 @@
 <?php
 
-/**
- * セッションを全て消す fin
- *
- * @param string ...$session_names 全てのセッションの名前
- * @return void
- */
+// /**
+//  * セッションを全て消す fin
+//  *
+//  * @param string ...$session_names 全てのセッションの名前
+//  * @return void
+//  */
 // function delete_session(string ...$session_names): void
 // {
 //   foreach ($session_names as $name) {

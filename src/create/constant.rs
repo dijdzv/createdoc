@@ -21,40 +21,50 @@ nav{
   border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
-.file li{
-  font-size: 1.4rem;
-}
-.file > li:hover{
-  background-color: #a4a8d4aa;
-}
-.func li{
-  font-size: 0.95rem;
-  padding-left: 1rem;
-}
-.func li:hover{
-  background-color: #a4a8d455;
-}
-.display{
-  display: none;
-}
-ul{
-  list-style: none;
+.n-folder{
   position: fixed;
   padding: 0;
   margin: 0;
   width: 200px;
-  /* height: 95vh; */
+  height: 90%;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-ul::-webkit-scrollbar {
+.n-folder::-webkit-scrollbar {
   display: none;
+}
+.n-file{
+  font-size: 1.4rem;
+}
+.n-file:hover{
+  background-color: #a4a8d4aa;
+}
+.n-func li{
+  font-size: 0.95rem;
+  padding-left: 1rem;
+}
+.n-func li:hover{
+  background-color: #a4a8d455;
+}
+.dn{
+  display: none;
+}
+ul{
+  list-style: none;
 }
 li{
   margin-top: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 0.3rem;
+}
+footer{
+  position: fixed;
+  width: calc(200px - 1rem);
+  bottom: 1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  border-top: solid 1px #734f9655;
 }
 main{
   width: 800px;
@@ -79,14 +89,6 @@ a{
   color: inherit;
   text-decoration: none;
 }
-footer{
-  position: fixed;
-  width: calc(200px - 1rem);
-  bottom: 1rem;
-  padding-top: 1rem;
-  padding-left: 1rem;
-  border-top: solid 1px #734f9655;
-}
 </style>
 <title></title>
 </head>
@@ -96,11 +98,17 @@ footer{
 pub const HTML_END: &str = r#"
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 <script>
-let file = document.getElementById("csv");
-let func = document.getElementsByClassName("csv")[0];
-csv.onclick = () => {
-    func.classList.toggle("display");
-};
+let nFile = document.getElementsByClassName("n-file");
+
+for (let f of nFile) {
+  f.addEventListener("click", () => {
+    let id = f.getAttribute("id");
+    let cls = document.getElementsByClassName(id)[0];
+    cls.classList.toggle("dn");
+  });
+}
+
+
 </script>
 </body>
 </html>"#;
