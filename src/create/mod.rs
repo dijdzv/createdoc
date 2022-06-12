@@ -15,7 +15,6 @@ pub fn create_html(
         *create_filename = create_filename[..cp].to_string();
     }
     let create_filepath = create_dir.to_string() + create_filename;
-    println!("{}", create_filepath);
 
     let mut file = File::create(create_filepath + ".html").unwrap();
     // html

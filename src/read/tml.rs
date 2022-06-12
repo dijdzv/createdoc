@@ -23,7 +23,6 @@ struct Dir {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ReadFile {
-    read_filename: Vec<String>,
     read_filename_extension: String,
 }
 
@@ -32,7 +31,7 @@ struct ExcludeFile {
     ex_filename: Vec<String>,
 }
 
-pub fn read_toml() -> (String, String, String, Vec<String>, String, Vec<String>) {
+pub fn read_toml() -> (String, String, String, String, Vec<String>) {
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
@@ -59,7 +58,6 @@ pub fn read_toml() -> (String, String, String, Vec<String>, String, Vec<String>)
             create_dir,
         },
         ReadFile {
-            read_filename,
             read_filename_extension,
         },
         ExcludeFile { ex_filename },
@@ -69,7 +67,6 @@ pub fn read_toml() -> (String, String, String, Vec<String>, String, Vec<String>)
         create_filename,
         read_dir,
         create_dir,
-        read_filename,
         read_filename_extension,
         ex_filename,
     )

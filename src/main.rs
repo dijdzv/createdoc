@@ -5,17 +5,11 @@ use std::path::Path;
 mod add;
 mod create;
 mod read;
+mod sort;
 
 fn main() {
-    let (
-        mut create_filename,
-        read_dir,
-        create_dir,
-        read_filename,
-        read_filename_extension,
-        ex_filename,
-    ) = read::read_toml();
-    let filename = Path::new("./csv.php");
+    let (mut create_filename, read_dir, create_dir, read_filename_extension, ex_filename) =
+        read::read_toml();
 
     let mut buf = Vec::new(); // 一時保管
     let mut pair = Vec::new(); //docとfuncのペア
@@ -25,11 +19,12 @@ fn main() {
     let mut is_doc = false;
     let mut is_fn = false;
 
-    let filenames = read::read_dir(read_dir).unwrap();
-    dbg!(filenames);
+    let mut filenames = read::read_dir(read_dir).unwrap();
+    filenames = sort::sorting(filenames, &read_filename_extension, ex_filename);
+    dbg!(&filenames);
 
     // fileに格納
-    for (i, result) in BufReader::new(File::open(filename).unwrap())
+    for (i, result) in BufReader::new(File::open(&filenames[0]).unwrap())
         .lines()
         .enumerate()
     {

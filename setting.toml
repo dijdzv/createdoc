@@ -7,8 +7,6 @@ read_dir = "./"
 create_dir = "./"
 
 [read_file]
-# 読み込みたいファイル名
-read_filename = ["*"]
 # 読み込みたい拡張子
 read_filename_extension = "php"
 
@@ -16,8 +14,5 @@ read_filename_extension = "php"
 # 除外したいファイル名
 ex_filename = [""]
 
-
 # 優先度
-# * < 指定
 # extention < 指定
-# exclude_file.指定 < file.指定
