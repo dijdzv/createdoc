@@ -12,7 +12,14 @@ pub fn create_main(
         file.write_all((r#"<div class="m-file m-"#.to_string() + filename + r#"">"#).as_bytes())
             .unwrap();
         file.write_all("<h2>".as_bytes()).unwrap();
-        file.write_all(filename.as_bytes()).unwrap();
+
+        let show_name = if filename.contains('.') {
+            let cp = filename.find('.').unwrap();
+            filename[..cp].to_string()
+        } else {
+            filename.to_string()
+        };
+        file.write_all(show_name.as_bytes()).unwrap();
         file.write_all("</h2>".as_bytes()).unwrap();
         for (name, doc, func) in file_vec {
             // .pair

@@ -26,7 +26,7 @@ nav{
   padding: 0;
   margin: 0;
   width: 200px;
-  height: 90%;
+  height: calc(100vh - (65px + 2rem));
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

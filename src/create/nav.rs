@@ -17,7 +17,14 @@ pub fn create_nav(
             (r#"<h4 class="n-file" id="n-"#.to_string() + filename + r#"">"#).as_bytes(),
         )
         .unwrap();
-        file.write_all((filename.to_string() + " -").as_bytes())
+
+        let show_name = if filename.contains('.') {
+            let cp = filename.find('.').unwrap();
+            filename[..cp].to_string()
+        } else {
+            filename.to_string()
+        };
+        file.write_all((show_name.to_string() + " -").as_bytes())
             .unwrap();
         // /n-file
         file.write_all("</h4>".as_bytes()).unwrap();
