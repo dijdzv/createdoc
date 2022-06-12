@@ -1,10 +1,8 @@
+use super::FolderVec;
 use crate::create::constant;
 use std::{fs::File, io::Write};
 
-pub fn create_main(
-    file: &mut File,
-    folder_vec: &Vec<(&String, Vec<(String, Vec<String>, Vec<String>)>)>,
-) {
+pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
     // main
     file.write_all("<main>".as_bytes()).unwrap();
 

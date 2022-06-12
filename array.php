@@ -4,14 +4,14 @@
  * 2次元配列から1次元配列を抜き取る
  *
  * @param  array $row_list 抜き取られる2次元配列
- * @param  int $colNum 抜き取りたいカラム番号
+ * @param  int $col_num 抜き取りたいカラム番号
  * @return array 抜き取られた1次元配列
  */
-function two_to_one(array $row_list, int $colNum): array
+function two_to_one(array $row_list, int $col_num): array
 {
   $list = [];
   foreach ($row_list as $row) {
-    $list[] = $row[$colNum];
+    $list[] = $row[$col_num];
   }
   return $list;
 }

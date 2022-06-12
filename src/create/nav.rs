@@ -1,10 +1,8 @@
+use super::FolderVec;
 use chrono::Local;
 use std::{fs::File, io::Write};
 
-pub fn create_nav(
-    file: &mut File,
-    folder_vec: &Vec<(&String, Vec<(String, Vec<String>, Vec<String>)>)>,
-) {
+pub fn create_nav(file: &mut File, folder_vec: &FolderVec) {
     // nav
     file.write_all(r#"<nav>"#.as_bytes()).unwrap();
 

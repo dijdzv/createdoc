@@ -1,3 +1,4 @@
+use super::FolderVec;
 use std::{fs::File, io::Write};
 
 mod constant;
@@ -5,11 +6,7 @@ mod main;
 mod nav;
 
 /// htmlファイルを生成
-pub fn create_html(
-    create_dir: &str,
-    create_filename: &mut String,
-    folder_vec: &Vec<(&String, Vec<(String, Vec<String>, Vec<String>)>)>,
-) {
+pub fn create_html(create_dir: &str, create_filename: &mut String, folder_vec: &FolderVec) {
     if create_filename.contains('.') {
         let cp = create_filename.find('.').unwrap();
         *create_filename = create_filename[..cp].to_string();

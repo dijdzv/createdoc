@@ -6,14 +6,22 @@ mod create;
 mod read;
 mod sort;
 
+type FuncName = String;
+type FileName = String;
+type DocVec = Vec<String>;
+type FuncVec = Vec<String>;
+
+type FileVec = Vec<(FuncName, DocVec, FuncVec)>;
+pub type FolderVec = Vec<(FileName, FileVec)>;
+
 fn main() {
     let (mut create_filename, read_dir, create_dir, read_filename_extension, ex_filename) =
         read::read_toml();
 
     let mut buf = Vec::new(); // 一時保管
     let mut pair = Vec::new(); //docとfuncのペア
-    let mut file_vec = Vec::new(); // １つのfile
-    let mut folder_vec = Vec::new(); // 全てのファイル
+    let mut file_vec: FileVec = Vec::new(); // １つのfile
+    let mut folder_vec: FolderVec = Vec::new(); // 全てのファイル
     let mut func_name = String::from(""); // 関数名のbuf
     let mut pre = 0; // 前の行番号
     let mut is_doc = false;
@@ -29,6 +37,7 @@ fn main() {
             .lines()
             .enumerate()
         {
+            // 一行
             let l = result.ok().unwrap();
 
             // vecに行毎追加
@@ -41,7 +50,7 @@ fn main() {
                 &mut file_vec,
             );
         }
-        folder_vec.push((filename, file_vec.clone()));
+        folder_vec.push((filename.to_string(), file_vec.clone()));
         file_vec.clear();
     }
 
