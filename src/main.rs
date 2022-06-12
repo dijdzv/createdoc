@@ -7,7 +7,14 @@ mod create;
 mod read;
 
 fn main() {
-    let (read_dir, create_dir, filename, filename_extension, ex_filename) = read::read_toml();
+    let (
+        create_filename,
+        read_dir,
+        create_dir,
+        read_filename,
+        read_filename_extension,
+        ex_filename,
+    ) = read::read_toml();
     let filename = Path::new("./csv.php");
 
     let mut buf = Vec::new(); // 一時保管
@@ -39,5 +46,5 @@ fn main() {
         );
     }
 
-    create::create_html(&create_dir, &file_vec);
+    create::create_html(&create_dir, &create_filename, &file_vec);
 }

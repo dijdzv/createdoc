@@ -1,5 +1,5 @@
 [file]
-filename = "phpdoc"
+create_filename = "phpdoc"
 
 [dir]
 read_dir = "./"
@@ -12,6 +12,7 @@ read_filename = ["*"]
 read_filename_extension = "php"
 
 [exclude_file]
+# 除外したいファイル名
 ex_filename = [""]
 
 

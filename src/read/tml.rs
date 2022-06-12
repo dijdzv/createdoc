@@ -2,12 +2,17 @@ use serde_derive::*;
 use std::fs::read_to_string;
 use std::path::Path;
 use toml::{self, de};
-
 #[derive(Debug, Serialize, Deserialize)]
 struct Setting {
-    dir: Dir,
     file: File,
+    dir: Dir,
+    read_file: ReadFile,
     exclude_file: ExcludeFile,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct File {
+    create_filename: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -17,7 +22,7 @@ struct Dir {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct File {
+struct ReadFile {
     read_filename: Vec<String>,
     read_filename_extension: String,
 }
@@ -27,7 +32,7 @@ struct ExcludeFile {
     ex_filename: Vec<String>,
 }
 
-pub fn read_toml() -> (String, String, Vec<String>, String, Vec<String>) {
+pub fn read_toml() -> (String, String, String, Vec<String>, String, Vec<String>) {
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
@@ -41,24 +46,27 @@ pub fn read_toml() -> (String, String, Vec<String>, String, Vec<String>) {
     };
 
     let Setting {
-        dir,
         file,
+        dir,
+        read_file,
         exclude_file,
     } = setting.unwrap();
 
     let (
+        File { create_filename },
         Dir {
             read_dir,
             create_dir,
         },
-        File {
+        ReadFile {
             read_filename,
             read_filename_extension,
         },
         ExcludeFile { ex_filename },
-    ) = (dir, file, exclude_file);
+    ) = (file, dir, read_file, exclude_file);
 
     (
+        create_filename,
         read_dir,
         create_dir,
         read_filename,

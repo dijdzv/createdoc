@@ -1,11 +1,21 @@
 use std::{fs::File, io::Write};
+
 mod constant;
 mod main;
 mod nav;
 
 /// htmlファイルを生成
-pub fn create_html(create_dir: &str, file_vec: &Vec<(String, Vec<String>, Vec<String>)>) {
-    let mut file = File::create("./rsdoc.html").unwrap();
+pub fn create_html(
+    create_dir: &str,
+    create_filename: &str,
+    file_vec: &Vec<(String, Vec<String>, Vec<String>)>,
+) {
+    let mut create_filepath = create_dir.to_string() + create_filename;
+    if create_filepath.contains('.') {
+        let cp = create_filepath.find('.').unwrap();
+        create_filepath = create_filepath[..cp].to_string();
+    }
+    let mut file = File::create(create_filepath + ".html").unwrap();
     // html
     file.write_all(constant::HTML_START.as_bytes()).unwrap();
 
