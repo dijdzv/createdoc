@@ -4,6 +4,9 @@ pub const HTML_START: &str = r#"<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 <style>
 html {
   scroll-behavior: smooth;
@@ -14,9 +17,6 @@ html {
 body{
   background-color: #e6e6fa88;
   overflow-x: hidden;
-}
-.prettyprint ol.linenums > li {
-	list-style-type: decimal;
 }
 .wrap{
   width: fit-content;
@@ -131,10 +131,35 @@ main{
   border-right: solid 0px #734f96;
   border-radius: 0px;
 }
-p{
+.doc{
+  width: 98%;
+  border: solid 2px #cab8d9;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.doc::-webkit-scrollbar {
+  display: none;
+}
+.doc p{
   line-height: 1.2rem;
   margin-left: 2rem;
   font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.prettyprint{
+  margin-left: 0 !important;
+  width: 98% !important;
+  white-space: pre !important;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.prettyprint::-webkit-scrollbar {
+  display: none;
+}
+.prettyprint ol.linenums > li {
+	list-style-type: decimal;
 }
 code{
   font-size: 1rem;

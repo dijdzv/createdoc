@@ -33,7 +33,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
             file.write_all("</h3></a>".as_bytes()).unwrap();
 
             // docコメント
-            file.write_all("<pre><p>".as_bytes()).unwrap();
+            file.write_all(r#"<pre class="doc"><p>"#.as_bytes())
+                .unwrap();
             for d in doc {
                 let s = d.trim_start_matches(constant::TRIM_PATTERN);
                 file.write_all((s.to_owned() + "\r\n").as_bytes()).unwrap();

@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 <style>
 html {
   scroll-behavior: smooth;
@@ -14,9 +17,6 @@ html {
 body{
   background-color: #e6e6fa88;
   overflow-x: hidden;
-}
-.prettyprint ol.linenums > li {
-	list-style-type: decimal;
 }
 .wrap{
   width: fit-content;
@@ -131,10 +131,35 @@ main{
   border-right: solid 0px #734f96;
   border-radius: 0px;
 }
-p{
+.doc{
+  width: 98%;
+  border: solid 2px #cab8d9;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.doc::-webkit-scrollbar {
+  display: none;
+}
+.doc p{
   line-height: 1.2rem;
   margin-left: 2rem;
   font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.prettyprint{
+  margin-left: 0 !important;
+  width: 98% !important;
+  white-space: pre !important;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.prettyprint::-webkit-scrollbar {
+  display: none;
+}
+.prettyprint ol.linenums > li {
+	list-style-type: decimal;
 }
 code{
   font-size: 1rem;
@@ -147,7 +172,7 @@ a{
 <title></title>
 </head>
 <body>
-<div class="wrap"><nav><h2 class="category">function</h2><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-func n-array.php dn"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-func n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-func n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-func n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-func n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-func n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-func n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-func n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-func n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><footer>2022年06月13日 12:00:47</footer></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><a id="two_to_one"><h3 class="m-func_name">two_to_one</h3></a><pre><p>
+<div class="wrap"><nav><h2 class="category">function</h2><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-func n-array.php dn"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-func n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-func n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-func n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-func n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-func n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-func n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-func n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-func n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><footer>2022年06月13日 12:54:36</footer></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><a id="two_to_one"><h3 class="m-func_name">two_to_one</h3></a><pre class="doc"><p>
 2次元配列から1次元配列を抜き取る
 
 @param  array $row_list 抜き取られる2次元配列
@@ -162,7 +187,7 @@ a{
   }
   return $list;
 }
-</code></pre></div><div class="pair"><a id="what_num"><h3 class="m-func_name">what_num</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="what_num"><h3 class="m-func_name">what_num</h3></a><pre class="doc"><p>
 ファイルに追加せずに追加したい値が何番目(key)か返す
 
 @param  array $list 1次元配列のみの配列
@@ -178,7 +203,7 @@ a{
 
   return array_keys($list, $add_num)[count(array_keys($list, $add_num)) - 1];
 }
-</code></pre></div></div><div class="m-file m-check.php"><h2 class="m-filename">check</h2><div class="pair"><a id="check_exist_csv"><h3 class="m-func_name">check_exist_csv</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-check.php"><h2 class="m-filename">check</h2><div class="pair"><a id="check_exist_csv"><h3 class="m-func_name">check_exist_csv</h3></a><pre class="doc"><p>
 存在チェック csv
 
 @param string $filepath ファイルパス
@@ -196,7 +221,7 @@ a{
   }
   return false;
 }
-</code></pre></div><div class="pair"><a id="check_multiple_exist_csv_record"><h3 class="m-func_name">check_multiple_exist_csv_record</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="check_multiple_exist_csv_record"><h3 class="m-func_name">check_multiple_exist_csv_record</h3></a><pre class="doc"><p>
 同じレコードに指定した複数個の値がすべて存在しているかどうか
 
 @param array ...$values チェックしたい複数個の 値とcol番号の配列 [値,col番号]....
@@ -219,7 +244,7 @@ a{
   }
   return false;
 }
-</code></pre></div></div><div class="m-file m-csv.php"><h2 class="m-filename">csv</h2><div class="pair"><a id="add_csv_record"><h3 class="m-func_name">add_csv_record</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-csv.php"><h2 class="m-filename">csv</h2><div class="pair"><a id="add_csv_record"><h3 class="m-func_name">add_csv_record</h3></a><pre class="doc"><p>
 csvファイルにレコードを追加する
 自動でidを付与する
 
@@ -235,7 +260,7 @@ csvファイルにレコードを追加する
   fputs($fp, implode(',', [$new_id, ...$contents]) . "\r\n");
   fclose($fp);
 }
-</code></pre></div><div class="pair"><a id="read_csv_file"><h3 class="m-func_name">read_csv_file</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="read_csv_file"><h3 class="m-func_name">read_csv_file</h3></a><pre class="doc"><p>
 csvファイルを読み込み配列に格納する
 
 @param string $filepath ファイルパス
@@ -254,7 +279,7 @@ csvファイルを読み込み配列に格納する
   fclose($fp);
   return $row_list;
 }
-</code></pre></div><div class="pair"><a id="write_csv_file"><h3 class="m-func_name">write_csv_file</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="write_csv_file"><h3 class="m-func_name">write_csv_file</h3></a><pre class="doc"><p>
 csvファイルを上書きする
 
 @param string $filepath ファイルパス
@@ -270,7 +295,7 @@ csvファイルを上書きする
   }
   fclose($fp);
 }
-</code></pre></div><div class="pair"><a id="del_csv_record"><h3 class="m-func_name">del_csv_record</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="del_csv_record"><h3 class="m-func_name">del_csv_record</h3></a><pre class="doc"><p>
 指定したidのレコードを削除する
 
 @param string $filepath ファイルパス
@@ -288,7 +313,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><a id="edit_csv_data"><h3 class="m-func_name">edit_csv_data</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="edit_csv_data"><h3 class="m-func_name">edit_csv_data</h3></a><pre class="doc"><p>
 指定したidとカラム番号のデータを書き換えてidを更新する
 
 @param  string $filepath ファイルパス
@@ -310,7 +335,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><a id="edit_csv_record"><h3 class="m-func_name">edit_csv_record</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="edit_csv_record"><h3 class="m-func_name">edit_csv_record</h3></a><pre class="doc"><p>
 指定したidのレコードを書き換えてidを更新する
 
 @param string $filepath ファイルパス
@@ -330,7 +355,7 @@ csvファイルを上書きする
     }
   }
 }
-</code></pre></div><div class="pair"><a id="create_id_csv_record"><h3 class="m-func_name">create_id_csv_record</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="create_id_csv_record"><h3 class="m-func_name">create_id_csv_record</h3></a><pre class="doc"><p>
 レコードに付加するidを生成する
 
 @param string $filepath ファイルパス
@@ -348,7 +373,7 @@ csvファイルを上書きする
   $id = $max + 1;
   return $id;
 }
-</code></pre></div><div class="pair"><a id="get_csv_record"><h3 class="m-func_name">get_csv_record</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="get_csv_record"><h3 class="m-func_name">get_csv_record</h3></a><pre class="doc"><p>
 指定したidのレコードを取得する
 
 @param string $filepath ファイルパス
@@ -365,7 +390,7 @@ csvファイルを上書きする
   }
   return false;
 }
-</code></pre></div></div><div class="m-file m-format.php"><h2 class="m-filename">format</h2><div class="pair"><a id="date_from_8digit_number"><h3 class="m-func_name">date_from_8digit_number</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-format.php"><h2 class="m-filename">format</h2><div class="pair"><a id="date_from_8digit_number"><h3 class="m-func_name">date_from_8digit_number</h3></a><pre class="doc"><p>
 8桁の数字を年月日に変換したものを返す
 
 @param  int    $eight_digit 8桁の数字
@@ -379,7 +404,7 @@ csvファイルを上書きする
 
   return $date;
 }
-</code></pre></div><div class="pair"><a id="println"><h3 class="m-func_name">println</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="println"><h3 class="m-func_name">println</h3></a><pre class="doc"><p>
 改行あり出力
 
 @param string $string 表示したい文字列
@@ -389,7 +414,7 @@ csvファイルを上書きする
 {
   echo $string . '<br>';
 }
-</code></pre></div><div class="pair"><a id="print_ary"><h3 class="m-func_name">print_ary</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="print_ary"><h3 class="m-func_name">print_ary</h3></a><pre class="doc"><p>
 配列を並べて出力(改行あり)
 
 @param string $separator 区切り
@@ -401,7 +426,7 @@ csvファイルを上書きする
   $string = implode($separator, $array);
   echo $string . '<br>';
 }
-</code></pre></div><div class="pair"><a id="garbling"><h3 class="m-func_name">garbling</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="garbling"><h3 class="m-func_name">garbling</h3></a><pre class="doc"><p>
 文字化けさせる
 
 @param string $string 文字化けさせたい文字列
@@ -422,7 +447,7 @@ csvファイルを上書きする
 
   return $garbling;
 }
-</code></pre></div></div><div class="m-file m-get.php"><h2 class="m-filename">get</h2><div class="pair"><a id="get_id_multiple_exist_csv_record"><h3 class="m-func_name">get_id_multiple_exist_csv_record</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-get.php"><h2 class="m-filename">get</h2><div class="pair"><a id="get_id_multiple_exist_csv_record"><h3 class="m-func_name">get_id_multiple_exist_csv_record</h3></a><pre class="doc"><p>
 指定した複数のデータが同レコードに存在しているidを得る
 
 @param string $filepath ファイルパス
@@ -446,7 +471,7 @@ csvファイルを上書きする
   }
   return false;
 }
-</code></pre></div><div class="pair"><a id="get_data_from_id_csv_file"><h3 class="m-func_name">get_data_from_id_csv_file</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="get_data_from_id_csv_file"><h3 class="m-func_name">get_data_from_id_csv_file</h3></a><pre class="doc"><p>
 一意の値からデータを得る
 
 @param string $filepath ファイルパス
@@ -465,7 +490,7 @@ csvファイルを上書きする
   }
   return false;
 }
-</code></pre></div></div><div class="m-file m-mysql.php"><h2 class="m-filename">mysql</h2><div class="pair"><a id="read_mysql"><h3 class="m-func_name">read_mysql</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-mysql.php"><h2 class="m-filename">mysql</h2><div class="pair"><a id="read_mysql"><h3 class="m-func_name">read_mysql</h3></a><pre class="doc"><p>
 </p></pre><pre class="prettyprint linenums"><code>function read_mysql(object $result): array
 {
   $row_list = [];
@@ -474,7 +499,7 @@ csvファイルを上書きする
   }
   return $row_list;
 }
-</code></pre></div></div><div class="m-file m-session.php"><h2 class="m-filename">session</h2><div class="pair"><a id="get_session"><h3 class="m-func_name">get_session</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-session.php"><h2 class="m-filename">session</h2><div class="pair"><a id="get_session"><h3 class="m-func_name">get_session</h3></a><pre class="doc"><p>
 セッション変数を配列に格納する
 
 @param string ...$session_names 格納したいセッションの名前
@@ -488,7 +513,7 @@ csvファイルを上書きする
   }
   return $data;
 }
-</code></pre></div></div><div class="m-file m-sort.php"><h2 class="m-filename">sort</h2><div class="pair"><a id="order"><h3 class="m-func_name">order</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-sort.php"><h2 class="m-filename">sort</h2><div class="pair"><a id="order"><h3 class="m-func_name">order</h3></a><pre class="doc"><p>
 昇順・降順
 
 @param array $array_2D ソートしたい2次元配列
@@ -517,7 +542,7 @@ csvファイルを上書きする
   }
   return $array_2D;
 }
-</code></pre></div></div><div class="m-file m-txt.php"><h2 class="m-filename">txt</h2><div class="pair"><a id="read_txt_file"><h3 class="m-func_name">read_txt_file</h3></a><pre><p>
+</code></pre></div></div><div class="m-file m-txt.php"><h2 class="m-filename">txt</h2><div class="pair"><a id="read_txt_file"><h3 class="m-func_name">read_txt_file</h3></a><pre class="doc"><p>
 txtファイルを読み込み配列に格納する
 
 @param string $filepath
@@ -536,7 +561,7 @@ txtファイルを読み込み配列に格納する
   fclose($fp);
   return $row_list;
 }
-</code></pre></div><div class="pair"><a id="add_txt_data"><h3 class="m-func_name">add_txt_data</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="add_txt_data"><h3 class="m-func_name">add_txt_data</h3></a><pre class="doc"><p>
 txtファイルに
 
 @param string $filepath
@@ -550,7 +575,7 @@ txtファイルに
   fputs($fp, $content . "\r\n");
   fclose($fp);
 }
-</code></pre></div><div class="pair"><a id="write_txt_file"><h3 class="m-func_name">write_txt_file</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="write_txt_file"><h3 class="m-func_name">write_txt_file</h3></a><pre class="doc"><p>
 </p></pre><pre class="prettyprint linenums"><code>function write_txt_file($filepath, $row_list)
 {
   $fp = fopen($filepath, 'w');
@@ -560,7 +585,7 @@ txtファイルに
   }
   fclose($fp);
 }
-</code></pre></div><div class="pair"><a id="count_num"><h3 class="m-func_name">count_num</h3></a><pre><p>
+</code></pre></div><div class="pair"><a id="count_num"><h3 class="m-func_name">count_num</h3></a><pre class="doc"><p>
 実行する度に+1するカウント
 
 @param  string $filepath ファイルパス
