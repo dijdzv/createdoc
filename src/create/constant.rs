@@ -13,6 +13,7 @@ html {
 }
 body{
   background-color: #e6e6fa88;
+  overflow-x: hidden;
 }
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
@@ -30,7 +31,6 @@ nav{
 .category{
   position: fixed;
   top: 0.5rem;
-  padding: 0;
   margin: 0;
   padding: 0 0 0 0.3rem;
   width: 200px;
@@ -76,6 +76,12 @@ nav{
   padding-left: 1rem;
   margin-bottom: 0.2rem;
   border-radius: 0.3rem;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.n-func li::-webkit-scrollbar {
+  display: none;
 }
 .n-func li:hover{
   background-color: #a4a8d455;
