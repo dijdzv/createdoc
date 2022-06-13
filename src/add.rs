@@ -6,12 +6,12 @@ pub fn add_line(
     (buf, func_name): (&mut Vec<String>, &mut String),
     pair: &mut Vec<Vec<String>>,
     file_vec: &mut Vec<(String, Vec<String>, Vec<String>)>,
-    (doc_start, doc_end): (&str, &str),
+    (cmt_start, cmt_end): (&str, &str),
 ) {
-    if l.starts_with(doc_start) {
+    if l.starts_with(cmt_start) {
         buf.push(l.to_string());
         *is_doc = true; // doc start
-    } else if l.starts_with(doc_end) && *is_doc {
+    } else if l.starts_with(cmt_end) && *is_doc {
         buf.push(l.to_string());
         *is_doc = false; // doc end
         pair.push(buf.to_vec());

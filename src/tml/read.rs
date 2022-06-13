@@ -24,8 +24,8 @@ struct Dir {
 #[derive(Debug, Serialize, Deserialize)]
 struct Read {
     read_filename_extension: String,
-    doc_start: String,
-    doc_end: String,
+    cmt_start: String,
+    cmt_end: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -61,8 +61,8 @@ pub fn read_toml() -> (String, String, String, String, String, String, Vec<Strin
         },
         Read {
             read_filename_extension,
-            doc_start,
-            doc_end,
+            cmt_start,
+            cmt_end,
         },
         Exclude { ex_filename },
     ) = (file, dir, read, exclude);
@@ -72,8 +72,8 @@ pub fn read_toml() -> (String, String, String, String, String, String, Vec<Strin
         read_dir,
         create_dir,
         read_filename_extension,
-        doc_start,
-        doc_end,
+        cmt_start,
+        cmt_end,
         ex_filename,
     )
 }

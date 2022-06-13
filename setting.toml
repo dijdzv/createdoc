@@ -9,8 +9,8 @@ create_dir = "./"
 [read]
 # "読み込みたい拡張子"
 read_filename_extension = "php"
-doc_start = "/**"
-doc_end = " */"
+cmt_start = "/**"
+cmt_end = " */"
 
 
 [exclude]

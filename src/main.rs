@@ -5,6 +5,7 @@ mod add;
 mod create;
 mod read;
 mod sort;
+mod tml;
 
 type FuncName = String;
 type FileName = String;
@@ -20,10 +21,10 @@ fn main() {
         read_dir,
         create_dir,
         read_filename_extension,
-        doc_start,
-        doc_end,
+        cmt_start,
+        cmt_end,
         ex_filename,
-    ) = read::read_toml();
+    ) = tml::read_toml();
 
     let mut buf = Vec::new(); // 一時保管
     let mut pair = Vec::new(); //docとfuncのペア
@@ -55,7 +56,7 @@ fn main() {
                 (&mut buf, &mut func_name),
                 &mut pair,
                 &mut file_vec,
-                (&doc_start, &doc_end),
+                (&cmt_start, &cmt_end),
             );
         }
         folder_vec.push((filename.to_string(), file_vec.clone()));
