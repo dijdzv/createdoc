@@ -35,11 +35,13 @@ struct Exclude {
 }
 
 pub fn read_toml() -> (String, String, String, String, String, String, Vec<String>) {
-    create_toml(TOML);
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
-        Err(e) => panic!("fail to read file: {}", e),
+        Err(_) => {
+            create_toml(TOML, path);
+            read_to_string(path).unwrap()
+        }
     };
 
     let setting: Result<Setting, de::Error> = toml::from_str(&s);
