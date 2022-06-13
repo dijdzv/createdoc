@@ -149,11 +149,18 @@ main{
 }
 .prettyprint{
   margin-left: 0 !important;
+
   width: 98% !important;
   white-space: pre !important;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  line-height: 1.1rem;
+  /* wifi非接続時 */
+  color: white;
+  background-color: black;
+  padding: 1rem;
+  border-radius: 8px;
 }
 .prettyprint::-webkit-scrollbar {
   display: none;
@@ -168,6 +175,56 @@ a{
   color: inherit;
   text-decoration: none;
 }
+:root {
+  --ggs: 1;
+}
+ .gg-copy {
+ box-sizing: border-box;
+ position: relative;
+ display: inline-block;
+ transform: scale(var(--ggs,1));
+ width: 14px;
+ height: 18px;
+ border: 2px solid;
+ margin-left: 0.5rem;
+ opacity: 0.2;
+}
+.gg-copy:hover{
+  opacity: 1;
+}
+ .gg-copy::after,
+ .gg-copy::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute
+ }
+ .gg-copy::before {
+ background:
+ linear-gradient( to left,
+ currentColor 5px, transparent 0)
+ no-repeat right top/5px 2px,
+ linear-gradient( to left,
+ currentColor 5px, transparent 0)
+ no-repeat left bottom/ 2px 5px;
+ box-shadow: inset -4px -4px 0 -2px;
+ bottom: -6px;
+ right: -6px;
+ width: 14px;
+ height: 18px
+ }
+ .gg-copy::after {
+ width: 6px;
+ height: 2px;
+ background: currentColor;
+ left: 2px;
+ top: 2px;
+ box-shadow: 0 4px 0,0 8px 0
+ }
+ input {
+  position: absolute;
+  opacity: 0;
+ }
 </style>
 <title></title>
 </head>
@@ -177,8 +234,8 @@ a{
 pub const HTML_END: &str = r#"
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 <script>
+/* navの表示・非表示 */
 let nFile = document.getElementsByClassName("n-filename");
-
 for (let f of nFile) {
   f.addEventListener("click", () => {
     let id = f.getAttribute("id");
@@ -187,6 +244,17 @@ for (let f of nFile) {
   });
 }
 
+/* copy */
+let copyIcon = document.getElementsByClassName("gg-copy");
+for (let c of copyIcon) {
+  c.addEventListener("click", () => {
+    let copyTarget = c.previousElementSibling;
+    console.log(copyTarget);
+    copyTarget.select();
+    document.execCommand("Copy");
+    window.getSelection().removeAllRanges();
+  });
+}
 
 </script>
 </body>
