@@ -73,9 +73,8 @@ nav{
 .n-func li{
   color: #734f96;
   font-size: 0.95rem;
-  padding-left: 1.5rem;
+  padding-left: 1rem;
   margin-bottom: 0.2rem;
-  padding-left: 0.5rem;
   border-radius: 0.3rem;
 }
 .n-func li:hover{
