@@ -24,8 +24,10 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
             file.write_all(r#"<div class="pair">"#.as_bytes()).unwrap();
 
             // func name
-            file.write_all((r#"<a id=""#.to_string() + name + r#""><h3>"#).as_bytes())
-                .unwrap();
+            file.write_all(
+                (r#"<a id=""#.to_string() + name + r#""><h3 class="m-func_name">"#).as_bytes(),
+            )
+            .unwrap();
             file.write_all(name.as_bytes()).unwrap();
             file.write_all("</h3></a>".as_bytes()).unwrap();
 
