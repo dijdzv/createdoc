@@ -35,6 +35,7 @@ nav{
   padding: 0 0 0 0.3rem;
   width: 200px;
   height: 2.3rem;
+  line-height: 2.3rem;
   color: #633f86;
   border-bottom: solid 1px #734f9655;
 }
@@ -87,7 +88,7 @@ nav{
   background-color: #a4a8d455;
 }
 .dn{
-  display: none;
+  display: none !important;
 }
 footer{
   position: fixed;
@@ -149,7 +150,6 @@ main{
 }
 .prettyprint{
   margin-left: 0 !important;
-
   width: 98% !important;
   white-space: pre !important;
   overflow-x: scroll;
@@ -176,13 +176,14 @@ a{
   text-decoration: none;
 }
 :root {
-  --ggs: 1;
+  --ggy: 1;
+  --ggk: 1.5;
 }
  .gg-copy {
  box-sizing: border-box;
  position: relative;
  display: inline-block;
- transform: scale(var(--ggs,1));
+ transform: scale(var(--ggy,1));
  width: 14px;
  height: 18px;
  border: 2px solid;
@@ -192,46 +193,71 @@ a{
 .gg-copy:hover{
   opacity: 1;
 }
- .gg-copy::after,
- .gg-copy::before {
- content: "";
- display: block;
- box-sizing: border-box;
- position: absolute
- }
- .gg-copy::before {
- background:
- linear-gradient( to left,
- currentColor 5px, transparent 0)
- no-repeat right top/5px 2px,
- linear-gradient( to left,
- currentColor 5px, transparent 0)
- no-repeat left bottom/ 2px 5px;
- box-shadow: inset -4px -4px 0 -2px;
- bottom: -6px;
- right: -6px;
- width: 14px;
- height: 18px
- }
- .gg-copy::after {
- width: 6px;
- height: 2px;
- background: currentColor;
- left: 2px;
- top: 2px;
- box-shadow: 0 4px 0,0 8px 0
- }
- input {
+.gg-copy::after,
+.gg-copy::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
   position: absolute;
-  opacity: 0;
- }
+}
+.gg-copy::before {
+  background:
+  linear-gradient( to left,
+  currentColor 5px, transparent 0)
+  no-repeat right top/5px 2px,
+  linear-gradient( to left,
+  currentColor 5px, transparent 0)
+  no-repeat left bottom/ 2px 5px;
+  box-shadow: inset -4px -4px 0 -2px;
+  bottom: -6px;
+  right: -6px;
+  width: 14px;
+  height: 18px;
+}
+.gg-copy::after {
+  width: 6px;
+  height: 2px;
+  background: currentColor;
+  left: 2px;
+  top: 2px;
+  box-shadow: 0 4px 0,0 8px 0;
+}
+input {
+ position: absolute;
+ opacity: 0;
+}
+.gg-check {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggk,1));
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  margin-left: 0.5rem;
+}
+.gg-check::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 6px;
+  height: 10px;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg);
+}
 </style>
 <title></title>
 </head>
 <body>
 "#;
 
-pub const HTML_END: &str = r#"
+pub const HTML_END: &str = r##"
 <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
 <script>
 /* navの表示・非表示 */
@@ -249,15 +275,20 @@ let copyIcon = document.getElementsByClassName("gg-copy");
 for (let c of copyIcon) {
   c.addEventListener("click", () => {
     let copyTarget = c.previousElementSibling;
-    console.log(copyTarget);
     copyTarget.select();
     document.execCommand("Copy");
     window.getSelection().removeAllRanges();
+    let check = c.nextElementSibling;
+    c.classList.toggle("dn");
+    check.classList.toggle("dn");
+    setTimeout(() => {
+      c.classList.toggle("dn");
+      check.classList.toggle("dn");
+    }, 2000);
   });
 }
-
 </script>
 </body>
-</html>"#;
+</html>"##;
 
 pub const TRIM_PATTERN: [char; 3] = ['/', '*', ' '];
