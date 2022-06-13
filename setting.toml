@@ -6,11 +6,14 @@ create_filename = "phpdoc"
 read_dir = "./"
 create_dir = "./"
 
-[read_file]
+[read]
 # "読み込みたい拡張子"
 read_filename_extension = "php"
+doc_start = "/**"
+doc_end = " */"
 
-[exclude_file]
+
+[exclude]
 # ["除外したいファイル名", ...]
 # ファイル名の先頭から指定
 ex_filename = ["index.php"]

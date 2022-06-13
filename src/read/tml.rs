@@ -6,8 +6,8 @@ use toml::{self, de};
 struct Setting {
     file: File,
     dir: Dir,
-    read_file: ReadFile,
-    exclude_file: ExcludeFile,
+    read: Read,
+    exclude: Exclude,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -22,16 +22,18 @@ struct Dir {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct ReadFile {
+struct Read {
     read_filename_extension: String,
+    doc_start: String,
+    doc_end: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct ExcludeFile {
+struct Exclude {
     ex_filename: Vec<String>,
 }
 
-pub fn read_toml() -> (String, String, String, String, Vec<String>) {
+pub fn read_toml() -> (String, String, String, String, String, String, Vec<String>) {
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
@@ -47,8 +49,8 @@ pub fn read_toml() -> (String, String, String, String, Vec<String>) {
     let Setting {
         file,
         dir,
-        read_file,
-        exclude_file,
+        read,
+        exclude,
     } = setting.unwrap();
 
     let (
@@ -57,17 +59,21 @@ pub fn read_toml() -> (String, String, String, String, Vec<String>) {
             read_dir,
             create_dir,
         },
-        ReadFile {
+        Read {
             read_filename_extension,
+            doc_start,
+            doc_end,
         },
-        ExcludeFile { ex_filename },
-    ) = (file, dir, read_file, exclude_file);
+        Exclude { ex_filename },
+    ) = (file, dir, read, exclude);
 
     (
         create_filename,
         read_dir,
         create_dir,
         read_filename_extension,
+        doc_start,
+        doc_end,
         ex_filename,
     )
 }

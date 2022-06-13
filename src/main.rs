@@ -15,8 +15,15 @@ type FileVec = Vec<(FuncName, DocVec, FuncVec)>;
 pub type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
-    let (mut create_filename, read_dir, create_dir, read_filename_extension, ex_filename) =
-        read::read_toml();
+    let (
+        mut create_filename,
+        read_dir,
+        create_dir,
+        read_filename_extension,
+        doc_start,
+        doc_end,
+        ex_filename,
+    ) = read::read_toml();
 
     let mut buf = Vec::new(); // 一時保管
     let mut pair = Vec::new(); //docとfuncのペア
@@ -48,6 +55,7 @@ fn main() {
                 (&mut buf, &mut func_name),
                 &mut pair,
                 &mut file_vec,
+                (&doc_start, &doc_end),
             );
         }
         folder_vec.push((filename.to_string(), file_vec.clone()));
