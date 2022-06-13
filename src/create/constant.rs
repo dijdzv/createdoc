@@ -24,15 +24,27 @@ body{
 }
 nav{
   width: 200px;
-  border-right: solid 1px #734f9633;
+  border: solid 1px #734f9633;
   background-color: #e6e6faee;
+}
+.category{
+  position: fixed;
+  top: 0.5rem;
+  padding: 0;
+  margin: 0;
+  padding: 0 0 0 0.3rem;
+  width: 200px;
+  height: 2.3rem;
+  color: #633f86;
+  border-bottom: solid 1px #734f9655;
 }
 .n-folder{
   position: fixed;
+  top: 2.8rem;
   padding: 0;
   margin: 0;
   width: 200px;
-  height: calc(100vh - (65px + 2rem));
+  height: calc(100vh - 2.8rem - (65px + 2rem));
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -61,8 +73,8 @@ nav{
 .n-func li{
   color: #734f96;
   font-size: 0.95rem;
-  padding-left: 1rem;
-  margin-top: 0.2rem;
+  padding-left: 1.5rem;
+  margin-bottom: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 0.3rem;
 }
@@ -74,7 +86,7 @@ nav{
 }
 footer{
   position: fixed;
-  width: calc(200px - 1rem);
+  width: 200px;
   bottom: 1rem;
   padding-top: 1rem;
   padding-left: 1rem;
@@ -83,7 +95,7 @@ footer{
 main{
   width: min(800px,calc(100vw - 200px));
 }
-h2{
+.m-filename{
   margin: 1rem 0 0 1rem;
   padding-left: 0.5rem;
   color: #633f86;

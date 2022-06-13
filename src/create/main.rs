@@ -9,7 +9,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
     for (filename, file_vec) in folder_vec {
         file.write_all((r#"<div class="m-file m-"#.to_string() + filename + r#"">"#).as_bytes())
             .unwrap();
-        file.write_all("<h2>".as_bytes()).unwrap();
+        file.write_all(r#"<h2 class="m-filename">"#.as_bytes())
+            .unwrap();
 
         let show_name = if filename.contains('.') {
             let cp = filename.find('.').unwrap();

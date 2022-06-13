@@ -6,6 +6,12 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec) {
     // nav
     file.write_all(r#"<nav>"#.as_bytes()).unwrap();
 
+    // category
+    file.write_all(r#"<h2 class="category">"#.as_bytes())
+        .unwrap();
+    file.write_all("function".as_bytes()).unwrap();
+    file.write_all("</h2>".as_bytes()).unwrap();
+
     //  n-folder
     file.write_all(r#"<div class="n-folder">"#.as_bytes())
         .unwrap();
