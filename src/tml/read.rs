@@ -1,3 +1,4 @@
+use super::{create_toml, TOML};
 use serde_derive::*;
 use std::fs::read_to_string;
 use std::path::Path;
@@ -34,6 +35,7 @@ struct Exclude {
 }
 
 pub fn read_toml() -> (String, String, String, String, String, String, Vec<String>) {
+    create_toml(TOML);
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,

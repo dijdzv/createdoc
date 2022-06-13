@@ -1,4 +1,4 @@
-[file]
+pub const TOML: &str = r#"[file]
 # html
 create_filename = "rsdoc"
 
@@ -15,4 +15,4 @@ cmt_end = " */"
 [exclude]
 # ["除外したいファイル名", ...]
 # ファイル名の先頭から指定
-ex_filename = ["index.php"]
+ex_filename = ["index.php"]"#;
