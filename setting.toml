@@ -11,7 +11,7 @@ create_dir = "./"
 read_filename_extension = "php"
 cmt_start = "/**"
 cmt_end = " */"
-target = [["function","}"]]
+target = ["function","class"]
 
 [exclude]
 # ["除外したいファイル名", ...]

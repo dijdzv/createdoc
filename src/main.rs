@@ -20,8 +20,7 @@ fn main() {
         mut create_filename,
         (read_dir, create_dir),
         (cmt_start, cmt_end),
-        read_filename_extension,
-        ex_filename,
+        (read_filename_extension, ex_filename),
         target,
     ) = tml::read_toml();
 
