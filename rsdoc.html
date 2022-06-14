@@ -135,12 +135,19 @@ main{
 .doc{
   width: 98%;
   border: solid 2px #cab8d9;
-  overflow-x: scroll;
+  overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  border-radius: 6px;
 }
 .doc::-webkit-scrollbar {
-  display: none;
+ /*  display: none; */
+  height: 8px;
+  padding-bottom: 5px;
+}
+.doc::-webkit-scrollbar-thumb {
+  background: #7025bb66;
+  border-radius: 10px;
 }
 .doc p{
   line-height: 1.2rem;
@@ -152,7 +159,7 @@ main{
   margin-left: 0 !important;
   width: 98% !important;
   white-space: pre !important;
-  overflow-x: scroll;
+  overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
   line-height: 1.1rem;
@@ -163,7 +170,12 @@ main{
   border-radius: 8px;
 }
 .prettyprint::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
+  height: 10px;
+}
+.prettyprint::-webkit-scrollbar-thumb {
+  background: #9933ffbb;
+  border-radius: 8px;
 }
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
@@ -255,7 +267,7 @@ input {
 <title></title>
 </head>
 <body>
-<div class="wrap"><nav><h2 class="category">function</h2><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-func n-array.php dn"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-func n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-func n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-func n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-func n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-func n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-func n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-func n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-func n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><footer>2022年06月14日 00:45:41</footer></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><a id="two_to_one"><h3 class="m-func_name">two_to_one<input type="text" value="two_to_one"><i class="gg-copy"></i><i class="gg-check dn"></i></h3></a><pre class="doc"><p>
+<div class="wrap"><nav><h2 class="category">function</h2><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-func n-array.php dn"><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-func n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-func n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-func n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-func n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-func n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-func n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-func n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-func n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><footer>2022年06月14日 19:24:14</footer></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><a id="two_to_one"><h3 class="m-func_name">two_to_one<input type="text" value="two_to_one"><i class="gg-copy"></i><i class="gg-check dn"></i></h3></a><pre class="doc"><p>
 2次元配列から1次元配列を抜き取る
 
 @param  array $row_list 抜き取られる2次元配列

@@ -135,12 +135,18 @@ main{
 .doc{
   width: 98%;
   border: solid 2px #cab8d9;
-  overflow-x: scroll;
+  overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  border-radius: 6px;
 }
 .doc::-webkit-scrollbar {
-  display: none;
+ /*  display: none; */
+  height: 8px;
+}
+.doc::-webkit-scrollbar-thumb {
+  background: #7025bb66;
+  border-radius: 10px;
 }
 .doc p{
   line-height: 1.2rem;
@@ -152,7 +158,7 @@ main{
   margin-left: 0 !important;
   width: 98% !important;
   white-space: pre !important;
-  overflow-x: scroll;
+  overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
   line-height: 1.1rem;
@@ -163,7 +169,12 @@ main{
   border-radius: 8px;
 }
 .prettyprint::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
+  height: 10px;
+}
+.prettyprint::-webkit-scrollbar-thumb {
+  background: #9933ffbb;
+  border-radius: 8px;
 }
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
