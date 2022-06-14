@@ -132,6 +132,11 @@ main{
   border-right: solid 0px #734f96;
   border-radius: 0px;
 }
+.anchor{
+  position: absolute;
+  top: 0;
+  left: -200px;
+}
 .doc{
   width: 98%;
   border: solid 2px #cab8d9;

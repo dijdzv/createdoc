@@ -26,9 +26,9 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
 
             // func name
             file.write_all(
-                (r#"<a id=""#.to_string()
+                (r#"<h3 class="m-func_name"><a class="anchor" id=""#.to_string()
                     + name
-                    + r#""><h3 class="m-func_name">"#
+                    + r#""></a>"#
                     + name
                     + r#"<input type="text" value=""#
                     + name
@@ -36,11 +36,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
                     .as_bytes(),
             )
             .unwrap();
-            file.write_all(
-                r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3></a>"#.as_bytes(),
-            )
-            .unwrap();
-
+            file.write_all(r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#.as_bytes())
+                .unwrap();
             // docコメント
             file.write_all(r#"<pre class="doc"><p>"#.as_bytes())
                 .unwrap();
