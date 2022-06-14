@@ -27,6 +27,7 @@ struct Read {
     read_filename_extension: String,
     cmt_start: String,
     cmt_end: String,
+    target: Vec<Vec<String>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -34,7 +35,14 @@ struct Exclude {
     ex_filename: Vec<String>,
 }
 
-pub fn read_toml() -> (String, String, String, String, String, String, Vec<String>) {
+pub fn read_toml() -> (
+    String,
+    (String, String),
+    (String, String),
+    String,
+    Vec<String>,
+    Vec<Vec<String>>,
+) {
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
@@ -67,17 +75,17 @@ pub fn read_toml() -> (String, String, String, String, String, String, Vec<Strin
             read_filename_extension,
             cmt_start,
             cmt_end,
+            target,
         },
         Exclude { ex_filename },
     ) = (file, dir, read, exclude);
 
     (
         create_filename,
-        read_dir,
-        create_dir,
+        (read_dir, create_dir),
+        (cmt_start, cmt_end),
         read_filename_extension,
-        cmt_start,
-        cmt_end,
         ex_filename,
+        target,
     )
 }

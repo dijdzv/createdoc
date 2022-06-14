@@ -28,22 +28,24 @@ nav{
   border: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
-.category{
+.html-filename{
   position: fixed;
   top: 0.5rem;
-  margin: 0;
-  padding: 0 0 0 0.3rem;
+  margin: 0 0 0 -1px;
+  padding: 0;
   width: 200px;
   height: 2.3rem;
-  line-height: 2.3rem;
+  line-height: 2.4rem;
+  text-align: center;
   color: #633f86;
   border-bottom: solid 1px #734f9655;
+  overflow: hidden;
 }
 .n-folder{
   position: fixed;
   top: 2.8rem;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 -1px;
   width: 200px;
   height: calc(100vh - 2.8rem - (65px + 2rem));
   overflow-y: scroll;
@@ -93,6 +95,7 @@ nav{
 footer{
   position: fixed;
   width: 200px;
+  margin: 0 0 0 -1px;
   bottom: 1rem;
   padding-top: 1rem;
   padding-left: 1rem;

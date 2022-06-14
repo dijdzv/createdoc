@@ -2,15 +2,15 @@ use super::FolderVec;
 use chrono::Local;
 use std::{fs::File, io::Write};
 
-pub fn create_nav(file: &mut File, folder_vec: &FolderVec) {
+pub fn create_nav(file: &mut File, folder_vec: &FolderVec, create_filename: &str) {
     // nav
     file.write_all(r#"<nav>"#.as_bytes()).unwrap();
 
     // category
-    file.write_all(r#"<h2 class="category">"#.as_bytes())
+    file.write_all(r#"<a href=""><h2 class="html-filename">"#.as_bytes())
         .unwrap();
-    file.write_all("function".as_bytes()).unwrap();
-    file.write_all("</h2>".as_bytes()).unwrap();
+    file.write_all(create_filename.as_bytes()).unwrap();
+    file.write_all("</h2></a>".as_bytes()).unwrap();
 
     //  n-folder
     file.write_all(r#"<div class="n-folder">"#.as_bytes())

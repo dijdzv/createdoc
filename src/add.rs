@@ -1,23 +1,37 @@
+// type VariableReference = (
+//     &mut Vec<String>,
+//     &mut String,
+//     &mut Vec<Vec<String>>,
+//     &mut Vec<(String, Vec<String>, Vec<String>)>,
+// );
+
 /// 関数とDocのvecを生成
 pub fn add_line(
     l: &str,
     (i, pre): (usize, &mut usize),
     (is_doc, is_fn): (&mut bool, &mut bool),
-    (buf, func_name): (&mut Vec<String>, &mut String),
-    pair: &mut Vec<Vec<String>>,
-    file_vec: &mut Vec<(String, Vec<String>, Vec<String>)>,
+    (buf, func_name, pair, file_vec): (
+        &mut Vec<String>,
+        &mut String,
+        &mut Vec<Vec<String>>,
+        &mut Vec<(String, Vec<String>, Vec<String>)>,
+    ),
     (cmt_start, cmt_end): (&str, &str),
+    target: &[Vec<String>],
 ) {
     if l.starts_with(cmt_start) {
         buf.push(l.to_string());
         *is_doc = true; // doc start
+        return;
     } else if l.starts_with(cmt_end) && *is_doc {
         buf.push(l.to_string());
         *is_doc = false; // doc end
         pair.push(buf.to_vec());
         buf.clear();
         *pre = i;
-    } else if l.starts_with("function") {
+        return;
+    }
+    if l.starts_with("function") {
         // docとfnが隣あっていなければdocを空にしてpush
         if *pre != i - 1 {
             pair.clear();

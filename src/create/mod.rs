@@ -20,7 +20,7 @@ pub fn create_html(create_dir: &str, create_filename: &mut String, folder_vec: &
     // wrap
     file.write_all(r#"<div class="wrap">"#.as_bytes()).unwrap();
 
-    nav::create_nav(&mut file, folder_vec);
+    nav::create_nav(&mut file, folder_vec, create_filename);
 
     main::create_main(&mut file, folder_vec);
 
