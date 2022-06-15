@@ -7,12 +7,12 @@ mod read;
 mod sort;
 mod tml;
 
-type FuncName = String;
+type SyntaxName = String;
 type FileName = String;
-type DocVec = Vec<String>;
-type FuncVec = Vec<String>;
+type Doc = Vec<String>;
+type Content = Vec<String>;
 
-type FileVec = Vec<(FuncName, DocVec, FuncVec)>;
+type FileVec = Vec<(SyntaxName, Doc, Content)>;
 pub type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
@@ -24,14 +24,14 @@ fn main() {
         target,
     ) = tml::read_toml();
 
-    let mut buf = Vec::new(); // 一時保管
-    let mut pair = Vec::new(); //docとfuncのペア
+    let mut doc = Vec::new(); // 一時保管
+    let mut content = Vec::new(); //docとfuncのペア
     let mut file_vec: FileVec = Vec::new(); // １つのfile
     let mut folder_vec: FolderVec = Vec::new(); // 全てのファイル
-    let mut func_name = String::from(""); // 関数名のbuf
+    let mut syntax_name = String::from(""); // 関数名のbuf
     let mut pre = 0; // 前の行番号
     let mut is_doc = false;
-    let mut is_fn = false;
+    let mut is_content = false;
 
     let mut filenames = read::read_dir(read_dir).unwrap();
     filenames = sort::sorting(filenames, &read_filename_extension, ex_filename);
@@ -44,14 +44,14 @@ fn main() {
             .enumerate()
         {
             // 一行
-            let l = result.ok().unwrap();
+            let mut l = result.ok().unwrap();
 
             // vecに行毎追加
             add::add_line(
-                &l,
+                &mut l,
                 (i, &mut pre),
-                (&mut is_doc, &mut is_fn),
-                (&mut buf, &mut func_name, &mut pair, &mut file_vec),
+                (&mut is_doc, &mut is_content),
+                (&mut doc, &mut content, &mut syntax_name, &mut file_vec),
                 (&cmt_start, &cmt_end),
                 &target,
             );

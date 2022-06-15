@@ -9,9 +9,11 @@ create_dir = "./"
 [read]
 # "読み込みたい拡張子"
 read_filename_extension = "php"
+# コメント
 cmt_start = "/**"
 cmt_end = " */"
-target = ["function"]
+# 対象
+target = ["function","class"]
 
 [exclude]
 # ["除外したいファイル名", ...]
