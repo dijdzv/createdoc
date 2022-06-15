@@ -35,8 +35,10 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, create_filename: &str
         file.write_all("</h3>".as_bytes()).unwrap();
 
         // n-func
-        file.write_all((r#"<ul class="n-func n-"#.to_string() + filename + r#" dn">"#).as_bytes())
-            .unwrap();
+        file.write_all(
+            (r#"<ul class="n-syntax n-"#.to_string() + filename + r#" dn">"#).as_bytes(),
+        )
+        .unwrap();
 
         for (name, _, _) in file_vec {
             file.write_all((r##"<a href="#"##.to_string() + name + r#""><li>"#).as_bytes())

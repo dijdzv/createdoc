@@ -60,12 +60,12 @@ nav{
 .n-filename:hover{
   background-color: #a4a8d455;
 }
-.n-func{
+.n-syntax{
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.n-func li{
+.n-syntax li{
   color: #734f96;
   font-size: 0.95rem;
   padding-left: 1rem;
@@ -75,10 +75,10 @@ nav{
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.n-func li::-webkit-scrollbar {
+.n-syntax li::-webkit-scrollbar {
   display: none;
 }
-.n-func li:hover{
+.n-syntax li:hover{
   background-color: #a4a8d455;
 }
 .dn{
@@ -107,14 +107,14 @@ main{
   padding: 1rem;
   border-radius: 1rem;
 }
-.m-func_name{
+.m-syntax_name{
   position: relative;
   margin: 0;
   padding-top: 1rem;
   padding-left: 2rem;
   color: #734f96;
 }
-.m-func_name::before{
+.m-syntax_name::before{
   content: "";
   position: absolute;
   top: 1rem;
