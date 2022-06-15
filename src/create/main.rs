@@ -3,7 +3,7 @@ use crate::create::constant;
 use regex::Regex;
 use std::{fs::File, io::Write};
 
-pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
+pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     // main
     file.write_all("<main>".as_bytes()).unwrap();
 
@@ -51,8 +51,11 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
             file.write_all("</p></pre>".as_bytes()).unwrap();
 
             // pre code
-            file.write_all(r#"<pre class="code"><code class="language-PHP">"#.as_bytes())
-                .unwrap();
+            file.write_all(
+                (r#"<pre class="code"><code class="language-"#.to_owned() + read_lang + r#"">"#)
+                    .as_bytes(),
+            )
+            .unwrap();
             for f in func {
                 file.write_all((f.to_owned() + "\r\n").as_bytes()).unwrap();
             }

@@ -1,16 +1,14 @@
-[file]
-# html
-create_filename = "rsdoc"
-
 [dir]
 read_dir = "./"
 create_dir = "./"
 
 [read]
 # 対応言語 rust,php,js
+# "読み込みたい言語"
 # https://prismjs.com/index.html#supported-languages
+read_lang = "php"
 # "読み込みたい拡張子"
-read_filename_extension = "php"
+read_filename_extension = ".php"
 # コメント
 cmt_start = "/**"
 cmt_end = " */"

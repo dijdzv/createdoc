@@ -1,15 +1,11 @@
-pub const TOML: &str = r#"[file]
-# html
-create_filename = "rsdoc"
-
-[dir]
+pub const TOML: &str = r#"[dir]
 read_dir = "./"
 create_dir = "./"
 
 [read]
 # 対応言語 rust,php,js
-# https://prismjs.com/index.html#supported-languages
 # "読み込みたい言語"
+# https://prismjs.com/index.html#supported-languages
 read_lang = "rust"
 # "読み込みたい拡張子"
 read_filename_extension = "rs"

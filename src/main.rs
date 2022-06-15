@@ -17,10 +17,9 @@ pub type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
     let (
-        mut create_filename,
         (read_dir, create_dir),
         (cmt_start, cmt_end),
-        (read_filename_extension, ex_filename),
+        (read_lang, read_filename_extension, ex_filename),
         target,
     ) = tml::read_toml();
 
@@ -60,5 +59,5 @@ fn main() {
         file_vec.clear();
     }
 
-    create::create_html(&create_dir, &mut create_filename, &folder_vec);
+    create::create_html(&create_dir, &read_lang, &folder_vec);
 }
