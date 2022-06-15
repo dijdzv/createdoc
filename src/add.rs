@@ -32,7 +32,7 @@ pub fn add_line(
             content.push(l.to_string());
             *is_content = true; // content start
             *l = l.replacen(t, "", 1);
-            let re = Regex::new("([A-Z]|[a-z]|_|[0-9])+").unwrap();
+            let re = Regex::new("([A-Z]|[a-z]|_|-|[0-9])+").unwrap();
             let cap = re.captures(l).unwrap();
             *syntax_name = cap.get(0).unwrap().as_str().to_string();
             return;

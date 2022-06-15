@@ -49,7 +49,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
             file.write_all("</p></pre>".as_bytes()).unwrap();
 
             // pre code
-            file.write_all(r#"<pre class="prettyprint linenums"><code>"#.as_bytes())
+            file.write_all(r#"<pre class="code"><code class="language-PHP">"#.as_bytes())
                 .unwrap();
             for f in func {
                 file.write_all((f.to_owned() + "\r\n").as_bytes()).unwrap();

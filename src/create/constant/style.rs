@@ -154,34 +154,15 @@ main{
   font-size: 1rem;
   font-family: 'Noto Sans JP', sans-serif;
 }
-.prettyprint{
-  margin-left: 0 !important;
-  width: 98% !important;
-  white-space: pre !important;
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  line-height: 1.1rem;
-  /* wifi非接続時 */
-  color: white;
-  background-color: black;
-  padding: 1rem;
-  border-radius: 8px;
+.code{
+  width: 98%;
 }
-.prettyprint::-webkit-scrollbar {
-  /* display: none; */
+.code::-webkit-scrollbar {
   height: 10px;
 }
-.prettyprint::-webkit-scrollbar-thumb {
+.code::-webkit-scrollbar-thumb {
   background: #9933ffbb;
   border-radius: 8px;
-}
-.prettyprint ol.linenums > li {
-	list-style-type: decimal;
-}
-code{
-  font-size: 14px;
-  font-family: Consolas, 'Courier New', monospace;
 }
 a{
   color: inherit;

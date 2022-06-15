@@ -8,12 +8,11 @@ pub const HTML_TOP_START: &str = r#"<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">"#;
 
-pub const HTML_TOP_END: &str = "<title></title>
+pub const HTML_TOP_END: &str = r#"<title></title>
 </head>
-<body>
-";
+<body class="line-numbers">
+"#;
 
 pub const HTML_BOTTOM: &str = r##"
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=sunburst"></script>
 </body>
 </html>"##;

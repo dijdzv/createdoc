@@ -7,6 +7,7 @@ read_dir = "./"
 create_dir = "./"
 
 [read]
+# https://prismjs.com/index.html#supported-languages
 # "読み込みたい拡張子"
 read_filename_extension = "php"
 # コメント
