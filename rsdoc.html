@@ -16,37 +16,38 @@ html {
 body{
   background-color: #e6e6fa88;
   overflow-x: hidden;
+  margin: 0;
 }
 .wrap{
-  width: fit-content;
-  height: 100%;
   display: flex;
-  margin: 0 auto;
 }
 nav{
-  width: 200px;
-  border: solid 1px #734f9633;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 250px;
+  min-width: 200px;
+  height: 100vh;
+  border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
 .html-filename{
-  position: fixed;
-  top: 0.5rem;
-  margin: 0 0 0 -1px;
+  position: sticky;
+  top: 0;
+  margin: 0;
   padding: 0;
-  width: 200px;
-  height: 2.3rem;
-  line-height: 2.4rem;
+  height: 4rem;
+  line-height: 4rem;
   text-align: center;
   color: #633f86;
   border-bottom: solid 1px #734f9655;
   overflow: hidden;
 }
 .n-folder{
-  position: fixed;
+  position: sticky;
   top: 2.8rem;
   padding: 0;
-  margin: 0 0 0 -1px;
-  width: 200px;
+  margin: 0;
   height: calc(100vh - 2.8rem - (65px + 2rem));
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -60,8 +61,8 @@ nav{
 }
 .n-filename{
   cursor: pointer;
-  margin: 0;
-  padding-left: 0.5rem;
+  margin: 1rem 0 0 0;
+  padding-left: 1rem;
   color: #633f86;
   border-radius: 0.3rem;
 }
@@ -76,7 +77,7 @@ nav{
 .n-syntax li{
   color: #734f96;
   font-size: 0.95rem;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   margin-bottom: 0.2rem;
   border-radius: 0.3rem;
   overflow-x: scroll;
@@ -92,17 +93,19 @@ nav{
 .dn{
   display: none !important;
 }
-footer{
-  position: fixed;
-  width: 200px;
-  margin: 0 0 0 -1px;
-  bottom: 1rem;
-  padding-top: 1rem;
-  padding-left: 1rem;
+.bottom{
+  position: sticky;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  bottom: 0;
   border-top: solid 1px #734f9655;
 }
+.time{
+  width: 128px;
+}
 main{
-  width: min(800px,calc(100vw - 200px));
+  min-width: 0;
 }
 .m-filename{
   margin: 1rem 0 0 1rem;
@@ -144,12 +147,9 @@ main{
   width: 98%;
   border: solid 2px #cab8d9;
   overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   border-radius: 6px;
 }
 .doc::-webkit-scrollbar {
- /*  display: none; */
   height: 8px;
 }
 .doc::-webkit-scrollbar-thumb {
@@ -257,11 +257,10 @@ pre[class*=language-].line-numbers{position:relative;padding-left:3.8em;counter-
 .token a{color:inherit}
 span.inline-color-wrapper{background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=);background-position:center;background-size:110%;display:inline-block;height:1.333ch;width:1.333ch;margin:0 .333ch;box-sizing:border-box;border:1px solid #fff;outline:1px solid rgba(0,0,0,.5);overflow:hidden}span.inline-color{display:block;height:120%;width:120%}
 div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z-index:10;top:.3em;right:.2em;transition:opacity .3s ease-in-out;opacity:0}div.code-toolbar:hover>.toolbar{opacity:1}div.code-toolbar:focus-within>.toolbar{opacity:1}div.code-toolbar>.toolbar>.toolbar-item{display:inline-block}div.code-toolbar>.toolbar>.toolbar-item>a{cursor:pointer}div.code-toolbar>.toolbar>.toolbar-item>button{background:0 0;border:0;color:inherit;font:inherit;line-height:normal;overflow:visible;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}div.code-toolbar>.toolbar>.toolbar-item>a,div.code-toolbar>.toolbar>.toolbar-item>button,div.code-toolbar>.toolbar>.toolbar-item>span{color:#bbb;font-size:.8em;padding:0 .5em;background:#f5f2f0;background:rgba(224,224,224,.2);box-shadow:0 2px 0 0 rgba(0,0,0,.2);border-radius:.5em}div.code-toolbar>.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar>.toolbar-item>a:hover,div.code-toolbar>.toolbar>.toolbar-item>button:focus,div.code-toolbar>.toolbar>.toolbar-item>button:hover,div.code-toolbar>.toolbar>.toolbar-item>span:focus,div.code-toolbar>.toolbar>.toolbar-item>span:hover{color:inherit;text-decoration:none}
-.token.punctuation.brace-hover,.token.punctuation.brace-selected{outline:solid 1px}.rainbow-braces .token.punctuation.brace-level-1,.rainbow-braces .token.punctuation.brace-level-5,.rainbow-braces .token.punctuation.brace-level-9{color:#e50;opacity:1}.rainbow-braces .token.punctuation.brace-level-10,.rainbow-braces .token.punctuation.brace-level-2,.rainbow-braces .token.punctuation.brace-level-6{color:#0b3;opacity:1}.rainbow-braces .token.punctuation.brace-level-11,.rainbow-braces .token.punctuation.brace-level-3,.rainbow-braces .token.punctuation.brace-level-7{color:#26f;opacity:1}.rainbow-braces .token.punctuation.brace-level-12,.rainbow-braces .token.punctuation.brace-level-4,.rainbow-braces .token.punctuation.brace-level-8{color:#e0e;opacity:1}
 </style><title></title>
 </head>
 <body class="line-numbers">
-<div class="wrap"><nav><a href=""><h2 class="html-filename">rsdoc</h2></a><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-syntax n-array.php dn"><a href="#Test"><li>Test</li></a><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-syntax n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-syntax n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-syntax n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-syntax n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-syntax n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-syntax n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-syntax n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-syntax n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><footer>2022年06月15日 17:45:07</footer></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><h3 class="m-syntax_name"><a class="anchor" id="Test"></a>Test<input type="text" value="Test"><i class="gg-copy"></i><i class="gg-check dn"></i></h3><pre class="doc"><p></p></pre><pre class="code"><code class="language-PHP">class Test
+<div class="wrap"><nav><a href=""><h2 class="html-filename">rsdoc</h2></a><div class="n-folder"><div class="n-file"><h3 class="n-filename" id="n-array.php">array</h3><ul class="n-syntax n-array.php dn"><a href="#Test"><li>Test</li></a><a href="#two_to_one"><li>two_to_one</li></a><a href="#what_num"><li>what_num</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-check.php">check</h3><ul class="n-syntax n-check.php dn"><a href="#check_exist_csv"><li>check_exist_csv</li></a><a href="#check_multiple_exist_csv_record"><li>check_multiple_exist_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-csv.php">csv</h3><ul class="n-syntax n-csv.php dn"><a href="#add_csv_record"><li>add_csv_record</li></a><a href="#read_csv_file"><li>read_csv_file</li></a><a href="#write_csv_file"><li>write_csv_file</li></a><a href="#del_csv_record"><li>del_csv_record</li></a><a href="#edit_csv_data"><li>edit_csv_data</li></a><a href="#edit_csv_record"><li>edit_csv_record</li></a><a href="#create_id_csv_record"><li>create_id_csv_record</li></a><a href="#get_csv_record"><li>get_csv_record</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-format.php">format</h3><ul class="n-syntax n-format.php dn"><a href="#date_from_8digit_number"><li>date_from_8digit_number</li></a><a href="#println"><li>println</li></a><a href="#print_ary"><li>print_ary</li></a><a href="#garbling"><li>garbling</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-get.php">get</h3><ul class="n-syntax n-get.php dn"><a href="#get_id_multiple_exist_csv_record"><li>get_id_multiple_exist_csv_record</li></a><a href="#get_data_from_id_csv_file"><li>get_data_from_id_csv_file</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-mysql.php">mysql</h3><ul class="n-syntax n-mysql.php dn"><a href="#read_mysql"><li>read_mysql</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-session.php">session</h3><ul class="n-syntax n-session.php dn"><a href="#get_session"><li>get_session</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-sort.php">sort</h3><ul class="n-syntax n-sort.php dn"><a href="#order"><li>order</li></a></ul></div><div class="n-file"><h3 class="n-filename" id="n-txt.php">txt</h3><ul class="n-syntax n-txt.php dn"><a href="#read_txt_file"><li>read_txt_file</li></a><a href="#add_txt_data"><li>add_txt_data</li></a><a href="#write_txt_file"><li>write_txt_file</li></a><a href="#count_num"><li>count_num</li></a></ul></div></div><div class="bottom"><p class="time">2022年06月15日 23:21:40</p></div></nav><main><div class="m-file m-array.php"><h2 class="m-filename">array</h2><div class="pair"><h3 class="m-syntax_name"><a class="anchor" id="Test"></a>Test<input type="text" value="Test"><i class="gg-copy"></i><i class="gg-check dn"></i></h3><pre class="doc"><p></p></pre><pre class="code"><code class="language-PHP">class Test
 {
 }
 </code></pre></div><div class="pair"><h3 class="m-syntax_name"><a class="anchor" id="two_to_one"></a>two_to_one<input type="text" value="two_to_one"><i class="gg-copy"></i><i class="gg-check dn"></i></h3><pre class="doc"><p>
@@ -737,7 +736,6 @@ Prism.languages.go=Prism.languages.extend("clike",{string:{pattern:/(^|[^\\])"(?
 !function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var n=/<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/g,r=/^#?((?:[\da-f]){3,4}|(?:[\da-f]{2}){3,4})$/i,o=[function(n){var o=r.exec(n);if(o){for(var s=(n=o[1]).length>=6?2:1,e=n.length/s,t=1==s?1/15:1/255,i=[],a=0;a<e;a++){var c=parseInt(n.substr(a*s,s),16);i.push(c*t)}return 3==e&&i.push(1),"rgba("+i.slice(0,3).map((function(n){return String(Math.round(255*n))})).join(",")+","+String(Number(i[3].toFixed(3)))+")"}},function(n){var r=(new Option).style;return r.color=n,r.color?n:void 0}];Prism.hooks.add("wrap",(function(r){if("color"===r.type||r.classes.indexOf("color")>=0){for(var s,e=r.content,t=e.split(n).join(""),i=0,a=o.length;i<a&&!s;i++)s=o[i](t);if(!s)return;var c='<span class="inline-color-wrapper"><span class="inline-color" style="background-color:'+s+';"></span></span>';r.content=c+e}}))}}();
 !function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();
 !function(){function t(t){var e=document.createElement("textarea");e.value=t.getText(),e.style.top="0",e.style.left="0",e.style.position="fixed",document.body.appendChild(e),e.focus(),e.select();try{var o=document.execCommand("copy");setTimeout((function(){o?t.success():t.error()}),1)}catch(e){setTimeout((function(){t.error(e)}),1)}document.body.removeChild(e)}"undefined"!=typeof Prism&&"undefined"!=typeof document&&(Prism.plugins.toolbar?Prism.plugins.toolbar.registerButton("copy-to-clipboard",(function(e){var o=e.element,n=function(t){var e={copy:"Copy","copy-error":"Press Ctrl+C to copy","copy-success":"Copied!","copy-timeout":5e3};for(var o in e){for(var n="data-prismjs-"+o,c=t;c&&!c.hasAttribute(n);)c=c.parentElement;c&&(e[o]=c.getAttribute(n))}return e}(o),c=document.createElement("button");c.className="copy-to-clipboard-button",c.setAttribute("type","button");var r=document.createElement("span");return c.appendChild(r),u("copy"),function(e,o){e.addEventListener("click",(function(){!function(e){navigator.clipboard?navigator.clipboard.writeText(e.getText()).then(e.success,(function(){t(e)})):t(e)}(o)}))}(c,{getText:function(){return o.textContent},success:function(){u("copy-success"),i()},error:function(){u("copy-error"),setTimeout((function(){!function(t){window.getSelection().selectAllChildren(t)}(o)}),1),i()}}),c;function i(){setTimeout((function(){u("copy")}),n["copy-timeout"])}function u(t){r.textContent=n[t],c.setAttribute("data-copy-state",t)}})):console.warn("Copy to Clipboard plugin loaded before Toolbar plugin."))}();
-!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e={"(":")","[":"]","{":"}"},t={"(":"brace-round","[":"brace-square","{":"brace-curly"},n={"${":"{"},r=0,c=/^(pair-\d+-)(close|open)$/;Prism.hooks.add("complete",(function(c){var i=c.element,d=i.parentElement;if(d&&"PRE"==d.tagName){var u=[];if(Prism.util.isActive(i,"match-braces")&&u.push("(","[","{"),0!=u.length){d.__listenerAdded||(d.addEventListener("mousedown",(function(){var e=d.querySelector("code"),t=s("brace-selected");Array.prototype.slice.call(e.querySelectorAll("."+t)).forEach((function(e){e.classList.remove(t)}))})),Object.defineProperty(d,"__listenerAdded",{value:!0}));var f=Array.prototype.slice.call(i.querySelectorAll("span."+s("token")+"."+s("punctuation"))),h=[];u.forEach((function(c){for(var i=e[c],d=s(t[c]),u=[],p=[],v=0;v<f.length;v++){var m=f[v];if(0==m.childElementCount){var b=m.textContent;(b=n[b]||b)===c?(h.push({index:v,open:!0,element:m}),m.classList.add(d),m.classList.add(s("brace-open")),p.push(v)):b===i&&(h.push({index:v,open:!1,element:m}),m.classList.add(d),m.classList.add(s("brace-close")),p.length&&u.push([v,p.pop()]))}}u.forEach((function(e){var t="pair-"+r+++"-",n=f[e[0]],c=f[e[1]];n.id=t+"open",c.id=t+"close",[n,c].forEach((function(e){e.addEventListener("mouseenter",a),e.addEventListener("mouseleave",o),e.addEventListener("click",l)}))}))}));var p=0;h.sort((function(e,t){return e.index-t.index})),h.forEach((function(e){e.open?(e.element.classList.add(s("brace-level-"+(p%12+1))),p++):(p=Math.max(0,p-1),e.element.classList.add(s("brace-level-"+(p%12+1))))}))}}}))}function s(e){var t=Prism.plugins.customClass;return t?t.apply(e,"none"):e}function i(e){var t=c.exec(e.id);return document.querySelector("#"+t[1]+("open"==t[2]?"close":"open"))}function a(){Prism.util.isActive(this,"brace-hover",!0)&&[this,i(this)].forEach((function(e){e.classList.add(s("brace-hover"))}))}function o(){[this,i(this)].forEach((function(e){e.classList.remove(s("brace-hover"))}))}function l(){Prism.util.isActive(this,"brace-select",!0)&&[this,i(this)].forEach((function(e){e.classList.add(s("brace-selected"))}))}}();
 </script>
 </body>
 </html>

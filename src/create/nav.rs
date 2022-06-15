@@ -57,10 +57,13 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, create_filename: &str
     file.write_all("</div>".as_bytes()).unwrap();
 
     // footer
-    file.write_all("<footer>".as_bytes()).unwrap();
+    file.write_all(r#"<div class="bottom">"#.as_bytes())
+        .unwrap();
+    file.write_all(r#"<p class="time">"#.as_bytes()).unwrap();
     let now = Local::now().format("%Y年%m月%d日 %H:%M:%S").to_string();
     file.write_all(now.as_bytes()).unwrap();
-    file.write_all("</footer>".as_bytes()).unwrap();
+    file.write_all("</p>".as_bytes()).unwrap();
+    file.write_all("</div>".as_bytes()).unwrap();
 
     // /nav
     file.write_all("</nav>".as_bytes()).unwrap();

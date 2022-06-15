@@ -8,37 +8,38 @@ html {
 body{
   background-color: #e6e6fa88;
   overflow-x: hidden;
+  margin: 0;
 }
 .wrap{
-  width: fit-content;
-  height: 100%;
   display: flex;
-  margin: 0 auto;
 }
 nav{
-  width: 200px;
-  border: solid 1px #734f9633;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 250px;
+  min-width: 200px;
+  height: 100vh;
+  border-right: solid 1px #734f9633;
   background-color: #e6e6faee;
 }
 .html-filename{
-  position: fixed;
-  top: 0.5rem;
-  margin: 0 0 0 -1px;
+  position: sticky;
+  top: 0;
+  margin: 0;
   padding: 0;
-  width: 200px;
-  height: 2.3rem;
-  line-height: 2.4rem;
+  height: 4rem;
+  line-height: 4rem;
   text-align: center;
   color: #633f86;
   border-bottom: solid 1px #734f9655;
   overflow: hidden;
 }
 .n-folder{
-  position: fixed;
+  position: sticky;
   top: 2.8rem;
   padding: 0;
-  margin: 0 0 0 -1px;
-  width: 200px;
+  margin: 0;
   height: calc(100vh - 2.8rem - (65px + 2rem));
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -52,8 +53,8 @@ nav{
 }
 .n-filename{
   cursor: pointer;
-  margin: 0;
-  padding-left: 0.5rem;
+  margin: 1rem 0 0 0;
+  padding-left: 1rem;
   color: #633f86;
   border-radius: 0.3rem;
 }
@@ -68,7 +69,7 @@ nav{
 .n-syntax li{
   color: #734f96;
   font-size: 0.95rem;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   margin-bottom: 0.2rem;
   border-radius: 0.3rem;
   overflow-x: scroll;
@@ -84,17 +85,19 @@ nav{
 .dn{
   display: none !important;
 }
-footer{
-  position: fixed;
-  width: 200px;
-  margin: 0 0 0 -1px;
-  bottom: 1rem;
-  padding-top: 1rem;
-  padding-left: 1rem;
+.bottom{
+  position: sticky;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  bottom: 0;
   border-top: solid 1px #734f9655;
 }
+.time{
+  width: 128px;
+}
 main{
-  width: min(800px,calc(100vw - 200px));
+  min-width: 0;
 }
 .m-filename{
   margin: 1rem 0 0 1rem;
@@ -136,12 +139,9 @@ main{
   width: 98%;
   border: solid 2px #cab8d9;
   overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   border-radius: 6px;
 }
 .doc::-webkit-scrollbar {
- /*  display: none; */
   height: 8px;
 }
 .doc::-webkit-scrollbar-thumb {
