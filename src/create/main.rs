@@ -1,5 +1,6 @@
 use super::FolderVec;
 use crate::create::constant;
+use regex::Regex;
 use std::{fs::File, io::Write};
 
 pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
@@ -41,8 +42,9 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
             // docコメント
             file.write_all(r#"<pre class="doc"><p>"#.as_bytes())
                 .unwrap();
+            let re = Regex::new(r"[\s\t\v]+").unwrap();
             for d in doc {
-                let s = d.trim_start_matches(constant::TRIM_PATTERN);
+                let s = re.replace_all(d.trim_start_matches(constant::TRIM_PATTERN), " ");
                 file.write_all((s.to_owned() + "\r\n").as_bytes()).unwrap();
             }
             // /docコメント
