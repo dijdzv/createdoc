@@ -31,16 +31,10 @@ pub fn add_line(
         if l.starts_with(t) {
             content.push(l.to_string());
             *is_content = true; // content start
-            println!("1:{}", l);
-            l.retain(|c| c != ' ');
             *l = l.replacen(t, "", 1);
-            println!("2:{}", l);
-            let re = Regex::new("").unwrap();
-            let e = match l.find('(') {
-                Some(e) => e,
-                None => l.rfind("").unwrap(),
-            };
-            *syntax_name = l[0..e].to_string(); // 構文名を取得
+            let re = Regex::new("([A-Z]|[a-z]|_|[0-9])+").unwrap();
+            let cap = re.captures(l).unwrap();
+            *syntax_name = cap.get(0).unwrap().as_str().to_string();
             return;
         }
     }
