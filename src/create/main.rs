@@ -27,9 +27,9 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec) {
 
             // func name
             file.write_all(
-                (r#"<h3 class="m-syntax_name"><a class="anchor" id=""#.to_string()
+                (r#"<h3 class="m-syntax_name" id=""#.to_string()
                     + name
-                    + r#""></a>"#
+                    + r#"">"#
                     + name
                     + r#"<input type="text" value=""#
                     + name
