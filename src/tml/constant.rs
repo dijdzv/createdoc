@@ -7,13 +7,15 @@ read_dir = "./"
 create_dir = "./"
 
 [read]
+# "読み込みたい言語"
+read_lang = "rust"
 # "読み込みたい拡張子"
-read_filename_extension = "php"
+read_filename_extension = "rs"
 # コメント
 cmt_start = "/**"
 cmt_end = " */"
 # 対象
-target = ["function"]
+target = ["fn"]
 
 [exclude]
 # ["除外したいファイル名", ...]

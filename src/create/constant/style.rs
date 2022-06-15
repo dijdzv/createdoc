@@ -1,13 +1,4 @@
-pub const HTML_START: &str = r#"<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-<style>
+pub const STYLE: &str = r#"<style>
 html {
   scroll-behavior: smooth;
 }
@@ -20,6 +11,7 @@ body{
 }
 .wrap{
   width: fit-content;
+  height: 100%;
   display: flex;
   margin: 0 auto;
 }
@@ -271,44 +263,4 @@ input {
   transform-origin: bottom left;
   transform: rotate(45deg);
 }
-</style>
-<title></title>
-</head>
-<body>
-"#;
-
-pub const HTML_END: &str = r##"
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=php&skin=sunburst"></script>
-<script>
-/* navの表示・非表示 */
-let nFile = document.getElementsByClassName("n-filename");
-for (let f of nFile) {
-  f.addEventListener("click", () => {
-    let id = f.getAttribute("id");
-    let cls = document.getElementsByClassName(id)[0];
-    cls.classList.toggle("dn");
-  });
-}
-
-/* copy */
-let copyIcon = document.getElementsByClassName("gg-copy");
-for (let c of copyIcon) {
-  c.addEventListener("click", () => {
-    let copyTarget = c.previousElementSibling;
-    copyTarget.select();
-    document.execCommand("Copy");
-    window.getSelection().removeAllRanges();
-    let check = c.nextElementSibling;
-    c.classList.toggle("dn");
-    check.classList.toggle("dn");
-    setTimeout(() => {
-      c.classList.toggle("dn");
-      check.classList.toggle("dn");
-    }, 2000);
-  });
-}
-</script>
-</body>
-</html>"##;
-
-pub const TRIM_PATTERN: [char; 3] = ['/', '*', ' '];
+</style>"#;

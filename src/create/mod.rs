@@ -15,7 +15,9 @@ pub fn create_html(create_dir: &str, create_filename: &mut String, folder_vec: &
 
     let mut file = File::create(create_filepath + ".html").unwrap();
     // html
-    file.write_all(constant::HTML_START.as_bytes()).unwrap();
+    file.write_all(constant::HTML_TOP_START.as_bytes()).unwrap();
+    file.write_all(constant::STYLE.as_bytes()).unwrap();
+    file.write_all(constant::HTML_TOP_END.as_bytes()).unwrap();
 
     // wrap
     file.write_all(r#"<div class="wrap">"#.as_bytes()).unwrap();
@@ -28,5 +30,6 @@ pub fn create_html(create_dir: &str, create_filename: &mut String, folder_vec: &
     file.write_all("</div>".as_bytes()).unwrap();
 
     // /html
-    file.write_all(constant::HTML_END.as_bytes()).unwrap();
+    file.write_all(constant::SCRIPT.as_bytes()).unwrap();
+    file.write_all(constant::HTML_BOTTOM.as_bytes()).unwrap();
 }

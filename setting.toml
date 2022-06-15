@@ -18,4 +18,4 @@ target = ["function","class"]
 [exclude]
 # ["除外したいファイル名", ...]
 # ファイル名の先頭から指定
-ex_filename = ["index.php"]
+ex_filename = ["index"]
