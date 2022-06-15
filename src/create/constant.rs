@@ -188,7 +188,8 @@ main{
 	list-style-type: decimal;
 }
 code{
-  font-size: 1rem;
+  font-size: 14px;
+  font-family: Consolas, 'Courier New', monospace;
 }
 a{
   color: inherit;
