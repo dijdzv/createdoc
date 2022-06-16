@@ -8,37 +8,43 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     file.write_all("<main>".as_bytes()).unwrap();
 
     for (filename, file_vec) in folder_vec {
+        // m-file
         file.write_all(format!("{}{}{}", r#"<div class="m-file m-"#, filename, r#"">"#).as_bytes())
             .unwrap();
 
+        // h2 m-filename
         let show_name = if filename.contains('.') {
             let cp = filename.find('.').unwrap();
             filename[..cp].to_string()
         } else {
             filename.to_string()
         };
-        file.write_all(r#"<h2 class="m-filename">"#.as_bytes())
-            .unwrap();
-        file.write_all(show_name.as_bytes()).unwrap();
-        file.write_all("</h2>".as_bytes()).unwrap();
+        file.write_all(
+            format!("{}{}{}", r#"<h2 class="m-filename">"#, show_name, "</h2>").as_bytes(),
+        )
+        .unwrap();
+
         for (name, doc, func) in file_vec {
             // .pair
             file.write_all(r#"<div class="pair">"#.as_bytes()).unwrap();
 
-            // func name
+            // syntax name
             file.write_all(
-                (r#"<h3 class="m-syntax_name" id=""#.to_string()
-                    + name
-                    + r#"">"#
-                    + name
-                    + r#"<input type="text" value=""#
-                    + name
-                    + r#"">"#)
-                    .as_bytes(),
+                format!(
+                    "{}{}{}{}{}{}{}{}",
+                    r#"<h3 class="m-syntax_name" id=""#,
+                    name,
+                    r#"">"#,
+                    name,
+                    r#"<input type="text" value=""#,
+                    name,
+                    r#"">"#,
+                    r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#
+                )
+                .as_bytes(),
             )
             .unwrap();
-            file.write_all(r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#.as_bytes())
-                .unwrap();
+
             // docコメント
             file.write_all(r#"<pre class="doc"><p class="doc-p">"#.as_bytes())
                 .unwrap();
@@ -63,8 +69,11 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
             // pre code
             file.write_all(
-                (r#"<pre class="code"><code class="language-"#.to_owned() + read_lang + r#"">"#)
-                    .as_bytes(),
+                format!(
+                    "{}{}{}",
+                    r#"<pre class="code"><code class="language-"#, read_lang, r#"">"#
+                )
+                .as_bytes(),
             )
             .unwrap();
             for f in func {
