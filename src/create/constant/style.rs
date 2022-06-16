@@ -3,13 +3,11 @@ pub const STYLE: &str = r#"<style>
   --ggy: 1;
   --ggk: 1.5;
   --color-standard: #dddddd;
-  --color-third: #6f9eb6;
-  --color-fourth: #6a91a4;
+  --color-blue: #6dcff0;
   --color-background: #3d3d3d;
   --color-nav-background: #505050;
-  --color-nav-border: #dddddd;
-  --color-scrollbar-vivid: #9933ffbb;
-  --color-scrollbar-dull: #7025bb66;
+  --color-nav-border: #717171;
+  --color-scrollbar: #717171;
   --color-tag: green;
   --color-type: blue;
 }
@@ -41,7 +39,6 @@ nav {
   width: 250px;
   min-width: 200px;
   height: 100vh;
-  border-right: solid 1px var(--color-nav-border);
   background-color: var(--color-nav-background);
 }
 
@@ -53,7 +50,7 @@ nav {
   height: 4rem;
   line-height: 4rem;
   text-align: center;
-  border-bottom: solid 1px var(--color-nav-border);
+  border-bottom: solid 2px var(--color-nav-border);
   overflow: hidden;
 }
 
@@ -86,7 +83,7 @@ nav {
 }
 
 .n-syntax li {
-  color: var(--color-third);
+  color: var(--color-blue);
   font-size: 1rem;
   font-weight: 600;
   /* font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif; */
@@ -112,7 +109,7 @@ nav {
   place-content: center;
   margin: 0;
   bottom: 0;
-  border-top: solid 1px var(--color-nav-border);
+  border-top: solid 2px var(--color-nav-border);
 }
 
 .time {
@@ -140,7 +137,7 @@ main {
   margin: 0;
   padding-top: 1rem;
   padding-left: 2rem;
-  color: var(--color-third);
+  color: var(--color-blue);
 }
 
 .m-syntax_name::before {
@@ -150,18 +147,18 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: solid 0px var(--color-third);
-  border-bottom: solid 2px var(--color-third);
-  border-left: solid 20px var(--color-third);
-  border-right: solid 0px var(--color-third);
+  border-top: solid 0px var(--color-blue);
+  border-bottom: solid 2px var(--color-blue);
+  border-left: solid 20px var(--color-blue);
+  border-right: solid 0px var(--color-blue);
   border-radius: 0px;
 }
 
 .doc {
   width: 98%;
-  border: solid 2px var(--color-fourth);
+  /* border: solid 2px var(--color-blue); */
   overflow-x: auto;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .doc::-webkit-scrollbar {
@@ -169,15 +166,13 @@ main {
 }
 
 .doc::-webkit-scrollbar-thumb {
-  background: var(--color-scrollbar-dull);
-  border-radius: 10px;
+  background: var(--color-scrollbar);
 }
 
 .doc-p {
   font-family: "Meiryo UI", sans-serif;
   margin-left: 2rem;
   font-size: 1rem;
-  font-weight: bold;
   line-height: 1.2rem;
   letter-spacing: 0.09rem;
 }
@@ -191,8 +186,7 @@ main {
 }
 
 .code::-webkit-scrollbar-thumb {
-  background: var(--color-scrollbar-vivid);
-  border-radius: 8px;
+  background: var(--color-scrollbar);
 }
 
 a {
