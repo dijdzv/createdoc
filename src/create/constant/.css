@@ -1,18 +1,17 @@
-pub const STYLE: &str = r#"<style>
 :root {
   --ggy: 1;
   --ggk: 1.5;
-  --color-first: #633f86;
-  --color-second: #734f96;
-  --color-third: #a688bd;
-  --color-fourth: #b79fcb;
+  --color-first: #56256e;
+  --color-second: #5a4498;
   --color-main-background: #e6e6fa88;
   --color-nav-background: #e6e6faee;
   --color-nav-border: #734f9633;
   --color-doc-border: #cab8d9;
   --color-scrollbar-vivid: #9933ffbb;
   --color-scrollbar-dull: #7025bb66;
-  --color-li: #915da3;
+  --color-hover-wide: #a4a8d433;
+  --color-hover-narrow: #a4a8d455;
+  --color-li: green;
   --color-tag: green;
   --color-type: blue;
 }
@@ -74,12 +73,20 @@ nav {
   display: none;
 }
 
+.n-file:hover {
+  background-color: var(--color-hover-wide);
+}
+
 .n-filename {
   cursor: pointer;
   margin: 1rem 0 0 0;
   padding-left: 2rem;
   color: var(--color-first);
   border-radius: 0.3rem;
+}
+
+.n-filename:hover {
+  background-color: var(--color-hover-narrow);
 }
 
 .n-syntax {
@@ -103,6 +110,10 @@ nav {
 
 .n-syntax li::-webkit-scrollbar {
   display: none;
+}
+
+.n-syntax li:hover {
+  background-color: var(--color-hover-narrow);
 }
 
 .dn {
@@ -288,5 +299,3 @@ input {
 .type {
   background-color: var(--color-type);
 }
-
-</style>"#;
