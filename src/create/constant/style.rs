@@ -143,7 +143,7 @@ main{
   background: #7025bb66;
   border-radius: 10px;
 }
-.doc p{
+.doc-p{
   line-height: 1.2rem;
   margin-left: 2rem;
   font-size: 1rem;
@@ -238,5 +238,11 @@ input {
   border-style: solid;
   transform-origin: bottom left;
   transform: rotate(45deg);
+}
+.tag{
+  background-color: green;
+}
+.type{
+  background-color: blue;
 }
 </style>"#;

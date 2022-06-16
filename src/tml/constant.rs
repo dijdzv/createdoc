@@ -8,6 +8,7 @@ create_dir = "./"
 # https://prismjs.com/index.html#supported-languages
 read_lang = "rust"
 # "読み込みたい拡張子"
+# 後方からパターンマッチ
 read_filename_extension = "rs"
 # コメント
 cmt_start = "/**"
@@ -17,5 +18,5 @@ target = ["fn"]
 
 [exclude]
 # ["除外したいファイル名", ...]
-# ファイル名の先頭から指定
+# ファイル名の先頭からパターンマッチ
 ex_filename = [""]"#;
