@@ -10,6 +10,7 @@ pub const STYLE: &str = r#"<style>
   --color-scrollbar: #717171;
   --color-tag: green;
   --color-type: blue;
+  --color-hover: #aaaaaa;
 }
 
 html {
@@ -71,9 +72,12 @@ nav {
 
 .n-filename {
   cursor: pointer;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0.8rem 0;
   padding-left: 2rem;
-  border-radius: 0.3rem;
+}
+
+.n-filename:hover{
+  color: var(--color-hover);
 }
 
 .n-syntax {
@@ -85,11 +89,11 @@ nav {
 .n-syntax li {
   color: var(--color-blue);
   font-size: 1rem;
+  letter-spacing: 1px;
   font-weight: 600;
-  /* font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif; */
+  font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
   padding-left: 2rem;
-  margin-bottom: 0.2rem;
-  border-radius: 0.3rem;
+  margin-bottom: 0.8rem;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
