@@ -2,17 +2,14 @@ pub const STYLE: &str = r#"<style>
 :root {
   --ggy: 1;
   --ggk: 1.5;
-  --color-first: #633f86;
-  --color-second: #734f96;
-  --color-third: #a688bd;
-  --color-fourth: #b79fcb;
-  --color-main-background: #e6e6fa88;
-  --color-nav-background: #e6e6faee;
-  --color-nav-border: #734f9633;
-  --color-doc-border: #cab8d9;
+  --color-standard: #dddddd;
+  --color-third: #6f9eb6;
+  --color-fourth: #6a91a4;
+  --color-background: #3d3d3d;
+  --color-nav-background: #505050;
+  --color-nav-border: #dddddd;
   --color-scrollbar-vivid: #9933ffbb;
   --color-scrollbar-dull: #7025bb66;
-  --color-li: #915da3;
   --color-tag: green;
   --color-type: blue;
 }
@@ -26,9 +23,11 @@ html {
 }
 
 body {
+  background-color: var(--color-background);
   overflow-x: hidden;
   margin: 0;
   height: 100%;
+  color: var(--color-standard);
 }
 
 .wrap {
@@ -54,7 +53,6 @@ nav {
   height: 4rem;
   line-height: 4rem;
   text-align: center;
-  color: var(--color-first);
   border-bottom: solid 1px var(--color-nav-border);
   overflow: hidden;
 }
@@ -78,7 +76,6 @@ nav {
   cursor: pointer;
   margin: 1rem 0 0 0;
   padding-left: 2rem;
-  color: var(--color-first);
   border-radius: 0.3rem;
 }
 
@@ -89,7 +86,7 @@ nav {
 }
 
 .n-syntax li {
-  color: var(--color-li);
+  color: var(--color-third);
   font-size: 1rem;
   font-weight: 600;
   /* font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif; */
@@ -124,14 +121,12 @@ nav {
 
 main {
   min-width: 0;
-  background-color: var(--color-main-background);
 }
 
 .m-filename {
   margin: 1rem 0 0 1rem;
   padding-left: 0.5rem;
-  color: var(--color-first);
-  border-bottom: solid 3px var(--color-first);
+  border-bottom: solid 3px var(--color-standard);
 }
 
 .pair {
@@ -145,7 +140,7 @@ main {
   margin: 0;
   padding-top: 1rem;
   padding-left: 2rem;
-  color: var(--color-second);
+  color: var(--color-third);
 }
 
 .m-syntax_name::before {
@@ -155,16 +150,16 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: solid 0px var(--color-second);
-  border-bottom: solid 2px var(--color-second);
-  border-left: solid 20px var(--color-second);
-  border-right: solid 0px var(--color-second);
+  border-top: solid 0px var(--color-third);
+  border-bottom: solid 2px var(--color-third);
+  border-left: solid 20px var(--color-third);
+  border-right: solid 0px var(--color-third);
   border-radius: 0px;
 }
 
 .doc {
   width: 98%;
-  border: solid 2px var(--color-doc-border);
+  border: solid 2px var(--color-fourth);
   overflow-x: auto;
   border-radius: 6px;
 }
@@ -179,10 +174,12 @@ main {
 }
 
 .doc-p {
-  line-height: 1.2rem;
+  font-family: "Meiryo UI", sans-serif;
   margin-left: 2rem;
   font-size: 1rem;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: bold;
+  line-height: 1.2rem;
+  letter-spacing: 0.09rem;
 }
 
 .code {

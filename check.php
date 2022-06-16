@@ -24,7 +24,7 @@ function check_exist_csv(string $filepath, int $col_num, string $value): bool
 /**
  * 同じレコードに指定した複数個の値がすべて存在しているかどうか
  *
- * @param array ...$values チェックしたい複数個の 値とcol番号の配列 [値,col番号]....
+ * @param array ...$values チェックしたい複数個の値とcol番号の配列 [値,col番号]....
  * @return boolean すべて存在していればtrue。すべて存在していなければfalse
  */
 function check_multiple_exist_csv_record(string $filepath, array ...$values): bool
