@@ -43,7 +43,7 @@ pub fn read_toml() -> (
         Ok(s) => s,
         Err(_) => {
             create_toml(TOML, path);
-            read_to_string(path).unwrap()
+            panic!("The `setting.toml` file did not exist, so I created a new one.");
         }
     };
 
