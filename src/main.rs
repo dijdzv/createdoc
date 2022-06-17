@@ -2,7 +2,6 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 mod add;
-mod browse;
 mod create;
 mod read;
 mod sort;
@@ -60,6 +59,4 @@ fn main() {
     }
 
     create::create_html(&create_dir, &read_lang, &folder_vec);
-
-    browse::browse_open().unwrap();
 }
