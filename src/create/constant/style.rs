@@ -8,9 +8,9 @@ pub const STYLE: &str = r#"<style>
   --color-nav-background: #505050;
   --color-nav-border: #717171;
   --color-scrollbar: #717171;
-  --color-tag: green;
-  --color-type: blue;
-  --color-hover: #aaaaaa;
+  --color-tag: #2cc92c;
+  --color-type: #f4c61f;
+  --color-hover: #bbbbbb;
 }
 
 html {
@@ -277,11 +277,11 @@ input {
 }
 
 .tag {
-  background-color: var(--color-tag);
+  color: var(--color-tag);
 }
 
 .type {
-  background-color: var(--color-type);
+  color: var(--color-type);
 }
 
 </style>"#;

@@ -50,19 +50,44 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 .unwrap();
             let re_space = Regex::new(r"[\s\t]+").unwrap();
             let re_tag = Regex::new(r"@[a-zA-Z]+").unwrap();
+            let re_type = Regex::new(r#"(array|int(eger)?|string|bool(ean)?|void)[^\s]*"#).unwrap();
             for d in doc {
                 // 先頭からtrim
                 let d = d.trim_start_matches(constant::TRIM_PATTERN);
                 // ２つ以上連続する空白を1つに
-                let d = re_space.replace_all(d, " ");
+                let d = re_space.replace_all(d, " ").into_owned();
                 // tagをspanで囲う
                 let tag = re_tag.find(&d);
-                match tag {
-                    Some(t) => {}
-                    None => {}
-                }
+                let d = match tag {
+                    Some(t) => {
+                        format!(
+                            "{}{}{}{}{}",
+                            &d[..t.start()],
+                            r#"<span class="tag">"#,
+                            &d[t.start()..t.end()],
+                            "</span>",
+                            &d[t.end()..]
+                        )
+                    }
+                    None => d,
+                };
+                let typ = re_type.find(&d);
+                let d = match typ {
+                    Some(t) => {
+                        format!(
+                            "{}{}{}{}{}",
+                            &d[..t.start()],
+                            r#"<span class="type">"#,
+                            &d[t.start()..t.end()],
+                            "</span>",
+                            &d[t.end()..]
+                        )
+                    }
+                    None => d,
+                };
 
-                file.write_all((d.to_owned() + "\r\n").as_bytes()).unwrap();
+                file.write_all(format!("{}{}", d, "\r\n").as_bytes())
+                    .unwrap();
             }
             // /docコメント
             file.write_all("</p></pre>".as_bytes()).unwrap();
@@ -77,7 +102,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             )
             .unwrap();
             for f in func {
-                file.write_all((f.to_owned() + "\r\n").as_bytes()).unwrap();
+                file.write_all(format!("{}{}", f, "\r\n").as_bytes())
+                    .unwrap();
             }
             // /code /pre
             file.write_all("</code></pre>".as_bytes()).unwrap();
