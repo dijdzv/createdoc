@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 mod add;
+mod browse;
 mod create;
 mod read;
 mod sort;
@@ -11,7 +12,6 @@ type SyntaxName = String;
 type FileName = String;
 type Doc = Vec<String>;
 type Content = Vec<String>;
-
 type FileVec = Vec<(SyntaxName, Doc, Content)>;
 pub type FolderVec = Vec<(FileName, FileVec)>;
 
@@ -60,4 +60,6 @@ fn main() {
     }
 
     create::create_html(&create_dir, &read_lang, &folder_vec);
+
+    browse::browse_open().unwrap();
 }

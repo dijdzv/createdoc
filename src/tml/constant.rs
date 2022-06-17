@@ -8,7 +8,6 @@ create_dir = "./"
 # https://prismjs.com/index.html#supported-languages
 read_lang = ""
 # "読み込みたい拡張子"
-# 後方からパターンマッチ
 read_filename_extension = ""
 # コメント
 # 開始,コメント行,終了の先頭が異なる必要がある

@@ -1,3 +1,5 @@
+use std::path::Path;
+
 pub fn sorting(
     filenames: Vec<String>,
     read_filename_extension: &str,
@@ -6,7 +8,10 @@ pub fn sorting(
     // 拡張子で指定
     let filenames = filenames
         .into_iter()
-        .filter(|f| f.ends_with(read_filename_extension));
+        .filter(|f| match Path::new(f).extension() {
+            Some(f) => f == read_filename_extension,
+            None => false,
+        });
 
     // 除外するファイル名を指定
     filenames
