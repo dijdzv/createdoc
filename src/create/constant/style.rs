@@ -8,7 +8,8 @@ pub const STYLE: &str = r#"<style>
   --color-nav-background: #505050;
   --color-nav-border: #717171;
   --color-scrollbar: #717171;
-  --color-tag: #2cc92c;
+  /* --color-tag: #2cc92c; */
+  --color-tag: #f07df8;
   --color-type: #f4c61f;
   --color-hover: #bbbbbb;
 }
@@ -160,9 +161,9 @@ main {
 
 .doc {
   width: 98%;
-  /* border: solid 2px var(--color-blue); */
   overflow-x: auto;
   border-radius: 4px;
+  cursor: default;
 }
 
 .doc::-webkit-scrollbar {
