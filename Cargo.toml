@@ -1,5 +1,5 @@
 [package]
-name = "create-doc"
+name = "createdoc"
 version = "0.1.0"
 edition = "2021"
 
