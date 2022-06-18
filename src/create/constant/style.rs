@@ -11,7 +11,6 @@ pub const STYLE: &str = r#"<style>
   /* --color-tag: #2cc92c; */
   --color-tag: #f07df8;
   --color-type: #f4c61f;
-  --color-hover: #bbbbbb;
 }
 
 html {
@@ -77,10 +76,6 @@ nav {
   padding-left: 2rem;
 }
 
-.n-filename:hover{
-  color: var(--color-hover);
-}
-
 .n-syntax {
   list-style: none;
   padding: 0;
@@ -90,7 +85,7 @@ nav {
 .n-syntax li {
   color: var(--color-blue);
   font-size: 1rem;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
   font-weight: 600;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
   padding-left: 2rem;
@@ -157,6 +152,7 @@ main {
   border-left: solid 20px var(--color-blue);
   border-right: solid 0px var(--color-blue);
   border-radius: 0px;
+  z-index: -1;
 }
 
 .doc {

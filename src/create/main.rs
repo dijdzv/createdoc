@@ -20,7 +20,17 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             filename.to_string()
         };
         file.write_all(
-            format!("{}{}{}", r#"<h2 class="m-filename">"#, show_name, "</h2>").as_bytes(),
+            format!(
+                "{}{}{}{}{}{}{}",
+                r#"<h2 class="m-filename" id=""#,
+                show_name,
+                r##""><a href="#"##,
+                show_name,
+                r#"">"#,
+                show_name,
+                "</a></h2>"
+            )
+            .as_bytes(),
         )
         .unwrap();
 
@@ -31,12 +41,14 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             // syntax name
             file.write_all(
                 format!(
-                    "{}{}{}{}{}{}{}{}",
+                    "{}{}{}{}{}{}{}{}{}{}",
                     r#"<h3 class="m-syntax_name" id=""#,
+                    name,
+                    r##""><a href="#"##,
                     name,
                     r#"">"#,
                     name,
-                    r#"<input type="text" value=""#,
+                    r#"</a><input type="text" value=""#,
                     name,
                     r#"">"#,
                     r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#
