@@ -59,5 +59,5 @@ fn main() {
     }
 
     create::create_html(&create_dir, &read_lang, &folder_vec);
-    println!("Successfully created!")
+    println!("Success!")
 }
