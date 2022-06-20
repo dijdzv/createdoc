@@ -48,10 +48,10 @@ pub fn read_toml() -> (
     };
 
     let setting: Result<Setting, de::Error> = toml::from_str(&s);
-    match &setting {
-        Ok(p) => println!("{:#?}", p),
-        Err(e) => panic!("fail to parse toml: {}", e),
-    };
+    // match &setting {
+    //     Ok(p) => println!("{:#?}", p),
+    //     Err(e) => panic!("fail to parse toml: {}", e),
+    // };
 
     let Setting { dir, read, exclude } = setting.unwrap();
 
