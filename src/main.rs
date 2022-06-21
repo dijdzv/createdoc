@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::path::Path;
 
 mod add;
 mod create;
@@ -15,12 +16,23 @@ type FileVec = Vec<(TargetName, Doc, Content)>;
 type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
+    match app() {
+        Ok(_) => println!("Creation Success!"),
+        Err(e) => {
+            tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH));
+            println!("The `setting.toml` file did not exist, so I created a new one.");
+            println!("{}", e)
+        }
+    }
+}
+
+fn app() -> Result<(), Box<dyn std::error::Error>> {
     let (
         (read_dir, create_dir),
         cmt_start,
         (read_lang, read_filename_extension, ex_filename),
         target,
-    ) = tml::read_toml();
+    ) = tml::read_toml()?;
 
     let mut doc = Vec::new(); // 一時保管
     let mut content = Vec::new(); //docとfuncのペア
@@ -54,5 +66,6 @@ fn main() {
     }
 
     create::create_html(&create_dir, &read_lang, &folder_vec);
-    println!("Success!")
+
+    Ok(())
 }

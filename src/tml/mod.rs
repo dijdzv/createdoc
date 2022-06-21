@@ -6,3 +6,4 @@ pub use create::create_toml;
 
 mod constant;
 pub use constant::TOML;
+pub use constant::TOML_PATH;

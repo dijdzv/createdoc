@@ -20,3 +20,5 @@ target = [""]
 # ["除外したいファイル名", ...]
 # 先頭からパターンマッチ
 ex_filename = [""]"#;
+
+pub const TOML_PATH: &str = "./setting.toml";
