@@ -17,7 +17,7 @@ pub type FolderVec = Vec<(FileName, FileVec)>;
 fn main() {
     let (
         (read_dir, create_dir),
-        (cmt_start, cmt_end),
+        cmt_start,
         (read_lang, read_filename_extension, ex_filename),
         target,
     ) = tml::read_toml();
@@ -26,8 +26,7 @@ fn main() {
     let mut content = Vec::new(); //docとfuncのペア
     let mut file_vec: FileVec = Vec::new(); // １つのfile
     let mut folder_vec: FolderVec = Vec::new(); // 全てのファイル
-    let mut syntax_name = String::from(""); // 関数名のbuf
-    let mut pre = 0; // 前の行番号
+    let mut target_name = String::from(""); // 関数名のbuf
     let mut is_doc = false;
     let mut is_content = false;
 
@@ -37,20 +36,16 @@ fn main() {
     // folderに格納
     for filename in &filenames {
         // fileに格納
-        for (i, result) in BufReader::new(File::open(filename).unwrap())
-            .lines()
-            .enumerate()
-        {
+        for result in BufReader::new(File::open(filename).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();
 
             // vecに行毎追加
             add::add_line(
                 &mut l,
-                (i, &mut pre),
                 (&mut is_doc, &mut is_content),
-                (&mut doc, &mut content, &mut syntax_name, &mut file_vec),
-                (&cmt_start, &cmt_end),
+                (&mut doc, &mut content, &mut target_name, &mut file_vec),
+                &cmt_start,
                 &target,
             );
         }

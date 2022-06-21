@@ -21,7 +21,6 @@ struct Read {
     read_lang: String,
     read_filename_extension: String,
     cmt_start: String,
-    cmt_end: String,
     target: Vec<String>,
 }
 
@@ -30,14 +29,9 @@ struct Exclude {
     ex_filename: Vec<String>,
 }
 
-type TupleString = (String, String);
+type ReadType = (String, String, Vec<String>);
 
-pub fn read_toml() -> (
-    TupleString,
-    TupleString,
-    (String, String, Vec<String>),
-    Vec<String>,
-) {
+pub fn read_toml() -> ((String, String), String, ReadType, Vec<String>) {
     let path = Path::new("./setting.toml");
     let s = match read_to_string(path) {
         Ok(s) => s,
@@ -64,7 +58,6 @@ pub fn read_toml() -> (
             read_lang,
             read_filename_extension,
             cmt_start,
-            cmt_end,
             target,
         },
         Exclude { ex_filename },
@@ -72,7 +65,7 @@ pub fn read_toml() -> (
 
     (
         (read_dir, create_dir),
-        (cmt_start, cmt_end),
+        cmt_start,
         (read_lang, read_filename_extension, ex_filename),
         target,
     )

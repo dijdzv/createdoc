@@ -10,9 +10,7 @@ read_lang = ""
 # "読み込みたい拡張子"
 read_filename_extension = ""
 # コメント
-# 開始,コメント行,終了の先頭が異なる必要がある
 cmt_start = "/**"
-cmt_end = " */"
 # 対象
 # ["function","class",...]
 target = [""]
