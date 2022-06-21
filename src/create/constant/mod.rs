@@ -8,4 +8,4 @@ pub use prism::{PRISM_CSS, PRISM_JS};
 pub use script::SCRIPT;
 pub use style::STYLE;
 
-pub const TRIM_PATTERN: [char; 3] = ['/', '*', ' '];
+pub const TRIM_PATTERN: [char; 5] = ['/', '*', ' ', '#', '"'];

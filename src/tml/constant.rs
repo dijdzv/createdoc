@@ -10,6 +10,7 @@ read_lang = ""
 # "読み込みたい拡張子"
 read_filename_extension = ""
 # コメント
+# 対応記号 /, *, #, ",
 cmt_start = "/**"
 # 対象
 # ["function","class",...]
