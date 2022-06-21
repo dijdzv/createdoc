@@ -3,22 +3,23 @@ read_dir = "./"
 create_dir = "./"
 
 [read]
-# 対応言語 php,js,rust,go
-# "読み込みたい言語"
+# Highlight
+# Supported Languages => php,js,rust,go
 # https://prismjs.com/index.html#supported-languages
+# "読み込みたい言語" (highlight)
 read_lang = ""
 # "読み込みたい拡張子"
 read_filename_extension = ""
-# コメント
-# 対応記号 /, *, #, ",
+# Comment
+# Supported symbol => /, *, #, ",
 cmt_start = "/**"
-# 対象
+# Target syntax
 # ["function","class",...]
 target = [""]
 
 [exclude]
 # ["除外したいファイル名", ...]
-# 先頭からパターンマッチ
+# Pattern match from the top
 ex_filename = [""]"#;
 
 pub const TOML_PATH: &str = "./setting.toml";
