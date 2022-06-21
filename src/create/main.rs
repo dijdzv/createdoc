@@ -34,7 +34,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         )
         .unwrap();
 
-        for (name, doc, func) in file_vec {
+        for (target_name, doc, content) in file_vec {
             // .pair
             file.write_all(r#"<div class="pair">"#.as_bytes()).unwrap();
 
@@ -42,14 +42,14 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             file.write_all(
                 format!(
                     "{}{}{}{}{}{}{}{}{}{}",
-                    r#"<h3 class="m-syntax_name" id=""#,
-                    name,
+                    r#"<h3 class="m-target_name" id=""#,
+                    target_name,
                     r##""><a href="#"##,
-                    name,
+                    target_name,
                     r#"">"#,
-                    name,
+                    target_name,
                     r#"</a><input type="text" value=""#,
-                    name,
+                    target_name,
                     r#"">"#,
                     r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#
                 )
@@ -113,8 +113,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 .as_bytes(),
             )
             .unwrap();
-            for f in func {
-                file.write_all(format!("{}{}", f, "\r\n").as_bytes())
+            for c in content {
+                file.write_all(format!("{}{}", c, "\r\n").as_bytes())
                     .unwrap();
             }
             // /code /pre

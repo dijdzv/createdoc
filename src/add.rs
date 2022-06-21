@@ -1,4 +1,4 @@
-use crate::{Content, Doc, SyntaxName};
+use crate::{Content, Doc, TargetName};
 use regex::Regex;
 
 /// 関数とDocのvecを生成
@@ -8,7 +8,7 @@ pub fn add_line(
     (doc, content, target_name, file_vec): (
         &mut Doc,
         &mut Content,
-        &mut SyntaxName,
+        &mut TargetName,
         &mut Vec<(String, Doc, Content)>,
     ),
     cmt_start: &str,

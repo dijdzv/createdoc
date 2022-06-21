@@ -76,13 +76,13 @@ nav {
   padding-left: 2rem;
 }
 
-.n-syntax {
+.n-target {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.n-syntax li {
+.n-target li {
   color: var(--color-blue);
   font-size: 1rem;
   letter-spacing: 0px;
@@ -95,7 +95,7 @@ nav {
   scrollbar-width: none;
 }
 
-.n-syntax li::-webkit-scrollbar {
+.n-target li::-webkit-scrollbar {
   display: none;
 }
 
@@ -132,7 +132,7 @@ main {
   border-radius: 1rem;
 }
 
-.m-syntax_name {
+.m-target_name {
   position: relative;
   margin: 0;
   padding-top: 1rem;
@@ -140,7 +140,7 @@ main {
   color: var(--color-blue);
 }
 
-.m-syntax_name::before {
+.m-target_name::before {
   content: "";
   position: absolute;
   top: 1rem;

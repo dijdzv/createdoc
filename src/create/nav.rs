@@ -38,16 +38,16 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
         // n-syntax
         file.write_all(
-            format!("{}{}{}", r#"<ul class="n-syntax n-"#, filename, r#" dn">"#).as_bytes(),
+            format!("{}{}{}", r#"<ul class="n-target n-"#, filename, r#" dn">"#).as_bytes(),
         )
         .unwrap();
 
         // li
-        for (name, _, _) in file_vec {
+        for (target_name, _, _) in file_vec {
             file.write_all(
                 format!(
                     "{}{}{}{}{}",
-                    r##"<a href="#"##, name, r#""><li>"#, name, "</li></a>"
+                    r##"<a href="#"##, target_name, r#""><li>"#, target_name, "</li></a>"
                 )
                 .as_bytes(),
             )

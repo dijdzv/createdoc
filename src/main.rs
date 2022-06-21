@@ -7,12 +7,12 @@ mod read;
 mod sort;
 mod tml;
 
-type SyntaxName = String;
+type TargetName = String;
 type FileName = String;
 type Doc = Vec<String>;
 type Content = Vec<String>;
-type FileVec = Vec<(SyntaxName, Doc, Content)>;
-pub type FolderVec = Vec<(FileName, FileVec)>;
+type FileVec = Vec<(TargetName, Doc, Content)>;
+type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
     let (
