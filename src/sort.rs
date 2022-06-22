@@ -15,6 +15,11 @@ pub fn sorting(
 
     // 除外するファイル名を指定
     filenames
-        .filter(|f| ex_filename.iter().all(|ef| !f.starts_with(ef)))
+        .filter(|f| {
+            ex_filename
+                .iter()
+                .filter(|ef| !ef.is_empty())
+                .all(|ef| !f.starts_with(ef))
+        })
         .collect::<Vec<_>>()
 }
