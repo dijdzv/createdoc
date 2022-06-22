@@ -12,7 +12,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
     for (filename, file_vec) in folder_vec {
         // m-file
-        file.write_all(format!("{}{}{}", r#"<div class="m-file m-"#, filename, r#"">"#).as_bytes())
+        file.write_all(format!("<div class=\"m-file m-{}\">", filename).as_bytes())
             .unwrap();
 
         // h2 m-filename
@@ -21,14 +21,8 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
         file.write_all(
             format!(
-                "{}{}{}{}{}{}{}",
-                r#"<h2 class="m-filename" id=""#,
-                show_name,
-                r##""><a href="#"##,
-                show_name,
-                r#"">"#,
-                show_name,
-                "</a></h2>"
+                "<h2 class=\"m-filename\" id=\"{}\"><a href=\"#{}\">{}</a></h2>",
+                show_name, show_name, show_name
             )
             .as_bytes(),
         )
@@ -41,17 +35,12 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             // syntax name
             file.write_all(
                 format!(
-                    "{}{}{}{}{}{}{}{}{}{}",
-                    r#"<h3 class="m-target_name" id=""#,
-                    target_name,
-                    r##""><a href="#"##,
-                    target_name,
-                    r#"">"#,
-                    target_name,
-                    r#"</a><input type="text" class="hidden-input" value=""#,
-                    target_name,
-                    r#"">"#,
-                    r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#
+                    "<h3 class=\"m-target_name\" id=\"{}\">
+                    <a href=\"#{}\">{}</a>
+                    <input type=\"text\" class=\"hidden-input\" value=\"{}\">
+                    <i class=\"gg-copy\"></i><i class=\"gg-check dn\"></i>
+                    </h3>",
+                    target_name, target_name, target_name, target_name,
                 )
                 .as_bytes(),
             )
@@ -73,11 +62,9 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 let d = match tag {
                     Some(t) => {
                         format!(
-                            "{}{}{}{}{}",
+                            "{}<span class=\"tag\">{}</span>{}",
                             &d[..t.start()],
-                            r#"<span class="tag">"#,
                             &d[t.start()..t.end()],
-                            "</span>",
                             &d[t.end()..]
                         )
                     }
@@ -87,35 +74,31 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 let d = match typ {
                     Some(t) => {
                         format!(
-                            "{}{}{}{}{}",
+                            "{}<span class=\"type\">{}</span>{}",
                             &d[..t.start()],
-                            r#"<span class="type">"#,
                             &d[t.start()..t.end()],
-                            "</span>",
                             &d[t.end()..]
                         )
                     }
                     None => d,
                 };
-
-                file.write_all(format!("{}{}", d, "\r\n").as_bytes())
-                    .unwrap();
+                file.write_all(format!("{}\n", d).as_bytes()).unwrap();
             }
+
             // /docコメント
             file.write_all("</p></pre>".as_bytes()).unwrap();
 
             // pre code
             file.write_all(
                 format!(
-                    "{}{}{}",
-                    r#"<pre class="code"><code class="language-"#, read_lang, r#"">"#
+                    "<pre class=\"code\"><code class=\"language-{}\">",
+                    read_lang
                 )
                 .as_bytes(),
             )
             .unwrap();
             for c in content {
-                file.write_all(format!("{}{}", c, "\r\n").as_bytes())
-                    .unwrap();
+                file.write_all(format!("{}\n", c).as_bytes()).unwrap();
             }
             // /code /pre
             file.write_all("</code></pre>".as_bytes()).unwrap();

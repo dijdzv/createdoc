@@ -18,5 +18,8 @@ pub fn search_data(folder_vec: &FolderVec) -> String {
     }
     let hash_str = buf.join(",\n");
 
-    format!("const search_data = {{\n {}\n }}", hash_str)
+    format!(
+        "<script>const search_data = {{\n {}\n }}</script>",
+        hash_str
+    )
 }

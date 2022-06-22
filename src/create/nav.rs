@@ -4,12 +4,12 @@ use std::{fs::File, io::Write};
 
 pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     // nav
-    file.write_all(r#"<nav>"#.as_bytes()).unwrap();
+    file.write_all("<nav>".as_bytes()).unwrap();
 
     // category
     file.write_all(r#"<a href=""><h2 class="html-filename">"#.as_bytes())
         .unwrap();
-    file.write_all(format!("{}{}", read_lang, "doc").as_bytes())
+    file.write_all(format!("{}doc", read_lang).as_bytes())
         .unwrap();
     file.write_all("</h2></a>".as_bytes()).unwrap();
 
@@ -21,35 +21,25 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         file.write_all(r#"<div class="n-file">"#.as_bytes())
             .unwrap();
         // n-filename
-        let show_name = if filename.contains('.') {
-            let cp = filename.find('.').unwrap();
-            filename[..cp].to_string()
-        } else {
-            filename.to_string()
-        };
+        let cp = filename.find('.').unwrap();
+        let show_name = filename[..cp].to_string();
         file.write_all(
             format!(
-                "{}{}{}{}{}",
-                r#"<h3 class="n-filename" id="n-"#, filename, r#"">"#, show_name, "</h3>"
+                "<h3 class=\"n-filename\" id=\"n-{}\">{}</h3>",
+                filename, show_name
             )
             .as_bytes(),
         )
         .unwrap();
 
         // n-syntax
-        file.write_all(
-            format!("{}{}{}", r#"<ul class="n-target n-"#, filename, r#" dn">"#).as_bytes(),
-        )
-        .unwrap();
+        file.write_all(format!("<ul class=\"n-target n-{} dn\">", filename).as_bytes())
+            .unwrap();
 
         // li
         for (target_name, _, _) in file_vec {
             file.write_all(
-                format!(
-                    "{}{}{}{}{}",
-                    r##"<a href="#"##, target_name, r#""><li>"#, target_name, "</li></a>"
-                )
-                .as_bytes(),
+                format!("<a href=\"#{}\"><li>{}</li></a>", target_name, target_name).as_bytes(),
             )
             .unwrap();
         }
@@ -66,14 +56,8 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
     // footer
     let now = Local::now().format("%Y年%m月%d日 %H:%M:%S").to_string();
-    file.write_all(
-        format!(
-            "{}{}{}",
-            r#"<div class="bottom"><p class="time">"#, now, "</p></div>"
-        )
-        .as_bytes(),
-    )
-    .unwrap();
+    file.write_all(format!("<div class=\"bottom\"><p class=\"time\">{}</p></div>", now).as_bytes())
+        .unwrap();
 
     // /nav
     file.write_all("</nav>".as_bytes()).unwrap();
