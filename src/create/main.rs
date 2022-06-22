@@ -16,12 +16,9 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             .unwrap();
 
         // h2 m-filename
-        let show_name = if filename.contains('.') {
-            let cp = filename.find('.').unwrap();
-            filename[..cp].to_string()
-        } else {
-            filename.to_string()
-        };
+        let cp = filename.find('.').unwrap();
+        let show_name = filename[..cp].to_string();
+
         file.write_all(
             format!(
                 "{}{}{}{}{}{}{}",
