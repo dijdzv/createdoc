@@ -14,12 +14,12 @@ pub fn search_data(folder_vec: &FolderVec) -> String {
     }
     let mut buf = Vec::new();
     for (k, v) in hashmap {
-        buf.push(format!("{}: [{}]", k, v.join(",")));
+        buf.push(format!(" {}: [{}]", k, v.join(",")));
     }
     let hash_str = buf.join(",\n");
 
     format!(
-        "<script>const search_data = {{\n {}\n }}</script>",
+        "<script>const search_data = {{\n{}\n}}\n</script>",
         hash_str
     )
 }

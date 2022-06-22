@@ -36,8 +36,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             file.write_all(
                 format!(
                     "<h3 class=\"m-target_name\" id=\"{}\">
-                    <a href=\"#{}\">{}</a>
-                    <input type=\"text\" class=\"hidden-input\" value=\"{}\">
+                    <a href=\"#{}\">{}</a><input type=\"text\" class=\"hidden-input\" value=\"{}\">
                     <i class=\"gg-copy\"></i><i class=\"gg-check dn\"></i>
                     </h3>",
                     target_name, target_name, target_name, target_name,
