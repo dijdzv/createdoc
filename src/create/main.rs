@@ -1,3 +1,4 @@
+use super::search;
 use super::FolderVec;
 use crate::create::constant;
 use regex::Regex;
@@ -6,6 +7,8 @@ use std::{fs::File, io::Write};
 pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     // main
     file.write_all("<main>".as_bytes()).unwrap();
+
+    search::input(file);
 
     for (filename, file_vec) in folder_vec {
         // m-file
@@ -48,7 +51,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                     target_name,
                     r#"">"#,
                     target_name,
-                    r#"</a><input type="text" value=""#,
+                    r#"</a><input type="text" class="hidden-input" value=""#,
                     target_name,
                     r#"">"#,
                     r#"<i class="gg-copy"></i><i class="gg-check dn"></i></h3>"#

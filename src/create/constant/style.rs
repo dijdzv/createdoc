@@ -241,7 +241,7 @@ a {
   box-shadow: 0 4px 0, 0 8px 0;
 }
 
-input {
+.hidden-input {
   position: absolute;
   opacity: 0;
 }
@@ -279,6 +279,16 @@ input {
 
 .type {
   color: var(--color-type);
+}
+
+#search{
+  width: 100%;
+  padding: 1rem;
+  background-color: #ffffff22;
+}
+
+#search-input{
+  width: 80%;
 }
 
 </style>"#;

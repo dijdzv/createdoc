@@ -14,7 +14,7 @@ read_filename_extension = ""
 # Supported symbol => /, *, #, ",
 cmt_start = "/**"
 # Target syntax
-# ["function","class",...]
+# ["function","class","fn","pub fn",...]
 target = [""]
 
 [exclude]

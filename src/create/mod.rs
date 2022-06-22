@@ -4,6 +4,7 @@ use std::{fs::File, io::Write};
 mod constant;
 mod main;
 mod nav;
+mod search;
 
 /// htmlファイルを生成
 pub fn create_html(create_dir: &str, read_lang: &str, folder_vec: &FolderVec) {
