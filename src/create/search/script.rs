@@ -6,14 +6,15 @@ document.addEventListener('keyup', (e) => {
   }
 });
 searchInput.addEventListener('input',()=>{
-    let v = searchInput.value;
-    if (v){
+    let sv = searchInput.value;
+    sv = sv.split(' ');
+    if (sv[0]){
       searchInput.style.marginBottom = '1rem';
     }else{
       searchInput.style.marginBottom = '0';
     }
     for (let i = 0; i < searchData.length; i++){
-     if (searchData[i].indexOf(v) != -1 && v){
+      if (sv.every(v=>searchData[i].indexOf(v) != -1) && sv[0]){
         searchList[i].classList.remove('dn');
      }else{
         searchList[i].classList.add('dn');
