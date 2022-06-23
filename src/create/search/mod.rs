@@ -8,4 +8,4 @@ mod result;
 pub use result::search_result;
 
 mod script;
-pub use script::INPUT_SCRIPT;
+pub use script::SEARCH_SCRIPT;

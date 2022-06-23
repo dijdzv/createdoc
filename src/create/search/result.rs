@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fs::File, io::Write};
 
-pub fn search_result(file: &mut File, search_data: HashMap<&str, Vec<&str>>) {
+pub fn search_result(file: &mut File, search_data: &HashMap<&str, Vec<&str>>) {
     file.write_all(r#"<div class="search-result"><ul>"#.as_bytes())
         .unwrap();
     for (filename, v) in search_data {
@@ -13,7 +13,7 @@ pub fn search_result(file: &mut File, search_data: HashMap<&str, Vec<&str>>) {
         )
         .unwrap();
 
-        for target_name in &v {
+        for target_name in v {
             file.write_all(
                 format!(
                     "<li class=\"search-list dn\"><a href=\"#{}\">{} <span class=\"s-target_name\">{}</span></a></li>",

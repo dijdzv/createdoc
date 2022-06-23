@@ -13,7 +13,20 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         .unwrap();
     search::search_input(file);
     let search_data = search::search_data(folder_vec);
-    search::search_result(file, search_data);
+    search::search_result(file, &search_data);
+    let mut buf = Vec::new();
+    for (k, v) in search_data {
+        buf.push(format!(" {}: [\"{}\"]", k, v.join("\",\"")));
+    }
+    file.write_all(
+        format!(
+            "<script>const searchData = {{\n{}\n}}\n</script>",
+            buf.join(",\n")
+        )
+        .as_bytes(),
+    )
+    .unwrap();
+
     file.write_all("</div>".as_bytes()).unwrap();
 
     for (filename, file_vec) in folder_vec {
