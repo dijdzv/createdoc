@@ -113,7 +113,7 @@ nav {
 }
 
 .time {
-  width: 128px;
+  white-space: pre;
 }
 
 main {
@@ -281,7 +281,7 @@ a {
   color: var(--color-type);
 }
 
-#search{
+.search-area{
   width: 100%;
   padding: 1rem;
   background-color: #ffffff22;

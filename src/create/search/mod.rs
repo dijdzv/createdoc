@@ -1,5 +1,8 @@
 mod input;
-pub use input::input;
+pub use input::search_input;
 
-mod script;
-pub use script::search_data;
+mod data;
+pub use data::search_data;
+
+mod result;
+pub use result::search_result;

@@ -8,7 +8,13 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     // main
     file.write_all("<main>".as_bytes()).unwrap();
 
-    search::input(file);
+    // search
+    file.write_all(r#"<div class="search-area">"#.as_bytes())
+        .unwrap();
+    search::search_input(file);
+    let search_data = search::search_data(folder_vec);
+    search::search_result(file, search_data);
+    file.write_all("</div>".as_bytes()).unwrap();
 
     for (filename, file_vec) in folder_vec {
         // m-file

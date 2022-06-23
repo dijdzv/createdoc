@@ -55,7 +55,7 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     file.write_all("</div>".as_bytes()).unwrap();
 
     // footer
-    let now = Local::now().format("%Y年%m月%d日 %H:%M:%S").to_string();
+    let now = Local::now().format("%Y/%m/%d\n%H:%M:%S").to_string();
     file.write_all(format!("<div class=\"bottom\"><p class=\"time\">{}</p></div>", now).as_bytes())
         .unwrap();
 
