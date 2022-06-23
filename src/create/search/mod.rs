@@ -6,3 +6,6 @@ pub use data::search_data;
 
 mod result;
 pub use result::search_result;
+
+mod script;
+pub use script::INPUT_SCRIPT;

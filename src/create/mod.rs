@@ -31,6 +31,8 @@ pub fn create_html(create_dir: &str, read_lang: &str, folder_vec: &FolderVec) {
     file.write_all(constant::SCRIPT.as_bytes()).unwrap();
     file.write_all(constant::PRISM_JS.as_bytes()).unwrap();
 
+    file.write_all(search::INPUT_SCRIPT.as_bytes()).unwrap();
+
     // /html
     file.write_all(constant::HTML_BOTTOM.as_bytes()).unwrap();
 }
