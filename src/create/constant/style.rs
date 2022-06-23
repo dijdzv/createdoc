@@ -308,18 +308,6 @@ a {
   margin-bottom: 1rem;
 }
 
-#search>button{
-  margin-left: 4px;
-  cursor: pointer;
-  background-color: #f0f0f0;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px;
-  width: 32.4px;
-  height: 32.4px;
-  display: grid;
-  place-content: center;
-}
-
 .search-result>ul{
   list-style: none;
   padding: 0;

@@ -16,16 +16,17 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
     search::search_result(file, &search_data);
     let mut buf = Vec::new();
     for (k, v) in search_data {
-        buf.push(format!(" {}: [\"{}\"]", k, v.join("\",\"")));
+        buf.push(format!(
+            "\"{}\",\"{}\"",
+            k,
+            v.iter()
+                .map(|f| format!("{} {}", k, f))
+                .collect::<Vec<_>>()
+                .join("\",\"")
+        ));
     }
-    file.write_all(
-        format!(
-            "<script>const searchData = {{\n{}\n}}\n</script>",
-            buf.join(",\n")
-        )
-        .as_bytes(),
-    )
-    .unwrap();
+    file.write_all(format!("<script>const searchData = [{}]\n</script>", buf.join(",")).as_bytes())
+        .unwrap();
 
     file.write_all("</div>".as_bytes()).unwrap();
 
