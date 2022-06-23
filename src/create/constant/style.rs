@@ -292,7 +292,7 @@ a {
 }
 
 #search-input{
-  margin-left: 10px;
+  margin: 0 0 0 10px;
   width: 100%;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -302,10 +302,6 @@ a {
   padding: 6px;
   font-size: 1rem;
   background-color: #f0f0f0;
-}
-
-#search-input:focus{
-  margin-bottom: 1rem;
 }
 
 .search-result>ul{
