@@ -30,9 +30,8 @@ struct Exclude {
 
 type ReadType = (String, String, Vec<String>);
 type Ok = ((String, String), String, ReadType, Vec<String>);
-type Error = Box<dyn std::error::Error>;
 
-pub fn read_toml() -> Result<Ok, Error> {
+pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     let s = read_to_string(TOML_PATH)?;
 
     let setting: Result<Setting, de::Error> = toml::from_str(&s);

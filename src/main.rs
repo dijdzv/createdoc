@@ -43,13 +43,14 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let mut filenames = read::read_dir(read_dir).unwrap();
+    let mut filenames = read::read_dir(&read_dir).unwrap();
     filenames = exclude::exclude(filenames, &read_filename_extension, ex_filename);
 
     // folderに格納
     for filename in &filenames {
         // fileに格納
-        for result in BufReader::new(File::open(filename).unwrap()).lines() {
+        let filepath = format!("{}{}", read_dir, filename);
+        for result in BufReader::new(File::open(filepath).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();
 
