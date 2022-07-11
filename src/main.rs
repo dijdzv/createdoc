@@ -66,6 +66,8 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
         file_vec.clear();
     }
 
+    folder_vec = sort::sort(&mut folder_vec);
+
     create::create_html(&create_dir, &read_lang, &folder_vec);
 
     Ok(())
