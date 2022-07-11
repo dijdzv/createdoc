@@ -1,5 +1,6 @@
 pub const TOML: &str = r#"[dir]
 read_dir = "./"
+read_folder = []
 create_dir = "./"
 
 [read]

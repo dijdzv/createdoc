@@ -12,6 +12,7 @@ struct Setting {
 #[derive(Debug, Serialize, Deserialize)]
 struct Dir {
     read_dir: String,
+    read_folder: Vec<String>,
     create_dir: String,
 }
 
@@ -29,7 +30,7 @@ struct Exclude {
 }
 
 type ReadType = (String, String, Vec<String>);
-type Ok = ((String, String), String, ReadType, Vec<String>);
+type Ok = ((String, Vec<String>, String), String, ReadType, Vec<String>);
 
 pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     let s = read_to_string(TOML_PATH)?;
@@ -45,6 +46,7 @@ pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     let (
         Dir {
             read_dir,
+            read_folder,
             create_dir,
         },
         Read {
@@ -57,7 +59,7 @@ pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     ) = (dir, read, exclude);
 
     Ok((
-        (read_dir, create_dir),
+        (read_dir, read_folder, create_dir),
         cmt_start,
         (read_lang, read_ext, ex_filename),
         target,

@@ -27,8 +27,12 @@ fn main() {
 }
 
 fn app() -> Result<(), Box<dyn std::error::Error>> {
-    let ((read_dir, create_dir), cmt_start, (read_lang, read_ext, ex_filename), target) =
-        tml::read_toml()?;
+    let (
+        (read_dir, read_folder, create_dir),
+        cmt_start,
+        (read_lang, read_ext, ex_filename),
+        target,
+    ) = tml::read_toml()?;
 
     let mut doc = Vec::new(); // 一時保管
     let mut content = Vec::new(); //docとfuncのペア
