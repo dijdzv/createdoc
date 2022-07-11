@@ -49,7 +49,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     // folderに格納
     for filename in &filenames {
         // fileに格納
-        let filepath = format!("{}{}", read_dir, filename);
+        let filepath = Path::new(&read_dir).join(filename);
         for result in BufReader::new(File::open(filepath).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();
