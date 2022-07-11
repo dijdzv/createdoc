@@ -252,6 +252,7 @@ a {
 .hidden-input {
   position: absolute;
   opacity: 0;
+  cursor: default;
 }
 
 .gg-check {
