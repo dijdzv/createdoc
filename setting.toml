@@ -1,8 +1,5 @@
 [dir]
-read_dir = [
-    "./",
-    "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
-  ]
+read_dir = "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
 create_dir = "./"
 
 [read]
@@ -23,4 +20,4 @@ target = ["function"]
 [exclude]
 # ["除外したいファイル名", ...]
 # Pattern match from the top
-ex_filename = [""]
+ex_filename = ["index"]

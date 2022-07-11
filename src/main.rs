@@ -1,6 +1,5 @@
 mod add;
 mod create;
-mod exclude;
 mod read;
 mod sort;
 mod tml;
@@ -39,13 +38,12 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let mut filenames = read::read_dir(&read_dir[0]).unwrap();
-    filenames = exclude::exclude(filenames, &read_ext, ex_filename);
+    let filenames = read::read_dir(&read_dir, &read_ext, ex_filename).unwrap();
 
     // folderに格納
     for filename in &filenames {
         // fileに格納
-        let filepath = Path::new(&read_dir[0]).join(filename);
+        let filepath = Path::new(&read_dir).join(filename);
         for result in BufReader::new(File::open(filepath).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();

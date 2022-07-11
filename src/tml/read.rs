@@ -11,7 +11,7 @@ struct Setting {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Dir {
-    read_dir: Vec<String>,
+    read_dir: String,
     create_dir: String,
 }
 
@@ -29,7 +29,7 @@ struct Exclude {
 }
 
 type ReadType = (String, String, Vec<String>);
-type Ok = ((Vec<String>, String), String, ReadType, Vec<String>);
+type Ok = ((String, String), String, ReadType, Vec<String>);
 
 pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     let s = read_to_string(TOML_PATH)?;
