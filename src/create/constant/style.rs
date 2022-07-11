@@ -206,6 +206,7 @@ a {
   border: 2px solid;
   margin-left: 0.5rem;
   opacity: 0.2;
+  cursor: pointer;
 }
 
 .gg-copy:hover {
