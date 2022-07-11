@@ -73,9 +73,13 @@ nav {
 
 .n-filename {
   cursor: pointer;
-  margin: 1rem 0 0.8rem 0;
-  padding-left: 2rem;
+  margin: 0.8rem 0 0 1.8rem;
+  padding: 0.2rem 0 0.3rem 0.2rem;
 }
+.n-filename:hover{
+  background-color: #00000033;
+}
+
 
 .n-target {
   list-style: none;
@@ -85,12 +89,12 @@ nav {
 
 .n-target li {
   color: var(--color-blue);
-  font-size: 1rem;
+  font-size: 14px;
   letter-spacing: 0px;
   font-weight: 600;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
-  margin-left: 2rem;
-  padding: 0.4rem 0;
+  margin-left: 1.8rem;
+  padding: 0.2rem 0 0.3rem 0.2rem;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

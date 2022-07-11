@@ -25,7 +25,7 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         let show_name = filename[..cp].to_string();
         file.write_all(
             format!(
-                "<h3 class=\"n-filename\" id=\"n-{}\">{}</h3>",
+                "<h4 class=\"n-filename\" id=\"n-{}\">{}</h4>",
                 filename, show_name
             )
             .as_bytes(),
@@ -33,7 +33,7 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         .unwrap();
 
         // n-syntax
-        file.write_all(format!("<ul class=\"n-target n-{} dn\">", filename).as_bytes())
+        file.write_all(format!("<ul class=\"n-target n-{}\">", filename).as_bytes())
             .unwrap();
 
         // li
