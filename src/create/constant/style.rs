@@ -324,6 +324,9 @@ a {
   padding: 5px 0;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
 }
+.search-list:hover{
+  background-color: #ffffff33;
+}
 
 .s-target_name{
   color: var(--color-blue);
