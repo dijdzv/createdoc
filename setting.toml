@@ -1,6 +1,8 @@
 [dir]
-read_dir = "."
-# read_dir = "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
+read_dir = [
+    "./",
+    "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
+  ]
 create_dir = "./"
 
 [read]
@@ -10,7 +12,7 @@ create_dir = "./"
 # "読み込みたい言語" (highlight)
 read_lang = "php"
 # "読み込みたい拡張子"
-read_filename_extension = "php"
+read_ext = "php"
 # Comment
 # Supported symbol => /, *, #, ",
 cmt_start = "/**"

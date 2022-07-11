@@ -28,12 +28,8 @@ fn main() {
 }
 
 fn app() -> Result<(), Box<dyn std::error::Error>> {
-    let (
-        (read_dir, create_dir),
-        cmt_start,
-        (read_lang, read_filename_extension, ex_filename),
-        target,
-    ) = tml::read_toml()?;
+    let ((read_dir, create_dir), cmt_start, (read_lang, read_ext, ex_filename), target) =
+        tml::read_toml()?;
 
     let mut doc = Vec::new(); // 一時保管
     let mut content = Vec::new(); //docとfuncのペア
@@ -43,13 +39,13 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let mut filenames = read::read_dir(&read_dir).unwrap();
-    filenames = exclude::exclude(filenames, &read_filename_extension, ex_filename);
+    let mut filenames = read::read_dir(&read_dir[0]).unwrap();
+    filenames = exclude::exclude(filenames, &read_ext, ex_filename);
 
     // folderに格納
     for filename in &filenames {
         // fileに格納
-        let filepath = Path::new(&read_dir).join(filename);
+        let filepath = Path::new(&read_dir[0]).join(filename);
         for result in BufReader::new(File::open(filepath).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();
