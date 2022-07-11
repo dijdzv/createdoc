@@ -89,11 +89,14 @@ nav {
   letter-spacing: 0px;
   font-weight: 600;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
-  padding-left: 2rem;
-  margin-bottom: 0.8rem;
+  margin-left: 2rem;
+  padding: 0.4rem 0;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+.n-target li:hover{
+  background-color: #00000033;
 }
 
 .n-target li::-webkit-scrollbar {
