@@ -56,6 +56,12 @@ pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
         Exclude { ex_filename },
     ) = (dir, read, exclude);
 
+    let read_dir = if read_dir.ends_with('/') || read_dir.ends_with('\\') {
+        read_dir
+    } else {
+        read_dir + "/"
+    };
+
     Ok((
         (read_dir, create_dir),
         cmt_start,
