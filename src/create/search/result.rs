@@ -6,7 +6,7 @@ pub fn search_result(file: &mut File, search_data: &HashMap<&str, Vec<&str>>) {
     for (filename, v) in search_data {
         file.write_all(
             format!(
-                "<li class=\"search-list dn\"><a href=\"#{}\">{}</a></li>",
+                "<a href=\"#{}\"><li class=\"search-list dn\">{}</li></a>",
                 filename, filename
             )
             .as_bytes(),
@@ -16,7 +16,7 @@ pub fn search_result(file: &mut File, search_data: &HashMap<&str, Vec<&str>>) {
         for target_name in v {
             file.write_all(
                 format!(
-                    "<li class=\"search-list dn\"><a href=\"#{}\">{} <span class=\"s-target_name\">{}</span></a></li>",
+                    "<a href=\"#{}\"><li class=\"search-list dn\">{}<span class=\"s-target_name\">{}</span></li></a>",
                     target_name, filename, target_name
                 )
                 .as_bytes(),

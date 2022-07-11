@@ -321,7 +321,7 @@ a {
 .search-list{
   border-bottom: solid 1px #aaa9;
   margin-left: 10px;
-  padding: 5px 0;
+  padding: 5px 0 5px 0.2rem;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
 }
 .search-list:hover{
@@ -330,6 +330,7 @@ a {
 
 .s-target_name{
   color: var(--color-blue);
+  margin-left: 0.5rem;
 }
 
 .gg-search {
