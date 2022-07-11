@@ -1,12 +1,13 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
-use std::path::Path;
-
 mod add;
 mod create;
+mod exclude;
 mod read;
 mod sort;
 mod tml;
+
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+use std::path::Path;
 
 type TargetName = String;
 type FileName = String;
@@ -43,7 +44,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_content = false;
 
     let mut filenames = read::read_dir(read_dir).unwrap();
-    filenames = sort::sorting(filenames, &read_filename_extension, ex_filename);
+    filenames = exclude::exclude(filenames, &read_filename_extension, ex_filename);
 
     // folderに格納
     for filename in &filenames {
