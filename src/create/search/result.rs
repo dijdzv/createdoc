@@ -1,6 +1,6 @@
-use std::{collections::HashMap, fs::File, io::Write};
+use std::{fs::File, io::Write};
 
-pub fn search_result(file: &mut File, search_data: &HashMap<&str, Vec<&str>>) {
+pub fn search_result(file: &mut File, search_data: &Vec<(&str, Vec<&str>)>) {
     file.write_all(r#"<div class="search-result"><ul>"#.as_bytes())
         .unwrap();
     for (filename, v) in search_data {
