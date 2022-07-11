@@ -25,8 +25,8 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         let show_name = filename[..cp].to_string();
         file.write_all(
             format!(
-                "<h4 class=\"n-filename\" id=\"n-{}\">{}</h4>",
-                filename, show_name
+                "<a href=\"#{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
+                show_name, filename, show_name
             )
             .as_bytes(),
         )

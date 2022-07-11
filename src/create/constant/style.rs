@@ -80,7 +80,6 @@ nav {
   background-color: #00000033;
 }
 
-
 .n-target {
   list-style: none;
   padding: 0;
