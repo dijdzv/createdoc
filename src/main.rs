@@ -62,7 +62,18 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
             );
         }
         let filename = filepath.file_name().unwrap().to_string_lossy().into_owned();
-        folder_vec.push((filename, file_vec.clone()));
+        if filepath.parent().unwrap() == Path::new(&read_dir) {
+            folder_vec.push((filename, file_vec.clone()));
+        } else {
+            let parent_dir = filepath
+                .parent()
+                .unwrap()
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap();
+            folder_vec.push((format!("{}::{}", parent_dir, filename), file_vec.clone()));
+        }
         file_vec.clear();
     }
 
