@@ -41,7 +41,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
 
         file.write_all(
             format!(
-                "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#{}\">{}</a></h2>",
+                "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
                 show_name, show_name, show_name
             )
             .as_bytes(),
@@ -56,7 +56,7 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
             file.write_all(
                 format!(
                     "<h3 class=\"m-target_name\" id=\"t-{}\">
-                    <a href=\"#{}\">{}</a><input type=\"text\" class=\"hidden-input\" value=\"{}\">
+                    <a href=\"#t-{}\">{}</a><input type=\"text\" class=\"hidden-input\" value=\"{}\">
                     <i class=\"gg-copy\"></i><i class=\"gg-check dn\"></i>
                     </h3>",
                     target_name, target_name, target_name, target_name,
