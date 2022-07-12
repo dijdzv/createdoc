@@ -1,6 +1,6 @@
 [dir]
 read_dir = "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
-read_folder = ["int"]
+read_folder = ["int","string"]
 create_dir = "./"
 
 [read]

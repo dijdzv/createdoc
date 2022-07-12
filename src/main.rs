@@ -19,8 +19,10 @@ fn main() {
     match app() {
         Ok(_) => println!("Creation Success!"),
         Err(e) => {
-            tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH));
-            println!("The `setting.toml` file did not exist, so I created a new one.");
+            if !Path::new(tml::TOML_PATH).exists() {
+                tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH));
+                println!("The `setting.toml` file did not exist, so I created a new one.");
+            }
             println!("{}", e)
         }
     }
