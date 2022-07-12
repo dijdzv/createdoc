@@ -42,12 +42,12 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let filenames = read::read_control(&read_dir, &read_ext, &exclude_filename, &read_folder)?;
+    let filepaths = read::read_control(&read_dir, &read_ext, &exclude_filename, &read_folder)?;
 
     // folderに格納
-    for filename in &filenames {
+    for filepath in &filepaths {
         // fileに格納
-        let filepath = Path::new(&read_dir).join(filename);
+        let filepath = Path::new(&filepath);
         for result in BufReader::new(File::open(filepath).unwrap()).lines() {
             // 一行
             let mut l = result.ok().unwrap();
@@ -61,7 +61,8 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
                 &target,
             );
         }
-        folder_vec.push((filename.to_string(), file_vec.clone()));
+        let filename = filepath.file_name().unwrap().to_string_lossy().into_owned();
+        folder_vec.push((filename, file_vec.clone()));
         file_vec.clear();
     }
 
