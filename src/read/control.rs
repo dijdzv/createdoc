@@ -15,7 +15,6 @@ pub fn read_control<P: AsRef<Path>>(
             current.append(&mut file);
         }
     } else {
-        dbg!(&exist_folder);
         for f in &exist_folder {
             let (mut file, _) = read_dir(path.as_ref().join(f), ext, exclude_filename)?;
             current.append(&mut file);
