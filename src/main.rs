@@ -65,14 +65,14 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
         if filepath.parent().unwrap() == Path::new(&read_dir) {
             folder_vec.push((filename, file_vec.clone()));
         } else {
-            let parent_dir = filepath
+            let parent_name = filepath
                 .parent()
                 .unwrap()
                 .file_name()
                 .unwrap()
                 .to_str()
                 .unwrap();
-            folder_vec.push((format!("{}::{}", parent_dir, filename), file_vec.clone()));
+            folder_vec.push((format!("{}::{}", parent_name, filename), file_vec.clone()));
         }
         file_vec.clear();
     }
