@@ -26,7 +26,7 @@ struct Read {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Exclude {
-    ex_filename: Vec<String>,
+    exclude_filename: Vec<String>,
 }
 
 type ReadType = (String, String, Vec<String>);
@@ -55,13 +55,13 @@ pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
             cmt_start,
             target,
         },
-        Exclude { ex_filename },
+        Exclude { exclude_filename },
     ) = (dir, read, exclude);
 
     Ok((
         (read_dir, read_folder, create_dir),
         cmt_start,
-        (read_lang, read_ext, ex_filename),
+        (read_lang, read_ext, exclude_filename),
         target,
     ))
 }

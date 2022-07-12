@@ -30,7 +30,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let (
         (read_dir, read_folder, create_dir),
         cmt_start,
-        (read_lang, read_ext, ex_filename),
+        (read_lang, read_ext, exclude_filename),
         target,
     ) = tml::read_toml()?;
 
@@ -42,7 +42,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let filenames = read::read_control(&read_dir, &read_ext, &ex_filename, &read_folder)?;
+    let filenames = read::read_control(&read_dir, &read_ext, &exclude_filename, &read_folder)?;
 
     // folderに格納
     for filename in &filenames {

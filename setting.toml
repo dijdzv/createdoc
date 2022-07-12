@@ -21,4 +21,4 @@ target = ["function"]
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-ex_filename = ["index"]
+exclude_filename = ["index"]

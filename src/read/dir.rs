@@ -5,7 +5,7 @@ use std::path::Path;
 pub fn read_dir<P: AsRef<Path>>(
     path: P,
     ext: &str,
-    ex_filename: &[String],
+    exclude_filename: &[String],
 ) -> io::Result<Vec<String>> {
     // let path = path.as_ref();
     Ok(fs::read_dir(path)?
@@ -17,7 +17,7 @@ pub fn read_dir<P: AsRef<Path>>(
                 let filename = filename.to_string_lossy().into_owned();
                 if file_type.is_file()
                     && f_path.extension().unwrap().to_str().unwrap() == ext
-                    && ex_filename.iter().any(|f| !filename.starts_with(f))
+                    && exclude_filename.iter().any(|f| !filename.starts_with(f))
                 {
                     Some(filename)
                 } else {

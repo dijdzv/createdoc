@@ -1,26 +1,27 @@
 pub const TOML: &str = r#"[dir]
 read_dir = "./"
-read_folder = []
+read_folder = [""]
 create_dir = "./"
 
 [read]
 # Highlight
-# Supported Languages => php,js,rust,go
+# Supported Languages => Try it out
 # https://prismjs.com/index.html#supported-languages
-# "読み込みたい言語" (highlight)
+# "Language to be loaded" (For Highlights)
 read_lang = ""
-# "読み込みたい拡張子"
-read_filename_extension = ""
+# "Extension to be loaded"
+read_ext = ""
 # Comment
 # Supported symbol => /, *, #, ",
 cmt_start = "/**"
 # Target syntax
-# ["function","class","fn","pub fn",...]
+# ["function","class",...]
 target = [""]
 
 [exclude]
-# ["除外したいファイル名", ...]
+# ["Name of the file to exclude", ...]
 # Pattern match from the top
-ex_filename = [""]"#;
+exclude_filename = [""]
+"#;
 
 pub const TOML_PATH: &str = "./setting.toml";

@@ -5,9 +5,9 @@ use std::path::Path;
 pub fn read_control<P: AsRef<Path>>(
     path: P,
     ext: &str,
-    ex_filename: &[String],
+    exclude_filename: &[String],
     folder: &[String],
 ) -> io::Result<Vec<String>> {
-    let current = read_dir(path, ext, ex_filename)?;
+    let current = read_dir(path, ext, exclude_filename)?;
     Ok(current)
 }
