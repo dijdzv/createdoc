@@ -25,21 +25,25 @@ pub fn create_nav(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
         let show_name = filename[..cp].to_string();
         file.write_all(
             format!(
-                "<a href=\"#{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
+                "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
                 show_name, filename, show_name
             )
             .as_bytes(),
         )
         .unwrap();
 
-        // n-syntax
+        // n-target
         file.write_all(format!("<ul class=\"n-target n-{}\">", filename).as_bytes())
             .unwrap();
 
         // li
         for (target_name, _, _) in file_vec {
             file.write_all(
-                format!("<a href=\"#{}\"><li>{}</li></a>", target_name, target_name).as_bytes(),
+                format!(
+                    "<a href=\"#t-{}\"><li>{}</li></a>",
+                    target_name, target_name
+                )
+                .as_bytes(),
             )
             .unwrap();
         }
