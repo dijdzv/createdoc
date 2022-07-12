@@ -48,9 +48,9 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     for filepath in &filepaths {
         // fileに格納
         let filepath = Path::new(&filepath);
-        for result in BufReader::new(File::open(filepath).unwrap()).lines() {
+        for result in BufReader::new(File::open(filepath)?).lines() {
             // 一行
-            let mut l = result.ok().unwrap();
+            let mut l = result?;
 
             // vecに行毎追加
             add::add_line(
