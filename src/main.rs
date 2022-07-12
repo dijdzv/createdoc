@@ -42,7 +42,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let filenames = read::read_dir(&read_dir, &read_ext, ex_filename).unwrap();
+    let filenames = read::read_control(&read_dir, &read_ext, &ex_filename, &read_folder)?;
 
     // folderに格納
     for filename in &filenames {

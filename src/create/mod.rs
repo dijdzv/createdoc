@@ -14,7 +14,7 @@ pub fn create_html(create_dir: &str, read_lang: &str, folder_vec: &FolderVec) {
     // html
     file.write_all(constant::HTML_TOP_START.as_bytes()).unwrap();
     file.write_all(constant::STYLE.as_bytes()).unwrap();
-    file.write_all(constant::PRISM_CSS.as_bytes()).unwrap();
+    file.write_all(constant::PRISM_CDN_CSS.as_bytes()).unwrap();
     file.write_all(constant::HTML_TOP_END.as_bytes()).unwrap();
 
     // wrap
@@ -29,7 +29,9 @@ pub fn create_html(create_dir: &str, read_lang: &str, folder_vec: &FolderVec) {
 
     // script
     file.write_all(constant::SCRIPT.as_bytes()).unwrap();
-    file.write_all(constant::PRISM_JS.as_bytes()).unwrap();
+    file.write_all(constant::PRISM_CDN_JS.as_bytes()).unwrap();
+    file.write_all(constant::PRISM_AUTO_LOADER.as_bytes())
+        .unwrap();
 
     file.write_all(search::SEARCH_SCRIPT.as_bytes()).unwrap();
 

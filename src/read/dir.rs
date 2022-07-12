@@ -5,8 +5,9 @@ use std::path::Path;
 pub fn read_dir<P: AsRef<Path>>(
     path: P,
     ext: &str,
-    ex_filename: Vec<String>,
+    ex_filename: &[String],
 ) -> io::Result<Vec<String>> {
+    // let path = path.as_ref();
     Ok(fs::read_dir(path)?
         .filter_map(|entry| {
             let entry = entry.ok()?;
@@ -25,11 +26,6 @@ pub fn read_dir<P: AsRef<Path>>(
             } else {
                 None
             }
-            // if entry.file_type().ok()?.is_file() {
-            //     Some(entry.file_name().to_string_lossy().into_owned())
-            // } else {
-            //     None
-            // }
         })
         .collect())
 }

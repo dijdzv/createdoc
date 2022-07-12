@@ -5,11 +5,11 @@ create_dir = "./"
 
 [read]
 # Highlight
-# Supported Languages => php,js,rust,go
+# Supported Languages => Try it out
 # https://prismjs.com/index.html#supported-languages
-# "読み込みたい言語" (highlight)
+# "Language to be loaded" (For Highlights)
 read_lang = "php"
-# "読み込みたい拡張子"
+# "Extension to be loaded"
 read_ext = "php"
 # Comment
 # Supported symbol => /, *, #, ",
@@ -19,6 +19,6 @@ cmt_start = "/**"
 target = ["function"]
 
 [exclude]
-# ["除外したいファイル名", ...]
+# ["Name of the file to exclude", ...]
 # Pattern match from the top
 ex_filename = ["index"]
