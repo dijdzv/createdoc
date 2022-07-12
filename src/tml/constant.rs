@@ -1,5 +1,6 @@
 pub const TOML: &str = r#"[dir]
 read_dir = "./"
+# Can use `*`
 read_folder = [""]
 create_dir = "./"
 
@@ -12,7 +13,7 @@ read_lang = ""
 # "Extension to be loaded"
 read_ext = ""
 # Comment
-# Supported symbol => /, *, #, ",
+# Supported symbol => `/`, `*`, `#`, `"`,
 cmt_start = "/**"
 # Target syntax
 # ["function","class",...]
