@@ -27,4 +27,8 @@ for (let c of copyIcon) {
     }, 2000);
   });
 }
+
+let pair = document.getElementsByClassName("pair");
+let lastPair = pair[pair.length - 1];
+lastPair.style.marginBottom = `calc(100vh - ${lastPair.clientHeight}px)`;
 </script>"#;

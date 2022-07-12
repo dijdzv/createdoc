@@ -127,10 +127,6 @@ main {
   min-width: 0;
 }
 
-.m-file:last-child{
-  margin-bottom: calc(100vh);
-}
-
 .m-filename {
   margin: 1rem 0 0 1rem;
   padding-left: 0.5rem;
