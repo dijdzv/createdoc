@@ -1,5 +1,5 @@
 [dir]
-read_dir = "C:\\Users\\ohs10700\\Documents\\GitHub\\php_code-spaces\\function"
+read_dir = "./"
 read_folder = ["*"] # Can use `*`
 create_dir = "./"
 
@@ -8,12 +8,14 @@ create_dir = "./"
 # Supported Languages => Try it out
 # https://prismjs.com/index.html#supported-languages
 # "Language to be loaded" (For Highlights)
-read_lang = "php"
+read_lang = "rust"
 # "Extension to be loaded"
-read_ext = "php"
+# `ext` => OK
+# `.ext` => NG
+read_ext = "rs"
 # Comment
 # Supported symbol => `/`, `*`, `#`, `"`,
-cmt_start = "/**"
+cmt_start = ""
 # Target syntax
 # ["function","class",...]
 target = ["function"]
@@ -21,4 +23,4 @@ target = ["function"]
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-exclude_filename = ["index"]
+exclude_filename = [""]

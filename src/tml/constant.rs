@@ -11,6 +11,8 @@ create_dir = "./"
 # "Language to be loaded" (For Highlights)
 read_lang = ""
 # "Extension to be loaded"
+# `ext` => OK
+# `.ext` => NG
 read_ext = ""
 # Comment
 # Supported symbol => `/`, `*`, `#`, `"`,
