@@ -2,6 +2,7 @@ use super::search;
 use super::FolderVec;
 use crate::create::constant;
 use regex::Regex;
+use std::path::Path;
 use std::{fs::File, io::Write};
 
 pub fn create_main(
@@ -15,7 +16,7 @@ pub fn create_main(
     // search
     file.write_all(r#"<div class="search-area">"#.as_bytes())?;
     search::search_input(file)?;
-    let search_data = search::search_data(folder_vec);
+    let search_data = search::search_data(folder_vec)?;
     search::search_result(file, &search_data)?;
     let mut buf = Vec::new();
     for (k, v) in search_data {
@@ -39,13 +40,16 @@ pub fn create_main(
         file.write_all(format!("<div class=\"m-file m-{}\">", filename).as_bytes())?;
 
         // h2 m-filename
-        let cp = filename.find('.').unwrap();
-        let show_name = filename[..cp].to_string();
+        let stem_name = Path::new(filename)
+            .file_stem()
+            .ok_or("aaa")?
+            .to_str()
+            .ok_or("aaa")?;
 
         file.write_all(
             format!(
                 "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
-                show_name, show_name, show_name
+                stem_name, stem_name, stem_name
             )
             .as_bytes(),
         )?;

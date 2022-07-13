@@ -1,7 +1,7 @@
 use crate::FolderVec;
-use std::collections::HashMap;
+use std::{collections::HashMap, path::Path};
 
-pub fn search_data(folder_vec: &FolderVec) -> Vec<(&str, Vec<&str>)> {
+pub fn search_data(folder_vec: &FolderVec) -> Result<Vec<(&str, Vec<&str>)>, String> {
     let mut hashmap = HashMap::new();
 
     for (filename, file_vec) in folder_vec {
@@ -9,11 +9,16 @@ pub fn search_data(folder_vec: &FolderVec) -> Vec<(&str, Vec<&str>)> {
             .iter()
             .map(|(t, _, _)| t.as_str())
             .collect::<Vec<_>>();
+        let stem_name = Path::new(filename)
+            .file_stem()
+            .ok_or("aaa")?
+            .to_str()
+            .ok_or("aaa")?;
 
-        hashmap.insert(&filename[..filename.find('.').unwrap()], target_names);
+        hashmap.insert(stem_name, target_names);
     }
 
     let mut search_data = hashmap.into_iter().collect::<Vec<_>>();
     search_data.sort_by(|a, b| a.0.cmp(b.0));
-    search_data
+    Ok(search_data)
 }

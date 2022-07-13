@@ -1,12 +1,12 @@
 use super::FolderVec;
 use chrono::Local;
-use std::{fs::File, io::Write};
+use std::{fs::File, io::Write, path::Path};
 
 pub fn create_nav(
     file: &mut File,
     folder_vec: &FolderVec,
     read_lang: &str,
-) -> Result<(), std::io::Error> {
+) -> Result<(), Box<dyn std::error::Error>> {
     // nav
     file.write_all("<nav>".as_bytes())?;
 
@@ -21,12 +21,15 @@ pub fn create_nav(
         // n-file
         file.write_all(r#"<div class="n-file">"#.as_bytes())?;
         // n-filename
-        let cp = filename.find('.').unwrap();
-        let show_name = filename[..cp].to_string();
+        let stem_name = Path::new(filename)
+            .file_stem()
+            .ok_or("aaa")?
+            .to_str()
+            .ok_or("aaa")?;
         file.write_all(
             format!(
                 "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
-                show_name, filename, show_name
+                stem_name, filename, stem_name
             )
             .as_bytes(),
         )?;
