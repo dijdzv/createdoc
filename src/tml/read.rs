@@ -1,7 +1,6 @@
-use super::TOML_PATH;
+use crate::tml;
 use serde_derive::*;
-use std::fs::read_to_string;
-use toml::{self, de};
+use std::{fs::read_to_string, path::Path};
 #[derive(Debug, Serialize, Deserialize)]
 struct Setting {
     dir: Dir,
@@ -33,15 +32,19 @@ type ReadType = (String, String, Vec<String>);
 type Ok = ((String, Vec<String>, String), String, ReadType, Vec<String>);
 
 pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
-    let s = read_to_string(TOML_PATH)?;
+    let result = read_to_string(tml::TOML_PATH);
+    let s = match result {
+        Ok(s) => s,
+        Err(e) => {
+            if !Path::new(tml::TOML_PATH).exists() {
+                tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH))?;
+                panic!("The `setting.toml` file did not exist, so I created a new one.");
+            }
+            return Err(Box::new(e));
+        }
+    };
 
-    let setting: Result<Setting, de::Error> = toml::from_str(&s);
-    // match &setting {
-    //     Ok(p) => println!("{:#?}", p),
-    //     Err(e) => panic!("fail to parse toml: {}", e),
-    // };
-
-    let Setting { dir, read, exclude } = setting?;
+    let Setting { dir, read, exclude } = toml::from_str(&s)?;
 
     let (
         Dir {
