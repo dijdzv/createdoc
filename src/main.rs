@@ -59,17 +59,21 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
                 &target,
             )?;
         }
-        let filename = filepath.file_name().unwrap().to_string_lossy().into_owned();
-        if filepath.parent().unwrap() == Path::new(&read_dir) {
+        let filename = filepath
+            .file_name()
+            .ok_or("aaa")?
+            .to_string_lossy()
+            .into_owned();
+        if filepath.parent().ok_or("aaa")? == Path::new(&read_dir) {
             folder_vec.push((filename, file_vec.clone()));
         } else {
             let parent_name = filepath
                 .parent()
-                .unwrap()
+                .ok_or("aaa")?
                 .file_name()
-                .unwrap()
+                .ok_or("aaa")?
                 .to_str()
-                .unwrap();
+                .ok_or("aaa")?;
             folder_vec.push((format!("{}::{}", parent_name, filename), file_vec.clone()));
         }
         file_vec.clear();
