@@ -1,4 +1,4 @@
-use crate::FolderVec;
+use crate::{error::ErrorMsg, FolderVec};
 use std::{collections::HashMap, path::Path};
 
 pub fn search_data(folder_vec: &FolderVec) -> Result<Vec<(&str, Vec<&str>)>, String> {
@@ -11,9 +11,9 @@ pub fn search_data(folder_vec: &FolderVec) -> Result<Vec<(&str, Vec<&str>)>, Str
             .collect::<Vec<_>>();
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or("aaa")?
+            .ok_or_else(|| ErrorMsg::FileStem.as_str())?
             .to_str()
-            .ok_or("aaa")?;
+            .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
 
         hashmap.insert(stem_name, target_names);
     }

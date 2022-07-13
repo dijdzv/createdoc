@@ -1,5 +1,6 @@
 mod add;
 mod create;
+mod error;
 mod read;
 mod sort;
 mod tml;
@@ -7,6 +8,8 @@ mod tml;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
+
+use error::ErrorMsg;
 
 type TargetName = String;
 type FileName = String;
@@ -61,19 +64,19 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
         }
         let filename = filepath
             .file_name()
-            .ok_or("aaa")?
+            .ok_or_else(|| ErrorMsg::FileName.as_str())?
             .to_string_lossy()
             .into_owned();
-        if filepath.parent().ok_or("aaa")? == Path::new(&read_dir) {
+        if filepath.parent().ok_or_else(|| ErrorMsg::Parent.as_str())? == Path::new(&read_dir) {
             folder_vec.push((filename, file_vec.clone()));
         } else {
             let parent_name = filepath
                 .parent()
-                .ok_or("aaa")?
+                .ok_or_else(|| ErrorMsg::Parent.as_str())?
                 .file_name()
-                .ok_or("aaa")?
+                .ok_or_else(|| ErrorMsg::FileName.as_str())?
                 .to_str()
-                .ok_or("aaa")?;
+                .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
             folder_vec.push((format!("{}::{}", parent_name, filename), file_vec.clone()));
         }
         file_vec.clear();

@@ -1,6 +1,7 @@
 use super::search;
 use super::FolderVec;
 use crate::create::constant;
+use crate::error::ErrorMsg;
 use regex::Regex;
 use std::path::Path;
 use std::{fs::File, io::Write};
@@ -42,9 +43,9 @@ pub fn create_main(
         // h2 m-filename
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or("aaa")?
+            .ok_or_else(|| ErrorMsg::FileStem.as_str())?
             .to_str()
-            .ok_or("aaa")?;
+            .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
 
         file.write_all(
             format!(

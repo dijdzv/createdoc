@@ -1,3 +1,5 @@
+use crate::error::ErrorMsg;
+
 use super::FolderVec;
 use chrono::Local;
 use std::{fs::File, io::Write, path::Path};
@@ -23,9 +25,10 @@ pub fn create_nav(
         // n-filename
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or("aaa")?
+            .ok_or_else(|| ErrorMsg::FileStem.as_str())?
             .to_str()
-            .ok_or("aaa")?;
+            .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
+
         file.write_all(
             format!(
                 "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",

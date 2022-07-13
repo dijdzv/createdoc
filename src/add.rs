@@ -1,4 +1,4 @@
-use crate::{Content, Doc, TargetName};
+use crate::{error::ErrorMsg, Content, Doc, TargetName};
 use regex::Regex;
 
 /// 関数とDocのvecを生成
@@ -23,8 +23,12 @@ pub fn add_line(
             *is_content = true; // content start
             *l = l.replacen(t, "", 1);
             let re = Regex::new(r"\w+")?;
-            let cap = re.captures(l).ok_or("aaa")?;
-            *target_name = cap.get(0).ok_or("aaa")?.as_str().to_string();
+            let cap = re.captures(l).ok_or_else(|| ErrorMsg::Captures.as_str())?;
+            *target_name = cap
+                .get(0)
+                .ok_or_else(|| ErrorMsg::Get.as_str())?
+                .as_str()
+                .to_string();
             return Ok(());
         }
     }
