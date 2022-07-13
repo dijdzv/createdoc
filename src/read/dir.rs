@@ -1,3 +1,4 @@
+use std::ffi::OsStr;
 use std::fs;
 use std::io;
 use std::path::Path;
@@ -16,7 +17,7 @@ pub fn read_dir<P: AsRef<Path>>(
                 let filename = filename.to_string_lossy().into_owned();
                 let filepath = path.as_ref().join(&filename).to_string_lossy().into_owned();
                 if entry.file_type().ok()?.is_file()
-                    && Path::new(&filename).extension() == Path::new(ext).extension()
+                    && Path::new(&filename).extension() == Some(OsStr::new(ext))
                     && exclude_filename.iter().any(|f| !filename.starts_with(f))
                 {
                     Some(filepath)
