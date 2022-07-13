@@ -24,7 +24,7 @@ pub fn create_html(
     // wrap
     file.write_all(r#"<div class="wrap">"#.as_bytes())?;
 
-    nav::create_nav(&mut file, folder_vec, read_lang);
+    nav::create_nav(&mut file, folder_vec, read_lang)?;
 
     main::create_main(&mut file, folder_vec, read_lang)?;
 

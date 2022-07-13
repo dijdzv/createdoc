@@ -20,7 +20,7 @@ fn main() {
         Ok(_) => println!("Creation Success!"),
         Err(e) => {
             if !Path::new(tml::TOML_PATH).exists() {
-                tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH));
+                tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH)).unwrap();
                 println!("The `setting.toml` file did not exist, so I created a new one.");
             }
             println!("{}", e)

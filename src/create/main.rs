@@ -14,9 +14,9 @@ pub fn create_main(
 
     // search
     file.write_all(r#"<div class="search-area">"#.as_bytes())?;
-    search::search_input(file);
+    search::search_input(file)?;
     let search_data = search::search_data(folder_vec);
-    search::search_result(file, &search_data);
+    search::search_result(file, &search_data)?;
     let mut buf = Vec::new();
     for (k, v) in search_data {
         buf.push(format!(

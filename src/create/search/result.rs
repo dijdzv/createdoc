@@ -1,8 +1,10 @@
 use std::{fs::File, io::Write};
 
-pub fn search_result(file: &mut File, search_data: &Vec<(&str, Vec<&str>)>) {
-    file.write_all(r#"<div class="search-result"><ul>"#.as_bytes())
-        .unwrap();
+pub fn search_result(
+    file: &mut File,
+    search_data: &Vec<(&str, Vec<&str>)>,
+) -> Result<(), std::io::Error> {
+    file.write_all(r#"<div class="search-result"><ul>"#.as_bytes())?;
     for (filename, v) in search_data {
         file.write_all(
             format!(
@@ -10,8 +12,7 @@ pub fn search_result(file: &mut File, search_data: &Vec<(&str, Vec<&str>)>) {
                 filename, filename
             )
             .as_bytes(),
-        )
-        .unwrap();
+        )?;
 
         for target_name in v {
             file.write_all(
@@ -21,8 +22,10 @@ pub fn search_result(file: &mut File, search_data: &Vec<(&str, Vec<&str>)>) {
                 )
                 .as_bytes(),
             )
-            .unwrap();
+            ?;
         }
     }
-    file.write_all("</ul></div>".as_bytes()).unwrap();
+    file.write_all("</ul></div>".as_bytes())?;
+
+    Ok(())
 }
