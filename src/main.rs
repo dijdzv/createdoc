@@ -17,14 +17,14 @@ type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
     match app() {
-        Ok(_) => println!("Creation Success!"),
+        Ok(create_filename) => println!("Created `{}` successfully!", create_filename),
         Err(e) => {
             println!("{}", e)
         }
     }
 }
 
-fn app() -> Result<(), Box<dyn std::error::Error>> {
+fn app() -> Result<String, Box<dyn std::error::Error>> {
     let (
         (read_dir, read_folder, create_dir),
         cmt_start,
@@ -83,5 +83,5 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
 
     create::create_html(&create_dir, &read_lang, &folder_vec)?;
 
-    Ok(())
+    Ok(format!("{}doc.html", read_lang))
 }
