@@ -61,7 +61,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
                 (&mut doc, &mut content, &mut target_name, &mut file_vec),
                 &cmt_start,
                 &target,
-            );
+            )?;
         }
         let filename = filepath.file_name().unwrap().to_string_lossy().into_owned();
         if filepath.parent().unwrap() == Path::new(&read_dir) {
@@ -81,7 +81,7 @@ fn app() -> Result<(), Box<dyn std::error::Error>> {
 
     folder_vec = sort::sort(&mut folder_vec);
 
-    create::create_html(&create_dir, &read_lang, &folder_vec);
+    create::create_html(&create_dir, &read_lang, &folder_vec)?;
 
     Ok(())
 }

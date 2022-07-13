@@ -4,13 +4,16 @@ use crate::create::constant;
 use regex::Regex;
 use std::{fs::File, io::Write};
 
-pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
+pub fn create_main(
+    file: &mut File,
+    folder_vec: &FolderVec,
+    read_lang: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
     // main
-    file.write_all("<main>".as_bytes()).unwrap();
+    file.write_all("<main>".as_bytes())?;
 
     // search
-    file.write_all(r#"<div class="search-area">"#.as_bytes())
-        .unwrap();
+    file.write_all(r#"<div class="search-area">"#.as_bytes())?;
     search::search_input(file);
     let search_data = search::search_data(folder_vec);
     search::search_result(file, &search_data);
@@ -25,15 +28,15 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 .join("\",\"")
         ));
     }
-    file.write_all(format!("<script>const searchData = [{}]\n</script>", buf.join(",")).as_bytes())
-        .unwrap();
+    file.write_all(
+        format!("<script>const searchData = [{}]\n</script>", buf.join(",")).as_bytes(),
+    )?;
 
-    file.write_all("</div>".as_bytes()).unwrap();
+    file.write_all("</div>".as_bytes())?;
 
     for (filename, file_vec) in folder_vec {
         // m-file
-        file.write_all(format!("<div class=\"m-file m-{}\">", filename).as_bytes())
-            .unwrap();
+        file.write_all(format!("<div class=\"m-file m-{}\">", filename).as_bytes())?;
 
         // h2 m-filename
         let cp = filename.find('.').unwrap();
@@ -45,12 +48,11 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                 show_name, show_name, show_name
             )
             .as_bytes(),
-        )
-        .unwrap();
+        )?;
 
         for (target_name, doc, content) in file_vec {
             // .pair
-            file.write_all(r#"<div class="pair">"#.as_bytes()).unwrap();
+            file.write_all(r#"<div class="pair">"#.as_bytes())?;
 
             // syntax name
             file.write_all(
@@ -62,15 +64,13 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                     target_name, target_name, target_name, target_name,
                 )
                 .as_bytes(),
-            )
-            .unwrap();
+            )?;
 
             // docコメント
-            file.write_all(r#"<pre class="doc"><p class="doc-p">"#.as_bytes())
-                .unwrap();
-            let re_space = Regex::new(r"[\s\t]+").unwrap();
-            let re_tag = Regex::new(r"@[a-zA-Z]+").unwrap();
-            let re_type = Regex::new(r#"(array|int(eger)?|string|bool(ean)?|void)[^\s]*"#).unwrap();
+            file.write_all(r#"<pre class="doc"><p class="doc-p">"#.as_bytes())?;
+            let re_space = Regex::new(r"[\s\t]+")?;
+            let re_tag = Regex::new(r"@[a-zA-Z]+")?;
+            let re_type = Regex::new(r#"(array|int(eger)?|string|bool(ean)?|void)[^\s]*"#)?;
             for d in doc {
                 // 先頭からtrim
                 let d = d.trim_start_matches(constant::TRIM_PATTERN);
@@ -101,11 +101,11 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                     }
                     None => d,
                 };
-                file.write_all(format!("{}\n", d).as_bytes()).unwrap();
+                file.write_all(format!("{}\n", d).as_bytes())?;
             }
 
             // /docコメント
-            file.write_all("</p></pre>".as_bytes()).unwrap();
+            file.write_all("</p></pre>".as_bytes())?;
 
             // pre code
             file.write_all(
@@ -114,21 +114,22 @@ pub fn create_main(file: &mut File, folder_vec: &FolderVec, read_lang: &str) {
                     read_lang
                 )
                 .as_bytes(),
-            )
-            .unwrap();
+            )?;
             for c in content {
-                file.write_all(format!("{}\n", c).as_bytes()).unwrap();
+                file.write_all(format!("{}\n", c).as_bytes())?;
             }
             // /code /pre
-            file.write_all("</code></pre>".as_bytes()).unwrap();
+            file.write_all("</code></pre>".as_bytes())?;
 
             // /.pair
-            file.write_all("</div>".as_bytes()).unwrap();
+            file.write_all("</div>".as_bytes())?;
         }
         // /m-file
-        file.write_all("</div>".as_bytes()).unwrap();
+        file.write_all("</div>".as_bytes())?;
     }
 
     // /main
-    file.write_all("</main>".as_bytes()).unwrap();
+    file.write_all("</main>".as_bytes())?;
+
+    Ok(())
 }

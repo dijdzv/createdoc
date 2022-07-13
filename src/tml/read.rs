@@ -41,7 +41,7 @@ pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
     //     Err(e) => panic!("fail to parse toml: {}", e),
     // };
 
-    let Setting { dir, read, exclude } = setting.unwrap();
+    let Setting { dir, read, exclude } = setting?;
 
     let (
         Dir {

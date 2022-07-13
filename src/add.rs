@@ -13,7 +13,7 @@ pub fn add_line(
     ),
     cmt_start: &str,
     target: &[String],
-) {
+) -> Result<(), Box<dyn std::error::Error>> {
     for t in target {
         if l.starts_with(t) {
             if *is_doc {
@@ -22,10 +22,10 @@ pub fn add_line(
             content.push(l.to_string());
             *is_content = true; // content start
             *l = l.replacen(t, "", 1);
-            let re = Regex::new(r"\w+").unwrap();
+            let re = Regex::new(r"\w+")?;
             let cap = re.captures(l).unwrap();
             *target_name = cap.get(0).unwrap().as_str().to_string();
-            return;
+            return Ok(());
         }
     }
     if l.starts_with('}') && *is_content {
@@ -47,4 +47,5 @@ pub fn add_line(
         doc.push(l.to_string());
         *is_doc = true; // doc start
     }
+    Ok(())
 }
