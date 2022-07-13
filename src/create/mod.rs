@@ -1,5 +1,5 @@
 use super::FolderVec;
-use std::{fs::File, io::Write};
+use std::{fs::File, io::Write, path::Path};
 
 mod constant;
 mod main;
@@ -12,7 +12,7 @@ pub fn create_html(
     read_lang: &str,
     folder_vec: &FolderVec,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let create_filepath = format!("{}{}doc", create_dir, read_lang);
+    let create_filepath = format!("{}doc", Path::new(create_dir).join(read_lang).display());
 
     let mut file = File::create(create_filepath + ".html")?;
     // html
