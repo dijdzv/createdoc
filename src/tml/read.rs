@@ -1,6 +1,10 @@
 use crate::tml;
 use serde_derive::*;
-use std::{fs::read_to_string, path::Path};
+use std::{
+    fs::read_to_string,
+    io::{self, ErrorKind},
+    path::Path,
+};
 #[derive(Debug, Serialize, Deserialize)]
 struct Setting {
     dir: Dir,
@@ -31,17 +35,19 @@ struct Exclude {
 type ReadType = (String, String, Vec<String>);
 type Ok = ((String, Vec<String>, String), String, ReadType, Vec<String>);
 
-pub fn read_toml() -> Result<Ok, Box<dyn std::error::Error>> {
+pub fn read_toml() -> Result<Ok, io::Error> {
     let result = read_to_string(tml::TOML_PATH);
     let s = match result {
         Ok(s) => s,
-        Err(e) => {
-            if !Path::new(tml::TOML_PATH).exists() {
-                tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH))?;
-                panic!("The `setting.toml` file did not exist, so I created a new one.");
-            }
-            return Err(Box::new(e));
+        Err(e) if e.kind() == ErrorKind::NotFound => {
+            tml::create_toml(tml::TOML, Path::new(tml::TOML_PATH))?;
+            let new_e = io::Error::new(
+                ErrorKind::NotFound,
+                "The `setting.toml` file did not exist, so I created a new one.",
+            );
+            return Err(new_e);
         }
+        Err(e) => return Err(e),
     };
 
     let Setting { dir, read, exclude } = toml::from_str(&s)?;
