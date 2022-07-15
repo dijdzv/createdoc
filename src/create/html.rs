@@ -6,12 +6,12 @@ use crate::FolderVec;
 
 use std::{fs::File, io::Write, path::Path};
 
-pub fn create_html(
-    create_dir: &str,
+pub fn create_html<P: AsRef<Path>>(
+    create_dir: P,
     read_lang: &str,
     folder_vec: &FolderVec,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let create_filepath = format!("{}doc", Path::new(create_dir).join(read_lang).display());
+    let create_filepath = format!("{}doc", create_dir.as_ref().join(read_lang).display());
 
     let mut file = File::create(create_filepath + ".html")?;
     // html
