@@ -1,7 +1,8 @@
 use super::search;
-use super::FolderVec;
 use crate::create::constant;
 use crate::error::ErrorMsg;
+use crate::FolderVec;
+
 use regex::Regex;
 use std::path::Path;
 use std::{fs::File, io::Write};
