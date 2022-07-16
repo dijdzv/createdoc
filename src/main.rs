@@ -11,13 +11,6 @@ use std::path::Path;
 use createdoc::ReadData;
 use error::ErrorMsg;
 
-type TargetName = String;
-type FileName = String;
-type Doc = Vec<String>;
-type Content = Vec<String>;
-type FileVec = Vec<(TargetName, Doc, Content)>;
-type FolderVec = Vec<(FileName, FileVec)>;
-
 fn main() {
     match app() {
         Ok(create_filepath) => println!("Created `{}` successfully!", create_filepath),
