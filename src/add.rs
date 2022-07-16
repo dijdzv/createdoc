@@ -7,7 +7,12 @@ pub fn add_line(read_data: &mut ReadData) -> Result<(), Box<dyn std::error::Erro
     let line = &read_data.line.clone();
     for t in read_data.target_list.clone().iter() {
         if line.starts_with(t) {
-            read_data.start_content(line, t);
+            if read_data.is_doc {
+                read_data.is_doc = false;
+            }
+            read_data.push_content(line);
+            read_data.is_content = true; // content start
+            read_data.line = read_data.line.replacen(t, "", 1);
             let re = Regex::new(r"\w+")?;
             let cap = re
                 .captures(&read_data.line)

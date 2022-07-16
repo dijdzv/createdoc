@@ -152,12 +152,4 @@ impl ReadData {
 
         self.dir_vec = sorted_file;
     }
-    pub fn start_content(&mut self, line: &str, target: &str) {
-        if self.is_doc {
-            self.is_doc = false;
-        }
-        self.push_content(line);
-        self.is_content = true; // content start
-        self.line = self.line.replacen(target, "", 1);
-    }
 }
