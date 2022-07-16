@@ -1,13 +1,12 @@
 use crate::error::ErrorMsg;
-use crate::FolderVec;
 
 use chrono::Local;
-use createdoc::Output;
+use createdoc::{DirVec, Output};
 use std::path::Path;
 
 pub fn create_nav(
     output: &mut Output,
-    folder_vec: &FolderVec,
+    dir_vec: &DirVec,
     read_lang: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // nav
@@ -20,7 +19,7 @@ pub fn create_nav(
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, file_vec) in folder_vec {
+    for (filename, file_vec) in dir_vec {
         // n-file
         output.add(r#"<div class="n-file">"#);
         // n-filename

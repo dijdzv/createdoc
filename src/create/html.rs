@@ -1,17 +1,15 @@
-use createdoc::Output;
-
 use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use crate::FolderVec;
+use createdoc::{DirVec, Output};
 
 use std::{fs::File, path::Path};
 
 pub fn create_html<P: AsRef<Path>>(
     create_dir: P,
     read_lang: &str,
-    folder_vec: &FolderVec,
+    dir_vec: &DirVec,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let create_filepath = format!("{}doc.html", create_dir.as_ref().join(read_lang).display());
 
@@ -26,9 +24,9 @@ pub fn create_html<P: AsRef<Path>>(
     // wrap
     output.add(r#"<div class="wrap">"#);
 
-    nav::create_nav(&mut output, folder_vec, read_lang)?;
+    nav::create_nav(&mut output, dir_vec, read_lang)?;
 
-    main::create_main(&mut output, folder_vec, read_lang)?;
+    main::create_main(&mut output, dir_vec, read_lang)?;
 
     // /wrap
     output.add("</div>");

@@ -1,7 +1,7 @@
-use crate::FolderVec;
+use crate::DirVec;
 
-pub fn sort(folder_vec: &mut FolderVec) -> FolderVec {
-    let mut sorted_file = folder_vec
+pub fn sort(dir_vec: &mut DirVec) -> DirVec {
+    let mut sorted_file = dir_vec
         .iter_mut()
         .map(|(f, file_vec)| {
             file_vec.sort_by(|a, b| a.0.cmp(&b.0));

@@ -1,15 +1,13 @@
 use super::search;
 use crate::create::constant;
 use crate::error::ErrorMsg;
-use crate::FolderVec;
-
-use createdoc::Output;
+use createdoc::{DirVec, Output};
 use regex::Regex;
 use std::path::Path;
 
 pub fn create_main(
     output: &mut Output,
-    folder_vec: &FolderVec,
+    dir_vec: &DirVec,
     read_lang: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // main
@@ -18,7 +16,7 @@ pub fn create_main(
     // search
     output.add(r#"<div class="search-area">"#);
     search::search_input(output);
-    let search_data = search::search_data(folder_vec)?;
+    let search_data = search::search_data(dir_vec)?;
     search::search_result(output, &search_data);
     let mut buf = Vec::new();
     for (k, v) in search_data {
@@ -38,7 +36,7 @@ pub fn create_main(
 
     output.add("</div>");
 
-    for (filename, file_vec) in folder_vec {
+    for (filename, file_vec) in dir_vec {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 

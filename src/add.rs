@@ -1,30 +1,18 @@
-use crate::{error::ErrorMsg, Content, Doc, TargetName};
+use crate::error::ErrorMsg;
+use createdoc::ReadData;
 use regex::Regex;
 
 /// 関数とDocのvecを生成
-pub fn add_line(
-    l: &mut String,
-    (is_doc, is_content): (&mut bool, &mut bool),
-    (doc, content, target_name, file_vec): (
-        &mut Doc,
-        &mut Content,
-        &mut TargetName,
-        &mut Vec<(String, Doc, Content)>,
-    ),
-    cmt_start: &str,
-    target: &[String],
-) -> Result<(), Box<dyn std::error::Error>> {
-    for t in target {
-        if l.starts_with(t) {
-            if *is_doc {
-                *is_doc = false;
-            }
-            content.push(l.to_string());
-            *is_content = true; // content start
-            *l = l.replacen(t, "", 1);
+pub fn add_line(read_data: &mut ReadData) -> Result<(), Box<dyn std::error::Error>> {
+    let line = &read_data.line.clone();
+    for t in read_data.target_list.clone().iter() {
+        if line.starts_with(t) {
+            read_data.start_content(line, t);
             let re = Regex::new(r"\w+")?;
-            let cap = re.captures(l).ok_or_else(|| ErrorMsg::Captures.as_str())?;
-            *target_name = cap
+            let cap = re
+                .captures(&read_data.line)
+                .ok_or_else(|| ErrorMsg::Captures.as_str())?;
+            read_data.target_name = cap
                 .get(0)
                 .ok_or_else(|| ErrorMsg::Get.as_str())?
                 .as_str()
@@ -32,24 +20,24 @@ pub fn add_line(
             return Ok(());
         }
     }
-    if l.starts_with('}') && *is_content {
-        content.push(l.to_string());
-        *is_content = false; // content end
-        file_vec.push((target_name.to_string(), doc.to_vec(), content.to_vec()));
-        doc.clear();
-        content.clear();
-    } else if *is_content {
-        content.push(l.to_string());
+    if line.starts_with('}') && read_data.is_content {
+        read_data.push_content(line);
+        read_data.is_content = false; // content end
+        read_data.push_file_vec();
+        read_data.clear_doc();
+        read_data.clear_content();
+    } else if read_data.is_content {
+        read_data.push_content(line);
     }
 
-    if *is_doc && l.is_empty() {
-        *is_doc = false;
-        doc.clear();
-    } else if *is_doc {
-        doc.push(l.to_string());
-    } else if l.starts_with(cmt_start) {
-        doc.push(l.to_string());
-        *is_doc = true; // doc start
+    if read_data.is_doc && line.is_empty() {
+        read_data.is_doc = false;
+        read_data.clear_doc();
+    } else if read_data.is_doc {
+        read_data.push_doc(line);
+    } else if line.starts_with(&read_data.cmt_start) {
+        read_data.push_doc(line);
+        read_data.is_doc = true; // doc start
     }
     Ok(())
 }
