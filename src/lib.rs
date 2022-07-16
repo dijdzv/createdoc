@@ -5,22 +5,22 @@ use std::{
 };
 
 pub struct Output {
-    pub output_string: String,
+    pub code: String,
 }
 
 impl Output {
     pub fn new() -> Self {
         Output {
-            output_string: "".to_string(),
+            code: "".to_string(),
         }
     }
     pub fn add<T: Display>(&mut self, code: T) {
         *self = Self {
-            output_string: format!("{}{}", self.output_string, code),
+            code: format!("{}{}", self.code, code),
         };
     }
     pub fn write(&self, file: &mut File) -> io::Result<()> {
-        file.write_all(self.output_string.as_bytes())
+        file.write_all(self.code.as_bytes())
     }
 }
 

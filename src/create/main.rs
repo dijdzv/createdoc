@@ -3,23 +3,23 @@ use crate::create::constant;
 use crate::error::ErrorMsg;
 use crate::FolderVec;
 
+use createdoc::Output;
 use regex::Regex;
 use std::path::Path;
-use std::{fs::File, io::Write};
 
 pub fn create_main(
-    file: &mut File,
+    output: &mut Output,
     folder_vec: &FolderVec,
     read_lang: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // main
-    file.write_all("<main>".as_bytes())?;
+    output.add("<main>");
 
     // search
-    file.write_all(r#"<div class="search-area">"#.as_bytes())?;
-    search::search_input(file)?;
+    output.add(r#"<div class="search-area">"#);
+    search::search_input(output);
     let search_data = search::search_data(folder_vec)?;
-    search::search_result(file, &search_data)?;
+    search::search_result(output, &search_data);
     let mut buf = Vec::new();
     for (k, v) in search_data {
         buf.push(format!(
@@ -31,15 +31,16 @@ pub fn create_main(
                 .join("\",\"")
         ));
     }
-    file.write_all(
-        format!("<script>const searchData = [{}]\n</script>", buf.join(",")).as_bytes(),
-    )?;
+    output.add(format!(
+        "<script>const searchData = [{}]\n</script>",
+        buf.join(",")
+    ));
 
-    file.write_all("</div>".as_bytes())?;
+    output.add("</div>");
 
     for (filename, file_vec) in folder_vec {
         // m-file
-        file.write_all(format!("<div class=\"m-file m-{}\">", filename).as_bytes())?;
+        output.add(format!("<div class=\"m-file m-{}\">", filename));
 
         // h2 m-filename
         let stem_name = Path::new(filename)
@@ -48,20 +49,17 @@ pub fn create_main(
             .to_str()
             .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
 
-        file.write_all(
-            format!(
-                "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
-                stem_name, stem_name, stem_name
-            )
-            .as_bytes(),
-        )?;
+        output.add(format!(
+            "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
+            stem_name, stem_name, stem_name
+        ));
 
         for (target_name, doc, content) in file_vec {
             // .pair
-            file.write_all(r#"<div class="pair">"#.as_bytes())?;
+            output.add(r#"<div class="pair">"#);
 
             // syntax name
-            file.write_all(
+            output.add(
                 format!(
                     "<h3 class=\"m-target_name\" id=\"t-{}\">
                     <a href=\"#t-{}\">{}</a><input type=\"text\" class=\"hidden-input\" value=\"{}\">
@@ -69,11 +67,10 @@ pub fn create_main(
                     </h3>",
                     target_name, target_name, target_name, target_name,
                 )
-                .as_bytes(),
-            )?;
+            );
 
             // docコメント
-            file.write_all(r#"<pre class="doc"><p class="doc-p">"#.as_bytes())?;
+            output.add(r#"<pre class="doc"><p class="doc-p">"#);
             let re_space = Regex::new(r"[\s\t]+")?;
             let re_tag = Regex::new(r"@[a-zA-Z]+")?;
             let re_type = Regex::new(r#"(array|int(eger)?|string|bool(ean)?|void)[^\s]*"#)?;
@@ -107,35 +104,32 @@ pub fn create_main(
                     }
                     None => d,
                 };
-                file.write_all(format!("{}\n", d).as_bytes())?;
+                output.add(format!("{}\n", d));
             }
 
             // /docコメント
-            file.write_all("</p></pre>".as_bytes())?;
+            output.add("</p></pre>");
 
             // pre code
-            file.write_all(
-                format!(
-                    "<pre class=\"code\"><code class=\"language-{}\">",
-                    read_lang
-                )
-                .as_bytes(),
-            )?;
+            output.add(format!(
+                "<pre class=\"code\"><code class=\"language-{}\">",
+                read_lang
+            ));
             for c in content {
-                file.write_all(format!("{}\n", c).as_bytes())?;
+                output.add(format!("{}\n", c));
             }
             // /code /pre
-            file.write_all("</code></pre>".as_bytes())?;
+            output.add("</code></pre>");
 
             // /.pair
-            file.write_all("</div>".as_bytes())?;
+            output.add("</div>");
         }
         // /m-file
-        file.write_all("</div>".as_bytes())?;
+        output.add("</div>");
     }
 
     // /main
-    file.write_all("</main>".as_bytes())?;
+    output.add("</main>");
 
     Ok(())
 }

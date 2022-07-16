@@ -6,7 +6,7 @@ use super::nav;
 use super::search;
 use crate::FolderVec;
 
-use std::{fs::File, io::Write, path::Path};
+use std::{fs::File, path::Path};
 
 pub fn create_html<P: AsRef<Path>>(
     create_dir: P,
@@ -27,22 +27,23 @@ pub fn create_html<P: AsRef<Path>>(
     output.add(r#"<div class="wrap">"#);
 
     nav::create_nav(&mut output, folder_vec, read_lang)?;
-    output.write(&mut file)?;
 
-    main::create_main(&mut file, folder_vec, read_lang)?;
+    main::create_main(&mut output, folder_vec, read_lang)?;
 
     // /wrap
-    file.write_all(b"</div>")?;
+    output.add("</div>");
 
     // script
-    file.write_all(constant::SCRIPT.as_bytes())?;
-    file.write_all(constant::PRISM_CDN_JS.as_bytes())?;
-    file.write_all(constant::PRISM_AUTO_LOADER.as_bytes())?;
+    output.add(constant::SCRIPT);
+    output.add(constant::PRISM_CDN_JS);
+    output.add(constant::PRISM_AUTO_LOADER);
 
-    file.write_all(search::SEARCH_SCRIPT.as_bytes())?;
+    output.add(search::SEARCH_SCRIPT);
 
     // /html
-    file.write_all(constant::HTML_BOTTOM.as_bytes())?;
+    output.add(constant::HTML_BOTTOM);
+
+    output.write(&mut file)?;
 
     Ok(())
 }

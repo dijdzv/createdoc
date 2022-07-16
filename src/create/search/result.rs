@@ -1,31 +1,21 @@
-use std::{fs::File, io::Write};
+use createdoc::Output;
 
-pub fn search_result(
-    file: &mut File,
-    search_data: &Vec<(&str, Vec<&str>)>,
-) -> Result<(), std::io::Error> {
-    file.write_all(r#"<div class="search-result"><ul>"#.as_bytes())?;
+pub fn search_result(output: &mut Output, search_data: &Vec<(&str, Vec<&str>)>) {
+    output.add(r#"<div class="search-result"><ul>"#);
     for (filename, v) in search_data {
-        file.write_all(
-            format!(
-                "<a href=\"#{}\"><li class=\"search-list dn\">{}</li></a>",
-                filename, filename
-            )
-            .as_bytes(),
-        )?;
+        output.add(format!(
+            "<a href=\"#{}\"><li class=\"search-list dn\">{}</li></a>",
+            filename, filename
+        ));
 
         for target_name in v {
-            file.write_all(
+            output.add(
                 format!(
                     "<a href=\"#{}\"><li class=\"search-list dn\">{}<span class=\"s-target_name\">{}</span></li></a>",
                     target_name, filename, target_name
                 )
-                .as_bytes(),
-            )
-            ?;
+            );
         }
     }
-    file.write_all("</ul></div>".as_bytes())?;
-
-    Ok(())
+    output.add("</ul></div>");
 }
