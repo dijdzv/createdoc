@@ -11,7 +11,7 @@ pub struct Output {
 impl Output {
     pub fn new() -> Self {
         Output {
-            code: "".to_string(),
+            code: String::new(),
         }
     }
     pub fn add<T: Display>(&mut self, code: T) {
