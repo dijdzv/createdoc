@@ -28,12 +28,7 @@ fn main() {
 }
 
 fn app() -> Result<String, Box<dyn std::error::Error>> {
-    let (
-        (read_dir, read_folder, create_dir),
-        cmt_start,
-        (read_lang, read_ext, exclude_filename),
-        target,
-    ) = tml::read_toml()?;
+    let setting = tml::read_toml()?;
 
     let mut doc = Vec::new(); // 一時保管
     let mut content = Vec::new(); //docとfuncのペア
@@ -43,7 +38,15 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
     let mut is_doc = false;
     let mut is_content = false;
 
-    let filepaths = read::read_control(&read_dir, &read_ext, &exclude_filename, &read_folder)?;
+    let cmt_start = setting.cmt_start();
+    let target_list = setting.target_list();
+    let read_dir = setting.read_dir();
+    let filepaths = read::read_control(
+        read_dir,
+        setting.read_ext(),
+        setting.exclude_filename(),
+        setting.read_folder(),
+    )?;
 
     // folderに格納
     for filepath in &filepaths {
@@ -58,8 +61,8 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
                 &mut l,
                 (&mut is_doc, &mut is_content),
                 (&mut doc, &mut content, &mut target_name, &mut file_vec),
-                &cmt_start,
-                &target,
+                cmt_start,
+                target_list,
             )?;
         }
         let filename = filepath
@@ -67,7 +70,7 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
             .ok_or_else(|| ErrorMsg::FileName.as_str())?
             .to_string_lossy()
             .into_owned();
-        if filepath.parent().ok_or_else(|| ErrorMsg::Parent.as_str())? == Path::new(&read_dir) {
+        if filepath.parent().ok_or_else(|| ErrorMsg::Parent.as_str())? == Path::new(read_dir) {
             folder_vec.push((filename, file_vec.clone()));
         } else {
             let parent_name = filepath
@@ -84,7 +87,8 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
 
     folder_vec = sort::sort(&mut folder_vec);
 
-    create::create_html(&create_dir, &read_lang, &folder_vec)?;
+    let read_lang = setting.read_lang();
+    create::create_html(setting.create_dir(), read_lang, &folder_vec)?;
 
     Ok(format!("{}doc.html", read_lang))
 }

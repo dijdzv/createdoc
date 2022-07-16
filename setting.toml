@@ -18,7 +18,7 @@ read_ext = "rs"
 cmt_start = ""
 # Target syntax
 # ["function","class",...]
-target = ["fn"]
+target_list = ["fn"]
 
 [exclude]
 # ["Name of the file to exclude", ...]

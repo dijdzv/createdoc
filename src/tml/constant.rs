@@ -19,7 +19,7 @@ read_ext = ""
 cmt_start = "/**"
 # Target syntax
 # ["function","class",...]
-target = [""]
+target_list = [""]
 
 [exclude]
 # ["Name of the file to exclude", ...]
