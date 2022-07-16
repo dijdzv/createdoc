@@ -5,7 +5,7 @@ mod read;
 mod sort;
 mod tml;
 
-use std::fs::{self, File};
+use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
 
