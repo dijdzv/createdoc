@@ -2,10 +2,10 @@ use crate::error::ErrorMsg;
 use createdoc::DirVec;
 use std::{collections::HashMap, path::Path};
 
-pub fn search_data(folder_vec: &DirVec) -> Result<Vec<(&str, Vec<&str>)>, String> {
+pub fn search_data(dir_vec: &DirVec) -> Result<Vec<(&str, Vec<&str>)>, String> {
     let mut hashmap = HashMap::new();
 
-    for (filename, file_vec) in folder_vec {
+    for (filename, file_vec) in dir_vec {
         let target_names = file_vec
             .iter()
             .map(|(t, _, _)| t.as_str())
