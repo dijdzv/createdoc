@@ -1,4 +1,5 @@
 use std::{
+    fmt::Display,
     fs::File,
     io::{self, Write},
 };
@@ -13,9 +14,9 @@ impl Output {
             output_string: "".to_string(),
         }
     }
-    pub fn add(&mut self, source: &str) {
+    pub fn add<T: Display>(&mut self, code: T) {
         *self = Self {
-            output_string: format!("{}{}", self.output_string, source),
+            output_string: format!("{}{}", self.output_string, code),
         };
     }
     pub fn write(&self, file: &mut File) -> io::Result<()> {

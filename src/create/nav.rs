@@ -2,26 +2,27 @@ use crate::error::ErrorMsg;
 use crate::FolderVec;
 
 use chrono::Local;
-use std::{fs::File, io::Write, path::Path};
+use createdoc::Output;
+use std::path::Path;
 
 pub fn create_nav(
-    file: &mut File,
+    output: &mut Output,
     folder_vec: &FolderVec,
     read_lang: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // nav
-    file.write_all("<nav>".as_bytes())?;
+    output.add("<nav>");
 
     // category
-    file.write_all(r#"<a href=""><h2 class="html-filename">"#.as_bytes())?;
-    file.write_all(format!("{}doc", read_lang).as_bytes())?;
-    file.write_all("</h2></a>".as_bytes())?;
+    output.add(r#"<a href=""><h2 class="html-filename">"#);
+    output.add(format!("{}doc", read_lang));
+    output.add("</h2></a>");
 
     //  n-folder
-    file.write_all(r#"<div class="n-folder">"#.as_bytes())?;
+    output.add(r#"<div class="n-folder">"#);
     for (filename, file_vec) in folder_vec {
         // n-file
-        file.write_all(r#"<div class="n-file">"#.as_bytes())?;
+        output.add(r#"<div class="n-file">"#);
         // n-filename
         let stem_name = Path::new(filename)
             .file_stem()
@@ -29,46 +30,41 @@ pub fn create_nav(
             .to_str()
             .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
 
-        file.write_all(
-            format!(
-                "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
-                stem_name, filename, stem_name
-            )
-            .as_bytes(),
-        )?;
+        output.add(format!(
+            "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
+            stem_name, filename, stem_name
+        ));
 
         // n-target
-        file.write_all(format!("<ul class=\"n-target n-{}\">", filename).as_bytes())?;
+        output.add(format!("<ul class=\"n-target n-{}\">", filename));
 
         // li
         for (target_name, _, _) in file_vec {
-            file.write_all(
-                format!(
-                    "<a href=\"#t-{}\"><li>{}</li></a>",
-                    target_name, target_name
-                )
-                .as_bytes(),
-            )?;
+            output.add(format!(
+                "<a href=\"#t-{}\"><li>{}</li></a>",
+                target_name, target_name
+            ));
         }
 
         // /n-syntax
-        file.write_all("</ul>".as_bytes())?;
+        output.add("</ul>");
 
         // n-file
-        file.write_all("</div>".as_bytes())?;
+        output.add("</div>");
     }
 
     // /n-folder
-    file.write_all("</div>".as_bytes())?;
+    output.add("</div>");
 
     // footer
     let now = Local::now().format("%Y/%m/%d\n%H:%M:%S").to_string();
-    file.write_all(
-        format!("<div class=\"bottom\"><p class=\"time\">{}</p></div>", now).as_bytes(),
-    )?;
+    output.add(format!(
+        "<div class=\"bottom\"><p class=\"time\">{}</p></div>",
+        now
+    ));
 
     // /nav
-    file.write_all("</nav>".as_bytes())?;
+    output.add("</nav>");
 
     Ok(())
 }

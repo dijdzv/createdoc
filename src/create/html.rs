@@ -18,15 +18,16 @@ pub fn create_html<P: AsRef<Path>>(
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();
     // html
-    file.write_all(constant::HTML_TOP_START.as_bytes())?;
-    file.write_all(constant::STYLE.as_bytes())?;
-    file.write_all(constant::PRISM_CDN_CSS.as_bytes())?;
-    file.write_all(constant::HTML_TOP_END.as_bytes())?;
+    output.add(constant::HTML_TOP_START);
+    output.add(constant::STYLE);
+    output.add(constant::PRISM_CDN_CSS);
+    output.add(constant::HTML_TOP_END);
 
     // wrap
-    file.write_all(br#"<div class="wrap">"#)?;
+    output.add(r#"<div class="wrap">"#);
 
-    nav::create_nav(&mut file, folder_vec, read_lang)?;
+    nav::create_nav(&mut output, folder_vec, read_lang)?;
+    output.write(&mut file)?;
 
     main::create_main(&mut file, folder_vec, read_lang)?;
 
