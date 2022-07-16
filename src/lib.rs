@@ -86,10 +86,10 @@ impl Setting {
 #[derive(Debug)]
 pub struct ReadData {
     pub line: String,
-    pub doc: Vec<String>,
-    pub content: Vec<String>,
+    doc: Vec<String>,
+    content: Vec<String>,
     pub target_name: String,
-    pub file_vec: Vec<(String, Vec<String>, Vec<String>)>,
+    file_vec: Vec<(String, Vec<String>, Vec<String>)>,
     pub dir_vec: DirVec,
     pub cmt_start: String,
     pub target_list: Vec<String>,
