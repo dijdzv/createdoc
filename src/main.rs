@@ -5,7 +5,7 @@ mod read;
 mod sort;
 mod tml;
 
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::{BufRead, BufReader};
 use std::path::Path;
 
@@ -20,7 +20,7 @@ type FolderVec = Vec<(FileName, FileVec)>;
 
 fn main() {
     match app() {
-        Ok(create_filename) => println!("Created `{}` successfully!", create_filename),
+        Ok(create_filepath) => println!("Created `{}` successfully!", create_filepath),
         Err(e) => {
             println!("{}", e)
         }

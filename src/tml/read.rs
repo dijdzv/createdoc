@@ -5,6 +5,7 @@ use std::{
     io::{self, ErrorKind},
     path::Path,
 };
+
 #[derive(Debug, Serialize, Deserialize)]
 struct Setting {
     dir: Dir,
