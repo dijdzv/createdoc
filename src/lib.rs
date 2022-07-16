@@ -1,5 +1,3 @@
-mod sort;
-
 use serde_derive::*;
 use std::{
     fmt::Display,
@@ -141,7 +139,18 @@ impl ReadData {
         ))
     }
     pub fn sort_dir_vec(&mut self) {
-        self.dir_vec = sort::sort(&mut self.dir_vec);
+        let mut sorted_file = self
+            .dir_vec
+            .iter_mut()
+            .map(|(f, file_vec)| {
+                file_vec.sort_by(|a, b| a.0.cmp(&b.0));
+                (f.to_owned(), file_vec.clone())
+            })
+            .collect::<Vec<_>>();
+
+        sorted_file.sort_by(|a, b| a.0.cmp(&b.0));
+
+        self.dir_vec = sorted_file;
     }
     pub fn start_content(&mut self, line: &str, target: &str) {
         if self.is_doc {
