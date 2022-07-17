@@ -1,3 +1,5 @@
+use createdoc::Setting;
+
 use super::read_dir;
 use std::io;
 use std::path::Path;
@@ -36,14 +38,15 @@ fn read_recursive<P: AsRef<Path>>(
     Ok(())
 }
 
-pub fn read_control<P: AsRef<Path>>(
-    path: P,
-    ext: &str,
-    exclude_file: &[String],
-    read_folder: &[String],
-) -> io::Result<Vec<String>> {
+pub fn read_control(setting: &Setting) -> io::Result<Vec<String>> {
     let mut current = Vec::new();
-    read_recursive(&path, ext, exclude_file, read_folder, &mut current)?;
+    read_recursive(
+        setting.read_dir(),
+        setting.read_ext(),
+        setting.exclude_file(),
+        setting.read_folder(),
+        &mut current,
+    )?;
 
     Ok(current)
 }

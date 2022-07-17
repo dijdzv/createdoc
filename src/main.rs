@@ -17,12 +17,7 @@ fn main() {
 
 fn app() -> Result<String, Box<dyn std::error::Error>> {
     let setting = tml::read_toml()?;
-    let filepaths = read::read_control(
-        setting.read_dir(),
-        setting.read_ext(),
-        setting.exclude_file(),
-        setting.read_folder(),
-    )?;
+    let filepaths = read::read_control(&setting)?;
 
     let mut read_data = ReadData::new(&setting);
 
