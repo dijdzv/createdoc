@@ -20,7 +20,7 @@ fn app() -> Result<String, Box<dyn std::error::Error>> {
     let filepaths = read::read_control(
         setting.read_dir(),
         setting.read_ext(),
-        setting.exclude_filename(),
+        setting.exclude_file(),
         setting.read_folder(),
     )?;
 

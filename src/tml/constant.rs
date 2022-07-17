@@ -25,7 +25,7 @@ target_list = [""]
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-exclude_filename = [""]
+exclude_file = [""]
 "#;
 
 pub const TOML_PATH: &str = "./setting.toml";

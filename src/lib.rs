@@ -57,15 +57,15 @@ struct Read {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Exclude {
-    exclude_filename: Vec<String>,
+    exclude_file: Vec<String>,
 }
 
 impl Setting {
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
     }
-    pub fn exclude_filename(&self) -> &[String] {
-        &self.exclude.exclude_filename
+    pub fn exclude_file(&self) -> &[String] {
+        &self.exclude.exclude_file
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir
