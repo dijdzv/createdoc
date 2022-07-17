@@ -122,14 +122,14 @@ impl ReadData {
             is_content: false,
         }
     }
-    pub fn push_content(&mut self, line: &str) {
-        self.content.push(line.to_string());
+    pub fn push_content(&mut self) {
+        self.content.push(self.line.to_owned());
     }
     pub fn push_dir_vec(&mut self, filename: String) {
         self.dir_vec.push((filename, self.file_vec.to_owned()));
     }
-    pub fn push_doc(&mut self, line: &str) {
-        self.doc.push(line.to_string());
+    pub fn push_doc(&mut self) {
+        self.doc.push(self.line.to_owned());
     }
     pub fn push_file_vec(&mut self) {
         self.file_vec.push((
