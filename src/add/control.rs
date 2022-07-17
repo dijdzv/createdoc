@@ -16,7 +16,6 @@ pub fn add_control(
             read_data.line = result?;
 
             // vecに行毎追加
-
             add_line(read_data)?;
         }
 
