@@ -1,6 +1,7 @@
 pub const TOML: &str = r#"[dir]
 read_dir = "./"
 # Can use `*`
+# Specify by name or path
 read_folder = [""]
 create_dir = "./"
 
