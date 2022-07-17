@@ -24,7 +24,6 @@ target_list = [""]
 
 [exclude]
 # ["Name of the file to exclude", ...]
-# Pattern match from the top
 exclude_file = [""]
 exclude_folder = [""]
 "#;
