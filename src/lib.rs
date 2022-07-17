@@ -95,6 +95,7 @@ pub struct ReadData {
     pub target_list: Vec<String>,
     pub is_doc: bool,
     pub is_content: bool,
+    pub read_dir: String,
 }
 pub type DirVec = Vec<(String, Vec<(String, Vec<String>, Vec<String>)>)>;
 
@@ -116,10 +117,11 @@ impl ReadData {
             target_name: String::new(),
             file_vec: Vec::new(),
             dir_vec: Vec::new(),
-            cmt_start: setting.read.cmt_start.to_string(),
+            cmt_start: setting.read.cmt_start.to_owned(),
             target_list: setting.read.target_list.to_vec(),
             is_doc: false,
             is_content: false,
+            read_dir: setting.dir.read_dir.to_owned(),
         }
     }
     pub fn push_content(&mut self) {
