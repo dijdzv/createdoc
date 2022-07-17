@@ -1,6 +1,6 @@
+use super::read_dir;
 use createdoc::Setting;
 
-use super::read_dir;
 use std::io;
 use std::path::Path;
 
@@ -14,7 +14,7 @@ fn read_recursive<P: AsRef<Path>>(
     if !path.as_ref().exists() {
         return Ok(());
     }
-    let (mut read_filename, exist_folder) = read_dir(&path, ext, exclude_file)?;
+    let (mut read_filename, exist_folder) = read_dir(&path, ext, (exclude_file, exclude_folder))?;
     current.append(&mut read_filename);
     if exist_folder.is_empty() {
         return Ok(());

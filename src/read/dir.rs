@@ -6,7 +6,7 @@ use std::path::Path;
 pub fn read_dir<P: AsRef<Path>>(
     path: P,
     ext: &str,
-    exclude_file: &[String],
+    (exclude_file, exclude_folder): (&[String], &[String]),
 ) -> io::Result<(Vec<String>, Vec<String>)> {
     let mut folder = Vec::new();
     Ok((
@@ -21,7 +21,9 @@ pub fn read_dir<P: AsRef<Path>>(
                     && !exclude_file.iter().any(|f| filename.starts_with(f))
                 {
                     Some(filepath)
-                } else if entry.file_type().ok()?.is_dir() {
+                } else if entry.file_type().ok()?.is_dir()
+                    && !exclude_folder.iter().any(|f| filename == *f)
+                {
                     folder.push(filepath);
                     None
                 } else {
