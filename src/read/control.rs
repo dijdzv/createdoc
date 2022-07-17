@@ -11,7 +11,6 @@ fn read_recursive<P: AsRef<Path>>(
 ) -> io::Result<()> {
     let (mut read_filename, exist_folder) = read_dir(&path, ext, exclude_filename)?;
     current.append(&mut read_filename);
-    dbg!(path.as_ref(), &exist_folder);
     if exist_folder.is_empty() {
         return Ok(());
     }

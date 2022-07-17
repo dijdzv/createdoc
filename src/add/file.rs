@@ -21,10 +21,10 @@ pub fn add_file<P: AsRef<Path>>(
         read_data.push_dir_vec(filename);
     } else {
         let parent_name = parent_filepath
-            .file_name()
-            .ok_or_else(|| ErrorMsg::FileName.as_str())?
+            .strip_prefix(Path::new(&read_data.read_dir))?
             .to_str()
-            .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
+            .ok_or_else(|| ErrorMsg::ToStr.as_str())?
+            .replace('\\', "::");
         read_data.push_dir_vec(format!("{}::{}", parent_name, filename));
     }
     read_data.clear_file_vec();
