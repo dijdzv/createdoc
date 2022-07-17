@@ -4,8 +4,8 @@ use regex::Regex;
 
 /// 関数とDocのvecを生成
 pub fn add_line(read_data: &mut ReadData) -> Result<(), Box<dyn std::error::Error>> {
-    let line = &read_data.line.to_owned();
-    for t in read_data.target_list.clone().iter() {
+    let line = read_data.line.to_owned();
+    for t in read_data.target_list.to_owned().iter() {
         if line.starts_with(t) {
             if read_data.is_doc {
                 read_data.is_doc = false;
