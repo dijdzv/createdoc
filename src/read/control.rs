@@ -1,8 +1,7 @@
 use super::read_dir;
 use createdoc::Setting;
 
-use std::io;
-use std::path::Path;
+use std::{io, path::Path};
 
 fn read_recursive<P: AsRef<Path>>(
     current: &mut Vec<String>,
