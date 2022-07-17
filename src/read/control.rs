@@ -5,11 +5,11 @@ use std::io;
 use std::path::Path;
 
 fn read_recursive<P: AsRef<Path>>(
+    current: &mut Vec<String>,
     path: P,
     ext: &str,
-    exclude_file: &[String],
     read_folder: &[String],
-    current: &mut Vec<String>,
+    (exclude_file, exclude_folder): (&[String], &[String]),
 ) -> io::Result<()> {
     if !path.as_ref().exists() {
         return Ok(());
@@ -21,16 +21,16 @@ fn read_recursive<P: AsRef<Path>>(
     }
     if read_folder.contains(&"*".to_string()) {
         for f in &exist_folder {
-            read_recursive(f, ext, exclude_file, read_folder, current)?;
+            read_recursive(current, f, ext, read_folder, (exclude_file, exclude_folder))?;
         }
     } else {
         for f in read_folder {
             read_recursive(
+                current,
                 path.as_ref().join(f),
                 ext,
-                exclude_file,
                 read_folder,
-                current,
+                (exclude_file, exclude_folder),
             )?;
         }
     }
@@ -41,11 +41,11 @@ fn read_recursive<P: AsRef<Path>>(
 pub fn read_control(setting: &Setting) -> io::Result<Vec<String>> {
     let mut current = Vec::new();
     read_recursive(
+        &mut current,
         setting.read_dir(),
         setting.read_ext(),
-        setting.exclude_file(),
         setting.read_folder(),
-        &mut current,
+        setting.exclude_tuple(),
     )?;
 
     Ok(current)

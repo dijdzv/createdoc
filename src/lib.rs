@@ -65,11 +65,14 @@ impl Setting {
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
     }
-    pub fn exclude_file(&self) -> &[String] {
+    fn exclude_file(&self) -> &[String] {
         &self.exclude.exclude_file
     }
-    pub fn exclude_folder(&self) -> &[String] {
+    fn exclude_folder(&self) -> &[String] {
         &self.exclude.exclude_folder
+    }
+    pub fn exclude_tuple(&self) -> (&[String], &[String]) {
+        (self.exclude_file(), self.exclude_folder())
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir
