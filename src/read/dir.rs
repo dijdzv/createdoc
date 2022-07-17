@@ -18,7 +18,7 @@ pub fn read_dir<P: AsRef<Path>>(
                 let filepath = path.as_ref().join(&filename).to_string_lossy().into_owned();
                 if entry.file_type().ok()?.is_file()
                     && Path::new(&filename).extension() == Some(OsStr::new(ext))
-                    && exclude_filename.iter().any(|f| !filename.starts_with(f))
+                    && !exclude_filename.iter().any(|f| filename.starts_with(f))
                 {
                     Some(filepath)
                 } else if entry.file_type().ok()?.is_dir() {
