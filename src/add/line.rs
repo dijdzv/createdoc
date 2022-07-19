@@ -1,6 +1,7 @@
 use crate::error::ErrorMsg;
-use anyhow::anyhow;
 use createdoc::ReadData;
+
+use anyhow::Context;
 use regex::Regex;
 
 /// 関数とDocのvecを生成
@@ -17,10 +18,10 @@ pub fn add_line(read_data: &mut ReadData) -> anyhow::Result<()> {
             let re = Regex::new(r"\w+")?;
             let cap = re
                 .captures(&read_data.line)
-                .ok_or_else(|| anyhow!(ErrorMsg::Captures.as_str()))?;
+                .with_context(|| ErrorMsg::Captures.as_str())?;
             read_data.target_name = cap
                 .get(0)
-                .ok_or_else(|| anyhow!(ErrorMsg::Get.as_str()))?
+                .with_context(|| ErrorMsg::Get.as_str())?
                 .as_str()
                 .to_string();
             return Ok(());

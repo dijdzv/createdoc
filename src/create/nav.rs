@@ -1,7 +1,7 @@
 use crate::error::ErrorMsg;
 use createdoc::{DirVec, Output};
 
-use anyhow::anyhow;
+use anyhow::Context;
 use chrono::Local;
 use std::path::Path;
 
@@ -22,9 +22,9 @@ pub fn create_nav(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> any
         // n-filename
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or_else(|| anyhow!(ErrorMsg::FileStem.as_str()))?
+            .with_context(|| ErrorMsg::FileStem.as_str())?
             .to_str()
-            .ok_or_else(|| anyhow!(ErrorMsg::ToStr.as_str()))?;
+            .with_context(|| ErrorMsg::ToStr.as_str())?;
 
         output.add(format!(
             "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
