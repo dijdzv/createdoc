@@ -4,7 +4,7 @@ pub const STYLE: &str = r#"<style>
   --ggy: 1;
   --ggk: 1.5;
   --color-standard: #dddddd;
-  --color-blue: #6dcff0;
+  --color-name: #6dcff0;
   --color-background: #3d3d3d;
   --color-nav-background: #505050;
   --color-nav-border: #717171;
@@ -87,7 +87,7 @@ nav {
 }
 
 .n-target li {
-  color: var(--color-blue);
+  color: var(--color-name);
   font-size: 14px;
   letter-spacing: 0px;
   font-weight: 600;
@@ -144,7 +144,7 @@ main {
   margin: 0;
   padding-top: 1rem;
   padding-left: 2rem;
-  color: var(--color-blue);
+  color: var(--color-name);
 }
 
 .m-target_name::before {
@@ -154,10 +154,10 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: solid 0px var(--color-blue);
-  border-bottom: solid 2px var(--color-blue);
-  border-left: solid 20px var(--color-blue);
-  border-right: solid 0px var(--color-blue);
+  border-top: solid 0px var(--color-name);
+  border-bottom: solid 2px var(--color-name);
+  border-left: solid 20px var(--color-name);
+  border-right: solid 0px var(--color-name);
   border-radius: 0px;
   z-index: -1;
 }
@@ -329,7 +329,7 @@ a {
 }
 
 .s-target_name{
-  color: var(--color-blue);
+  color: var(--color-name);
   margin-left: 0.5rem;
 }
 
