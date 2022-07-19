@@ -10,7 +10,7 @@ fn main() {
     match app() {
         Ok(create_filepath) => println!("Created `{}` successfully!", create_filepath),
         Err(e) => {
-            eprintln!("{}", e)
+            eprintln!("error: {}", e)
         }
     }
 }
