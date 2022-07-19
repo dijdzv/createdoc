@@ -3,7 +3,7 @@ use crate::create::constant;
 use crate::error::ErrorMsg;
 use createdoc::{DirVec, Output};
 
-use anyhow::anyhow;
+use anyhow::Context;
 use regex::Regex;
 use std::path::Path;
 
@@ -41,9 +41,9 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
         // h2 m-filename
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or_else(|| anyhow!(ErrorMsg::FileStem.as_str()))?
+            .with_context(|| ErrorMsg::FileStem.as_str())?
             .to_str()
-            .ok_or_else(|| anyhow!(ErrorMsg::ToStr.as_str()))?;
+            .with_context(|| ErrorMsg::ToStr.as_str())?;
 
         output.add(format!(
             "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
