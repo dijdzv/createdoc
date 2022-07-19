@@ -10,7 +10,7 @@ pub fn create_html<P: AsRef<Path>>(
     create_dir: P,
     read_lang: &str,
     dir_vec: &DirVec,
-) -> Result<(), Box<dyn std::error::Error>> {
+) -> anyhow::Result<()> {
     let create_filepath = format!("{}doc.html", create_dir.as_ref().join(read_lang).display());
 
     let mut file = File::create(create_filepath)?;

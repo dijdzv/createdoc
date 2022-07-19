@@ -2,14 +2,12 @@ use super::search;
 use crate::create::constant;
 use crate::error::ErrorMsg;
 use createdoc::{DirVec, Output};
+
+use anyhow::anyhow;
 use regex::Regex;
 use std::path::Path;
 
-pub fn create_main(
-    output: &mut Output,
-    dir_vec: &DirVec,
-    read_lang: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
+pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
@@ -43,9 +41,9 @@ pub fn create_main(
         // h2 m-filename
         let stem_name = Path::new(filename)
             .file_stem()
-            .ok_or_else(|| ErrorMsg::FileStem.as_str())?
+            .ok_or_else(|| anyhow!(ErrorMsg::FileStem.as_str()))?
             .to_str()
-            .ok_or_else(|| ErrorMsg::ToStr.as_str())?;
+            .ok_or_else(|| anyhow!(ErrorMsg::ToStr.as_str()))?;
 
         output.add(format!(
             "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",

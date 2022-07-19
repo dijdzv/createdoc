@@ -15,7 +15,7 @@ fn main() {
     }
 }
 
-fn app() -> Result<String, Box<dyn std::error::Error>> {
+fn app() -> anyhow::Result<String> {
     let setting = tml::read_toml()?;
     let filepaths = read::read_control(&setting)?;
 

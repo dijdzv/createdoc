@@ -4,10 +4,7 @@ use std::io::{BufRead, BufReader};
 use super::{add_file, add_line};
 use createdoc::ReadData;
 
-pub fn add_control(
-    filepaths: Vec<String>,
-    read_data: &mut ReadData,
-) -> Result<(), Box<dyn std::error::Error>> {
+pub fn add_control(filepaths: Vec<String>, read_data: &mut ReadData) -> anyhow::Result<()> {
     // folderに格納
     for filepath in &filepaths {
         // fileに格納

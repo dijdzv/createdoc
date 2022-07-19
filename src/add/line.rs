@@ -1,9 +1,10 @@
 use crate::error::ErrorMsg;
+use anyhow::anyhow;
 use createdoc::ReadData;
 use regex::Regex;
 
 /// 関数とDocのvecを生成
-pub fn add_line(read_data: &mut ReadData) -> Result<(), Box<dyn std::error::Error>> {
+pub fn add_line(read_data: &mut ReadData) -> anyhow::Result<()> {
     let line = read_data.line.to_owned();
     for t in read_data.target_list.to_owned().iter() {
         if line.starts_with(t) {
@@ -16,10 +17,10 @@ pub fn add_line(read_data: &mut ReadData) -> Result<(), Box<dyn std::error::Erro
             let re = Regex::new(r"\w+")?;
             let cap = re
                 .captures(&read_data.line)
-                .ok_or_else(|| ErrorMsg::Captures.as_str())?;
+                .ok_or_else(|| anyhow!(ErrorMsg::Captures.as_str()))?;
             read_data.target_name = cap
                 .get(0)
-                .ok_or_else(|| ErrorMsg::Get.as_str())?
+                .ok_or_else(|| anyhow!(ErrorMsg::Get.as_str()))?
                 .as_str()
                 .to_string();
             return Ok(());
