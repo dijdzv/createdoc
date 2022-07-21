@@ -1,5 +1,6 @@
 use serde_derive::*;
 use std::{
+    collections::HashMap,
     fmt::Display,
     fs::File,
     io::{self, Write},
@@ -70,15 +71,16 @@ struct Name {
 }
 
 impl Setting {
-    pub fn combine_modifier_and_target_list(&self) -> Vec<String> {
-        let mut v = Vec::new();
+    pub fn combine_modifier_and_target_list(&self) -> HashMap<String, Vec<String>> {
+        let mut h = HashMap::new();
         for t in &self.read.target_list {
-            v.push(t.to_owned());
+            let mut v = vec![t.to_owned()];
             for m in &self.read.modifier {
                 v.push(format!("{} {}", m, t));
             }
+            h.insert(t.to_owned(), v);
         }
-        v
+        h
     }
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
@@ -137,10 +139,11 @@ pub struct ReadData {
     doc: Vec<String>,
     content: Vec<String>,
     pub target_name: String,
+    pub syntax: String,
     file_vec: Vec<(String, Vec<String>, Vec<String>)>,
     pub dir_vec: DirVec,
     pub cmt_start: String,
-    pub target_list: Vec<String>,
+    pub target_list: HashMap<String, Vec<String>>,
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
@@ -170,6 +173,7 @@ impl ReadData {
             doc: Vec::new(),
             content: Vec::new(),
             target_name: String::new(),
+            syntax: String::new(),
             file_vec: Vec::new(),
             dir_vec: Vec::new(),
             cmt_start: setting.read.cmt_start.to_owned(),

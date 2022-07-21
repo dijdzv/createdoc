@@ -7,24 +7,27 @@ use regex::Regex;
 /// 関数とDocのvecを生成
 pub fn add_line(read_data: &mut ReadData) -> anyhow::Result<()> {
     let line = read_data.line.to_owned();
-    for t in read_data.target_list.to_owned().iter() {
-        if line.starts_with(t) {
-            if read_data.is_doc {
-                read_data.is_doc = false;
+    for (k, v) in read_data.target_list.clone().into_iter() {
+        for t in &v {
+            if line.starts_with(t) {
+                read_data.syntax = k;
+                if read_data.is_doc {
+                    read_data.is_doc = false;
+                }
+                read_data.push_content();
+                read_data.is_content = true; // content start
+                read_data.line = line.replacen(t, "", 1);
+                let re = Regex::new(r"\w+")?;
+                let cap = re
+                    .captures(&read_data.line)
+                    .with_context(|| ErrorMsg::Captures.as_str())?;
+                read_data.target_name = cap
+                    .get(0)
+                    .with_context(|| ErrorMsg::Get.as_str())?
+                    .as_str()
+                    .to_string();
+                return Ok(());
             }
-            read_data.push_content();
-            read_data.is_content = true; // content start
-            read_data.line = line.replacen(t, "", 1);
-            let re = Regex::new(r"\w+")?;
-            let cap = re
-                .captures(&read_data.line)
-                .with_context(|| ErrorMsg::Captures.as_str())?;
-            read_data.target_name = cap
-                .get(0)
-                .with_context(|| ErrorMsg::Get.as_str())?
-                .as_str()
-                .to_string();
-            return Ok(());
         }
     }
     if line.starts_with('}') && read_data.is_content {
