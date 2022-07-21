@@ -23,7 +23,7 @@ target_list = ["fn","pub fn","impl","pub enum","struct","pub struct"]
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-exclude_file = ["mod"]
+exclude_file = ["mod","constant"]
 exclude_folder = ["constant"]
 
 [name]

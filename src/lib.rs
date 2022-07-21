@@ -146,6 +146,10 @@ impl ReadData {
     pub fn clear_file_vec(&mut self) {
         self.file_vec.clear();
     }
+    pub fn html_escape(&mut self) {
+        self.line = self.line.replace('<', "&lt");
+        self.line = self.line.replace('>', "&gt");
+    }
     pub fn new(setting: &Setting) -> Self {
         Self {
             line: String::new(),

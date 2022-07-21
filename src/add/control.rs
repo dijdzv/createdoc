@@ -11,6 +11,7 @@ pub fn add_control(filepaths: Vec<String>, read_data: &mut ReadData) -> anyhow::
         for result in BufReader::new(File::open(filepath)?).lines() {
             // 一行のデータ
             read_data.line = result?;
+            read_data.html_escape();
 
             // vecに行毎追加
             add_line(read_data)?;
