@@ -24,3 +24,6 @@ searchInput.addEventListener('input',()=>{
 const searchList = document.getElementsByClassName('search-list');
 // searchData宣言済み
 </script>";
+
+pub const SEARCH_INPUT: &str = r#"<form id="search" role="search" onsubmit="return false;"><input type="search" id="search-input" name="search" spellcheck="false" autocomplete="off"
+      placeholder="Click or press `S` to search"></form>"#;

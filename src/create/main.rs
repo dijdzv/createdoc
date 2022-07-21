@@ -13,7 +13,7 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
 
     // search
     output.add(r#"<div class="search-area">"#);
-    search::search_input(output);
+    output.add(search::SEARCH_INPUT);
     let search_data = search::search_data(dir_vec)?;
     search::search_result(output, &search_data);
     let mut buf = Vec::new();
