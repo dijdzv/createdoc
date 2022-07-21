@@ -1,4 +1,6 @@
-pub const TOML: &str = r#"[dir]
+pub const TOML: &str = r#"## Only syntax enclosed in blocks can be documented
+
+[dir]
 read_dir = "./"
 # Can use `*`
 # Specify by name or path
