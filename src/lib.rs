@@ -70,6 +70,16 @@ struct Name {
 }
 
 impl Setting {
+    pub fn combine_modifier_and_target_list(&self) -> Vec<String> {
+        let mut v = Vec::new();
+        for t in &self.read.target_list {
+            v.push(t.to_owned());
+            for m in &self.read.modifier {
+                v.push(format!("{} {}", m, t));
+            }
+        }
+        v
+    }
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
     }
@@ -104,9 +114,6 @@ impl Setting {
     }
     pub fn is_exist_create_filename(&self) -> bool {
         !self.name.create_filename.is_empty()
-    }
-    pub fn modifier(&self) -> &[String] {
-        &self.read.modifier
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir
@@ -166,7 +173,7 @@ impl ReadData {
             file_vec: Vec::new(),
             dir_vec: Vec::new(),
             cmt_start: setting.read.cmt_start.to_owned(),
-            target_list: setting.read.target_list.to_vec(),
+            target_list: setting.combine_modifier_and_target_list(),
             is_doc: false,
             is_content: false,
             read_dir: setting.dir.read_dir.to_owned(),
