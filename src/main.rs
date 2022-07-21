@@ -23,8 +23,11 @@ fn app() -> anyhow::Result<String> {
 
     add::add_control(filepaths, &mut read_data)?;
 
-    let read_lang = setting.read_lang();
-    create::create_html(setting.create_dir(), read_lang, &read_data.dir_vec)?;
+    create::create_html(
+        &setting.create_filepath(),
+        setting.read_lang(),
+        &read_data.dir_vec,
+    )?;
 
-    Ok(format!("{}doc.html", read_lang))
+    Ok(setting.create_filepath())
 }

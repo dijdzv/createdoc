@@ -26,6 +26,9 @@ target_list = [""]
 # ["Name of the file to exclude", ...]
 exclude_file = [""]
 exclude_folder = [""]
+
+[name]
+create_name = ""
 "#;
 
 pub const TOML_PATH: &str = "./setting.toml";

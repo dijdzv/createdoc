@@ -25,3 +25,7 @@ target_list = ["fn","pub fn","impl","pub enum","struct","pub struct"]
 # Pattern match from the top
 exclude_file = ["mod"]
 exclude_folder = ["constant"]
+
+[name]
+# If empty, it will be "`read_lang`doc"
+create_filename = "createdoc"

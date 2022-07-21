@@ -3,6 +3,7 @@ use std::{
     fmt::Display,
     fs::File,
     io::{self, Write},
+    path::Path,
 };
 
 /// ファイル出力用のstruct
@@ -38,6 +39,7 @@ pub struct Setting {
     dir: Dir,
     read: Read,
     exclude: Exclude,
+    name: Name,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -61,9 +63,34 @@ struct Exclude {
     exclude_folder: Vec<String>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+struct Name {
+    create_filename: String,
+}
+
 impl Setting {
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
+    }
+    pub fn create_filename(&self) -> &str {
+        &self.name.create_filename
+    }
+    pub fn create_filepath(&self) -> String {
+        if self.is_create_filename_exist() {
+            format!(
+                "{}.html",
+                Path::new(self.create_dir())
+                    .join(self.create_filename())
+                    .display()
+            )
+        } else {
+            format!(
+                "{}doc.html",
+                Path::new(self.create_dir())
+                    .join(self.read_lang())
+                    .display()
+            )
+        }
     }
     fn exclude_file(&self) -> &[String] {
         &self.exclude.exclude_file
@@ -73,6 +100,9 @@ impl Setting {
     }
     pub fn exclude_tuple(&self) -> (&[String], &[String]) {
         (self.exclude_file(), self.exclude_folder())
+    }
+    pub fn is_create_filename_exist(&self) -> bool {
+        !self.name.create_filename.is_empty()
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir

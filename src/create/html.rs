@@ -4,15 +4,9 @@ use super::nav;
 use super::search;
 use createdoc::{DirVec, Output};
 
-use std::{fs::File, path::Path};
+use std::fs::File;
 
-pub fn create_html<P: AsRef<Path>>(
-    create_dir: P,
-    read_lang: &str,
-    dir_vec: &DirVec,
-) -> anyhow::Result<()> {
-    let create_filepath = format!("{}doc.html", create_dir.as_ref().join(read_lang).display());
-
+pub fn create_html(create_filepath: &str, read_lang: &str, dir_vec: &DirVec) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();
     // html
