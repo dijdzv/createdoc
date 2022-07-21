@@ -74,11 +74,10 @@ impl Setting {
     pub fn combine_modifier_and_target_list(&self) -> HashMap<String, Vec<String>> {
         let mut h = HashMap::new();
         for t in &self.read.target_list {
-            let mut v = vec![t.to_owned()];
+            let ptr = h.entry(t.to_owned()).or_insert_with(|| vec![t.to_owned()]);
             for m in &self.read.modifier {
-                v.push(format!("{} {}", m, t));
+                ptr.push(format!("{} {}", m, t));
             }
-            h.insert(t.to_owned(), v);
         }
         h
     }
