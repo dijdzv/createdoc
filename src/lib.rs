@@ -77,7 +77,7 @@ impl Setting {
         &self.name.create_filename
     }
     pub fn create_filepath(&self) -> String {
-        if self.is_create_filename_exist() {
+        if self.is_exist_create_filename() {
             format!(
                 "{}.html",
                 Path::new(self.create_dir())
@@ -102,7 +102,7 @@ impl Setting {
     pub fn exclude_tuple(&self) -> (&[String], &[String]) {
         (self.exclude_file(), self.exclude_folder())
     }
-    pub fn is_create_filename_exist(&self) -> bool {
+    pub fn is_exist_create_filename(&self) -> bool {
         !self.name.create_filename.is_empty()
     }
     pub fn modifier(&self) -> &[String] {
@@ -153,6 +153,9 @@ impl ReadData {
     pub fn html_escape(&mut self) {
         self.line = self.line.replace('<', "&lt");
         self.line = self.line.replace('>', "&gt");
+    }
+    pub fn is_empty_file_vec(&self) -> bool {
+        self.file_vec.is_empty()
     }
     pub fn new(setting: &Setting) -> Self {
         Self {
