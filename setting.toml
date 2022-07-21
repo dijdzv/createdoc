@@ -14,7 +14,7 @@ read_lang = "rust"
 # `.ext` => NG
 read_ext = "rs"
 # Comment
-# Supported symbol => `/`, `*`, `#`, `"`,
+# Supported symbol => `/`, `*`, `#`, `"`,`!`,
 cmt_start = "///"
 # Target syntax
 # ["function","class",...]
