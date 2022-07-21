@@ -14,7 +14,7 @@ searchInput.addEventListener('input',()=>{
       searchInput.style.marginBottom = '0';
     }
     for (let i = 0; i < searchData.length; i++){
-      if (sv.every(v=>searchData[i].indexOf(v) != -1) && sv[0]){
+      if (sv.every(v=>searchData[i].toLowerCase().indexOf(v.toLowerCase()) != -1) && sv[0]){
         searchList[i].classList.remove('dn');
      }else{
         searchList[i].classList.add('dn');
