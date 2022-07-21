@@ -69,7 +69,7 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
             output.add(r#"<pre class="doc"><p class="doc-p">"#);
             let re_space = Regex::new(r"[\s\t]+")?;
             let re_tag = Regex::new(r"@[a-zA-Z]+")?;
-            let re_type = Regex::new(r#"(array|int(eger)?|string|bool(ean)?|void)[^\s]*"#)?;
+            let re_type = Regex::new(r#"(array|int(eger)?|float|string|bool(ean)?|void)[^\s]*"#)?;
             for d in doc {
                 // 先頭からtrim
                 let d = d.trim_start_matches(constant::TRIM_PATTERN);
