@@ -1,5 +1,5 @@
 [dir]
-read_dir = "./"
+read_dir = "./src"
 read_folder = ["*"] # Can use `*`
 create_dir = "./"
 
@@ -15,12 +15,13 @@ read_lang = "rust"
 read_ext = "rs"
 # Comment
 # Supported symbol => `/`, `*`, `#`, `"`,
-cmt_start = ""
+cmt_start = "///"
 # Target syntax
 # ["function","class",...]
-target_list = ["fn"]
+target_list = ["fn","pub fn","impl","pub enum","struct","pub struct"]
 
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-exclude_file = [""]
+exclude_file = ["mod"]
+exclude_folder = ["constant"]
