@@ -1,3 +1,5 @@
+# Only syntax enclosed in blocks can be documented
+
 [dir]
 read_dir = "./src"
 read_folder = ["*"] # Can use `*`
@@ -24,8 +26,8 @@ modifier = ["pub"]
 [exclude]
 # ["Name of the file to exclude", ...]
 # Pattern match from the top
-exclude_file = ["mod","constant"]
-exclude_folder = ["constant"]
+exclude_file = []
+exclude_folder = []
 
 [name]
 # If empty, it will be "`read_lang`doc"
