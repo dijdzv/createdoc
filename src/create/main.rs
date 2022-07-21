@@ -50,7 +50,7 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
             stem_name, stem_name, stem_name
         ));
 
-        for (target_name, doc, content) in file_vec {
+        for (_, target_name, doc, content) in file_vec {
             // .pair
             output.add(r#"<div class="pair">"#);
 

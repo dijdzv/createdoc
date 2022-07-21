@@ -139,7 +139,7 @@ pub struct ReadData {
     content: Vec<String>,
     pub target_name: String,
     pub syntax: String,
-    file_vec: Vec<(String, Vec<String>, Vec<String>)>,
+    file_vec: Vec<(String, String, Vec<String>, Vec<String>)>,
     pub dir_vec: DirVec,
     pub cmt_start: String,
     pub target_list: HashMap<String, Vec<String>>,
@@ -147,7 +147,7 @@ pub struct ReadData {
     pub is_content: bool,
     pub read_dir: String,
 }
-pub type DirVec = Vec<(String, Vec<(String, Vec<String>, Vec<String>)>)>;
+pub type DirVec = Vec<(String, Vec<(String, String, Vec<String>, Vec<String>)>)>;
 
 impl ReadData {
     pub fn clear_content(&mut self) {
@@ -193,6 +193,7 @@ impl ReadData {
     }
     pub fn push_file_vec(&mut self) {
         self.file_vec.push((
+            self.syntax.to_owned(),
             self.target_name.to_owned(),
             self.doc.to_owned(),
             self.content.to_owned(),
@@ -203,7 +204,7 @@ impl ReadData {
             .dir_vec
             .iter_mut()
             .map(|(f, file_vec)| {
-                file_vec.sort_by(|a, b| a.0.cmp(&b.0));
+                file_vec.sort_by(|a, b| a.1.cmp(&b.1));
                 (f.to_owned(), file_vec.clone())
             })
             .collect::<Vec<_>>();

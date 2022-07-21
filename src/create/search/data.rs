@@ -10,7 +10,7 @@ pub fn search_data(dir_vec: &DirVec) -> anyhow::Result<Vec<(&str, Vec<&str>)>> {
     for (filename, file_vec) in dir_vec {
         let target_names = file_vec
             .iter()
-            .map(|(t, _, _)| t.as_str())
+            .map(|(_, t, _, _)| t.as_str())
             .collect::<Vec<_>>();
         let stem_name = Path::new(filename)
             .file_stem()
