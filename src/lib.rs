@@ -55,6 +55,7 @@ struct Read {
     read_ext: String,
     cmt_start: String,
     target_list: Vec<String>,
+    modifier: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -103,6 +104,9 @@ impl Setting {
     }
     pub fn is_create_filename_exist(&self) -> bool {
         !self.name.create_filename.is_empty()
+    }
+    pub fn modifier(&self) -> &[String] {
+        &self.read.modifier
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir

@@ -18,7 +18,8 @@ read_ext = "rs"
 cmt_start = "///"
 # Target syntax
 # ["function","class",...]
-target_list = ["fn","pub fn","impl","pub enum","struct","pub struct"]
+target_list = ["fn","impl","enum","struct"]
+modifier = ["pub"]
 
 [exclude]
 # ["Name of the file to exclude", ...]
