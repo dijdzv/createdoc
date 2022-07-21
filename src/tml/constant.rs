@@ -28,6 +28,7 @@ exclude_file = [""]
 exclude_folder = [""]
 
 [name]
+# If empty, it will be "`read_lang`doc"
 create_name = ""
 "#;
 
