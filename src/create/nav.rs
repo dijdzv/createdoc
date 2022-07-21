@@ -35,10 +35,10 @@ pub fn create_nav(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> any
         output.add(format!("<ul class=\"n-target n-{}\">", filename));
 
         // li
-        for (_, target_name, _, _) in file_vec {
+        for (syntax, target_name, _, _) in file_vec {
             output.add(format!(
-                "<a href=\"#t-{}\"><li>{}</li></a>",
-                target_name, target_name
+                "<a href=\"#t-{}-{}\"><li>{}</li></a>",
+                syntax, target_name, target_name
             ));
         }
 

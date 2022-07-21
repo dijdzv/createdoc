@@ -22,7 +22,7 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
             "\"{}\",\"{}\"",
             k,
             v.iter()
-                .map(|f| format!("{} {}", k, f))
+                .map(|(_, f)| format!("{} {}", k, f))
                 .collect::<Vec<_>>()
                 .join("\",\"")
         ));
@@ -50,18 +50,18 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
             stem_name, stem_name, stem_name
         ));
 
-        for (_, target_name, doc, content) in file_vec {
+        for (syntax, target_name, doc, content) in file_vec {
             // .pair
             output.add(r#"<div class="pair">"#);
 
-            // syntax name
+            // target name
             output.add(
                 format!(
-                    "<h3 class=\"m-target_name\" id=\"t-{}\">
-                    <a href=\"#t-{}\">{}</a><input type=\"text\" class=\"hidden-input\" value=\"{}\">
+                    "<h3 class=\"m-target_name\" id=\"t-{0}-{1}\">
+                    <a href=\"#t-{0}-{1}\">{1}</a><input type=\"text\" class=\"hidden-input\" value=\"{1}\">
                     <i class=\"gg-copy\"></i><i class=\"gg-check dn\"></i>
                     </h3>",
-                    target_name, target_name, target_name, target_name,
+                    syntax,target_name
                 )
             );
 
