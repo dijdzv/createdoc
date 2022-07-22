@@ -130,24 +130,28 @@ impl Setting {
     }
 }
 
-/// file_vec: Vec<(TargetName, Doc, Content)>
-/// all: Vec<(FileName, FileVec)>
 #[derive(Debug)]
 pub struct ReadData {
     pub line: String,
     doc: Vec<String>,
     content: Vec<String>,
-    pub target_name: String,
-    pub syntax: String,
-    file_vec: Vec<(String, String, Vec<String>, Vec<String>)>,
-    pub all: AllVec,
+    pub target_name: TargetName,
+    pub syntax: Syntax,
+    file_vec: Vec<(Syntax, TargetName, Doc, Content)>,
+    pub all: Vec<(Filename, FileVec)>,
     pub cmt_start: String,
     pub target_list: HashMap<String, Vec<String>>,
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
 }
-pub type AllVec = Vec<(String, Vec<(String, String, Vec<String>, Vec<String>)>)>;
+type Syntax = String;
+type TargetName = String;
+type Doc = Vec<String>;
+type Content = Vec<String>;
+type Filename = String;
+type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
+pub type AllVec = Vec<(Filename, FileVec)>;
 
 impl ReadData {
     pub fn categorize_syntax(&self) -> HashMap<String, String> {
