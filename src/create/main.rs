@@ -1,20 +1,20 @@
 use super::search;
 use crate::create::constant;
 use crate::error::ErrorMsg;
-use createdoc::{DirVec, Output};
+use createdoc::{AllVec, Output};
 
 use anyhow::Context;
 use regex::Regex;
 use std::path::Path;
 
-pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_main(output: &mut Output, all: &AllVec, read_lang: &str) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
     // search
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
-    let search_data = search::search_data(dir_vec)?;
+    let search_data = search::search_data(all)?;
     search::search_result(output, &search_data);
     let mut buf = Vec::new();
     for (k, v) in search_data {
@@ -34,7 +34,7 @@ pub fn create_main(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> an
 
     output.add("</div>");
 
-    for (filename, file_vec) in dir_vec {
+    for (filename, file_vec) in all {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 

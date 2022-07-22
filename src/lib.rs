@@ -131,7 +131,7 @@ impl Setting {
 }
 
 /// file_vec: Vec<(TargetName, Doc, Content)>
-/// dir_vec: Vec<(FileName, FileVec)>
+/// all: Vec<(FileName, FileVec)>
 #[derive(Debug)]
 pub struct ReadData {
     pub line: String,
@@ -140,16 +140,21 @@ pub struct ReadData {
     pub target_name: String,
     pub syntax: String,
     file_vec: Vec<(String, String, Vec<String>, Vec<String>)>,
-    pub dir_vec: DirVec,
+    pub all: AllVec,
     pub cmt_start: String,
     pub target_list: HashMap<String, Vec<String>>,
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
 }
-pub type DirVec = Vec<(String, Vec<(String, String, Vec<String>, Vec<String>)>)>;
+pub type AllVec = Vec<(String, Vec<(String, String, Vec<String>, Vec<String>)>)>;
 
 impl ReadData {
+    pub fn categorize_syntax(&self) -> HashMap<String, String> {
+        let mut h = HashMap::new();
+
+        h
+    }
     pub fn clear_content(&mut self) {
         self.content.clear();
     }
@@ -174,7 +179,7 @@ impl ReadData {
             target_name: String::new(),
             syntax: String::new(),
             file_vec: Vec::new(),
-            dir_vec: Vec::new(),
+            all: Vec::new(),
             cmt_start: setting.read.cmt_start.to_owned(),
             target_list: setting.combine_modifier_and_target_list(),
             is_doc: false,
@@ -182,11 +187,11 @@ impl ReadData {
             read_dir: setting.dir.read_dir.to_owned(),
         }
     }
+    pub fn push_all(&mut self, filename: String) {
+        self.all.push((filename, self.file_vec.to_owned()));
+    }
     pub fn push_content(&mut self) {
         self.content.push(self.line.to_owned());
-    }
-    pub fn push_dir_vec(&mut self, filename: String) {
-        self.dir_vec.push((filename, self.file_vec.to_owned()));
     }
     pub fn push_doc(&mut self) {
         self.doc.push(self.line.to_owned());
@@ -199,9 +204,9 @@ impl ReadData {
             self.content.to_owned(),
         ))
     }
-    pub fn sort_dir_vec(&mut self) {
+    pub fn sort_all(&mut self) {
         let mut sorted_file = self
-            .dir_vec
+            .all
             .iter_mut()
             .map(|(f, file_vec)| {
                 file_vec.sort_by(|a, b| a.1.cmp(&b.1));
@@ -211,6 +216,6 @@ impl ReadData {
 
         sorted_file.sort_by(|a, b| a.0.cmp(&b.0));
 
-        self.dir_vec = sorted_file;
+        self.all = sorted_file;
     }
 }

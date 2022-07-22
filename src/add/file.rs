@@ -19,7 +19,7 @@ pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow
         .parent()
         .with_context(|| ErrorMsg::Parent.as_str())?;
     if parent_filepath == Path::new(&read_data.read_dir) {
-        read_data.push_dir_vec(filename);
+        read_data.push_all(filename);
     } else {
         let parent_name = parent_filepath
             .strip_prefix(Path::new(&read_data.read_dir))?
@@ -27,7 +27,7 @@ pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow
             .with_context(|| ErrorMsg::ToStr.as_str())?
             .replace('\\', "::")
             .replace('/', "::");
-        read_data.push_dir_vec(format!("{}::{}", parent_name, filename));
+        read_data.push_all(format!("{}::{}", parent_name, filename));
     }
     read_data.clear_file_vec();
 

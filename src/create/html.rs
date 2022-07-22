@@ -2,11 +2,11 @@ use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use createdoc::{DirVec, Output};
+use createdoc::{AllVec, Output};
 
 use std::fs::File;
 
-pub fn create_html(create_filepath: &str, read_lang: &str, dir_vec: &DirVec) -> anyhow::Result<()> {
+pub fn create_html(create_filepath: &str, read_lang: &str, all: &AllVec) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();
     // html
@@ -18,9 +18,9 @@ pub fn create_html(create_filepath: &str, read_lang: &str, dir_vec: &DirVec) -> 
     // wrap
     output.add(r#"<div class="wrap">"#);
 
-    nav::create_nav(&mut output, dir_vec, read_lang)?;
+    nav::create_nav(&mut output, all, read_lang)?;
 
-    main::create_main(&mut output, dir_vec, read_lang)?;
+    main::create_main(&mut output, all, read_lang)?;
 
     // /wrap
     output.add("</div>");

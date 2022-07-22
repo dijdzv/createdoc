@@ -1,11 +1,11 @@
 use crate::error::ErrorMsg;
-use createdoc::{DirVec, Output};
+use createdoc::{AllVec, Output};
 
 use anyhow::Context;
 use chrono::Local;
 use std::path::Path;
 
-pub fn create_nav(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_nav(output: &mut Output, all: &AllVec, read_lang: &str) -> anyhow::Result<()> {
     // nav
     output.add("<nav>");
 
@@ -16,7 +16,7 @@ pub fn create_nav(output: &mut Output, dir_vec: &DirVec, read_lang: &str) -> any
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, file_vec) in dir_vec {
+    for (filename, file_vec) in all {
         // n-file
         output.add(r#"<div class="n-file">"#);
         // n-filename

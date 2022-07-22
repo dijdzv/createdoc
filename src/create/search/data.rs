@@ -1,15 +1,15 @@
 use crate::error::ErrorMsg;
-use createdoc::DirVec;
+use createdoc::AllVec;
 
 use anyhow::Context;
 use std::{collections::HashMap, path::Path};
 
 type SyntaxAndTarget<'a> = Vec<(&'a String, &'a String)>;
 
-pub fn search_data(dir_vec: &DirVec) -> anyhow::Result<Vec<(&str, SyntaxAndTarget)>> {
+pub fn search_data(all: &AllVec) -> anyhow::Result<Vec<(&str, SyntaxAndTarget)>> {
     let mut hashmap = HashMap::new();
 
-    for (filename, file_vec) in dir_vec {
+    for (filename, file_vec) in all {
         let syntax_and_target = file_vec
             .iter()
             .map(|(s, t, _, _)| (s, t))
