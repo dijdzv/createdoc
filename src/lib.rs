@@ -140,7 +140,7 @@ pub struct ReadData {
     file_vec: Vec<(Syntax, TargetName, Doc, Content)>,
     pub all: Vec<(Filename, FileVec)>,
     pub cmt_start: String,
-    pub target_list: HashMap<String, Vec<String>>,
+    pub target_list: HashMap<Syntax, Vec<String>>,
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
@@ -152,12 +152,24 @@ type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 pub type AllVec = Vec<(Filename, FileVec)>;
+type Categorized<'a> =
+    HashMap<&'a String, HashMap<&'a Filename, (&'a TargetName, &'a Doc, &'a Content)>>;
 
 impl ReadData {
-    pub fn categorize_syntax(&self) -> HashMap<String, String> {
-        let mut h = HashMap::new();
-
-        h
+    pub fn categorize_syntax(&self) -> Categorized {
+        let mut syntax_hash = HashMap::new();
+        for (filename, file_vec) in &self.all {
+            let mut file_hash = HashMap::new();
+            for (syntax, target_name, doc, content) in file_vec {
+                file_hash
+                    .entry(filename)
+                    .or_insert((target_name, doc, content));
+                syntax_hash
+                    .entry(syntax)
+                    .or_insert_with(|| file_hash.to_owned());
+            }
+        }
+        syntax_hash
     }
     pub fn clear_content(&mut self) {
         self.content.clear();
