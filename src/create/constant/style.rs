@@ -79,7 +79,11 @@ nav {
 .n-filename:hover{
   background-color: #00000033;
 }
-
+.n-syntax{
+  margin: 0 0 0 1.8rem;
+  padding: 0.2rem 0 0.3rem 0.2rem;
+  color: lightgreen;
+}
 .n-target {
   list-style: none;
   padding: 0;

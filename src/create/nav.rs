@@ -14,16 +14,17 @@ pub fn create_nav(
     // nav
     output.add("<nav>");
 
-    // category
+    // top
     output.add(r#"<a href=""><h2 class="html-filename">"#);
     output.add(format!("{}doc", read_lang));
     output.add("</h2></a>");
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, file_vec) in all {
+    for (filename, syntax_hash) in categorized {
         // n-file
         output.add(r#"<div class="n-file">"#);
+
         // n-filename
         let stem_name = Path::new(filename)
             .file_stem()
@@ -32,30 +33,70 @@ pub fn create_nav(
             .with_context(|| ErrorMsg::ToStr.as_str())?;
 
         output.add(format!(
-            "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
+            "<a href=\"#f-{}\"><h3 class=\"n-filename\" id=\"n-{}\">{}</h3></a>",
             stem_name, filename, stem_name
         ));
+        for (syntax, target_vec) in syntax_hash {
+            output.add(format!("<h4 class=\"n-syntax\">{}</h4>", syntax));
 
-        // n-target
-        output.add(format!("<ul class=\"n-target n-{}\">", filename));
+            for (target_name, _, _) in target_vec {
+                // n-target
+                output.add(format!("<ul class=\"n-target n-{}\">", filename));
 
-        // li
-        for (syntax, target_name, _, _) in file_vec {
-            output.add(format!(
-                "<a href=\"#t-{}-{}\"><li>{}</li></a>",
-                syntax, target_name, target_name
-            ));
+                // li
+                output.add(format!(
+                    "<a href=\"#t-{}-{}\"><li>{}</li></a>",
+                    syntax, target_name, target_name
+                ));
+
+                // /n-syntax
+                output.add("</ul>");
+            }
         }
-
-        // /n-syntax
-        output.add("</ul>");
-
         // n-file
         output.add("</div>");
     }
 
     // /n-folder
     output.add("</div>");
+
+    // //  n-folder
+    // output.add(r#"<div class="n-folder">"#);
+    // for (filename, file_vec) in all {
+    //     // n-file
+    //     output.add(r#"<div class="n-file">"#);
+    //     // n-filename
+    //     let stem_name = Path::new(filename)
+    //         .file_stem()
+    //         .with_context(|| ErrorMsg::FileStem.as_str())?
+    //         .to_str()
+    //         .with_context(|| ErrorMsg::ToStr.as_str())?;
+
+    //     output.add(format!(
+    //         "<a href=\"#f-{}\"><h4 class=\"n-filename\" id=\"n-{}\">{}</h4></a>",
+    //         stem_name, filename, stem_name
+    //     ));
+
+    //     // n-target
+    //     output.add(format!("<ul class=\"n-target n-{}\">", filename));
+
+    //     // li
+    //     for (syntax, target_name, _, _) in file_vec {
+    //         output.add(format!(
+    //             "<a href=\"#t-{}-{}\"><li>{}</li></a>",
+    //             syntax, target_name, target_name
+    //         ));
+    //     }
+
+    //     // /n-syntax
+    //     output.add("</ul>");
+
+    //     // n-file
+    //     output.add("</div>");
+    // }
+
+    // // /n-folder
+    // output.add("</div>");
 
     // footer
     let now = Local::now().format("%Y/%m/%d\n%H:%M:%S").to_string();

@@ -27,7 +27,17 @@ pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow
             .with_context(|| ErrorMsg::ToStr.as_str())?
             .replace('\\', "::")
             .replace('/', "::");
-        read_data.push_all(format!("{}::{}", parent_name, filename));
+        let dbg = parent_filepath
+            .strip_prefix(Path::new(&read_data.read_dir))?
+            .components()
+            .next()
+            .unwrap()
+            .as_os_str()
+            .to_str()
+            .unwrap();
+        dbg!(dbg);
+        read_data.push_all(format!("{}", dbg));
+        // read_data.push_all(format!("{}::{}", parent_name, filename));
     }
     read_data.clear_file_vec();
 

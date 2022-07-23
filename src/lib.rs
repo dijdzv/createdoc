@@ -152,27 +152,37 @@ type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 pub type AllVec = Vec<(Filename, FileVec)>;
-pub type Categorized<'a> = HashMap<&'a String, FileHash<'a>>;
-type FileHash<'a> = HashMap<&'a Filename, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
+pub type Categorized<'a> = HashMap<&'a Filename, SyntaxHash<'a>>;
+type SyntaxHash<'a> = HashMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
 
 impl ReadData {
     pub fn categorize_syntax(&self) -> Categorized {
-        let mut syntax_hash: Categorized = HashMap::new();
+        let mut mod_hash: Categorized = HashMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
-                syntax_hash
-                    .entry(syntax)
+                mod_hash
+                    .entry(filename)
                     .and_modify(|e| {
-                        e.entry(filename)
+                        e.entry(syntax)
                             .and_modify(|e| e.push((target_name, doc, content)))
                             .or_insert_with(|| vec![(target_name, doc, content)]);
                     })
                     .or_insert_with(|| {
-                        HashMap::from([(filename, vec![(target_name, doc, content)])])
+                        HashMap::from([(syntax, vec![(target_name, doc, content)])])
                     });
+                // mod_hash
+                //     .entry(syntax)
+                //     .and_modify(|e| {
+                //         e.entry(filename)
+                //             .and_modify(|e| e.push((target_name, doc, content)))
+                //             .or_insert_with(|| vec![(target_name, doc, content)]);
+                //     })
+                //     .or_insert_with(|| {
+                //         HashMap::from([(filename, vec![(target_name, doc, content)])])
+                //     });
             }
         }
-        syntax_hash
+        mod_hash
     }
     pub fn clear_content(&mut self) {
         self.content.clear();
