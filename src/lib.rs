@@ -152,7 +152,7 @@ type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 pub type AllVec = Vec<(Filename, FileVec)>;
-type Categorized<'a> = HashMap<&'a String, FileHash<'a>>;
+pub type Categorized<'a> = HashMap<&'a String, FileHash<'a>>;
 type FileHash<'a> = HashMap<&'a Filename, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
 
 impl ReadData {

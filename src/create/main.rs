@@ -1,13 +1,18 @@
 use super::search;
 use crate::create::constant;
 use crate::error::ErrorMsg;
-use createdoc::{AllVec, Output};
+use createdoc::{AllVec, Categorized, Output};
 
 use anyhow::Context;
 use regex::Regex;
 use std::path::Path;
 
-pub fn create_main(output: &mut Output, all: &AllVec, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_main(
+    output: &mut Output,
+    all: &AllVec,
+    categorized: &Categorized,
+    read_lang: &str,
+) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
