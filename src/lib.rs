@@ -152,20 +152,24 @@ type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 pub type AllVec = Vec<(Filename, FileVec)>;
-type Categorized<'a> = HashMap<&'a String, Vec<FileHash<'a>>>;
-type FileHash<'a> = HashMap<&'a Filename, (&'a TargetName, &'a Doc, &'a Content)>;
+type Categorized<'a> = HashMap<&'a String, FileHash<'a>>;
+type FileHash<'a> = HashMap<&'a Filename, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
 
 impl ReadData {
     pub fn categorize_syntax(&self) -> Categorized {
         let mut syntax_hash: Categorized = HashMap::new();
         for (filename, file_vec) in &self.all {
-            let mut file_hash: FileHash = HashMap::new();
             for (syntax, target_name, doc, content) in file_vec {
-                file_hash.insert(filename, (target_name, doc, content));
                 syntax_hash
                     .entry(syntax)
-                    .and_modify(|e| e.push(file_hash.to_owned()))
-                    .or_insert_with(|| vec![file_hash.to_owned()]);
+                    .and_modify(|e| {
+                        e.entry(filename)
+                            .and_modify(|e| e.push((target_name, doc, content)))
+                            .or_insert_with(|| vec![(target_name, doc, content)]);
+                    })
+                    .or_insert_with(|| {
+                        HashMap::from([(filename, vec![(target_name, doc, content)])])
+                    });
             }
         }
         syntax_hash
