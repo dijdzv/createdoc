@@ -23,6 +23,13 @@ fn app() -> anyhow::Result<String> {
 
     add::add_control(filepaths, &mut read_data)?;
 
+    for (s, shv) in read_data.categorize_syntax() {
+        for sh in &shv {
+            for t in sh.values() {
+                println!("{}: {}", s, t.0);
+            }
+        }
+    }
     create::create_html(
         &setting.create_filepath(),
         setting.read_lang(),
