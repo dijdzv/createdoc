@@ -21,23 +21,28 @@ pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow
     if parent_filepath == Path::new(&read_data.read_dir) {
         read_data.push_all(filename);
     } else {
-        let parent_name = parent_filepath
-            .strip_prefix(Path::new(&read_data.read_dir))?
-            .to_str()
-            .with_context(|| ErrorMsg::ToStr.as_str())?
-            .replace('\\', "::")
-            .replace('/', "::");
-        let dbg = parent_filepath
-            .strip_prefix(Path::new(&read_data.read_dir))?
-            .components()
-            .next()
-            .unwrap()
-            .as_os_str()
-            .to_str()
-            .unwrap();
-        dbg!(dbg);
-        read_data.push_all(format!("{}", dbg));
-        // read_data.push_all(format!("{}::{}", parent_name, filename));
+        let name = if read_data.is_module {
+            parent_filepath
+                .strip_prefix(Path::new(&read_data.read_dir))?
+                .components()
+                .next()
+                .unwrap()
+                .as_os_str()
+                .to_string_lossy()
+                .into_owned()
+        } else {
+            format!(
+                "{}::{}",
+                parent_filepath
+                    .strip_prefix(Path::new(&read_data.read_dir))?
+                    .to_string_lossy()
+                    .into_owned()
+                    .replace('\\', "::")
+                    .replace('/', "::"),
+                filename
+            )
+        };
+        read_data.push_all(name);
     }
     read_data.clear_file_vec();
 

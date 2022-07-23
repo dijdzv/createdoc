@@ -1,7 +1,7 @@
 use serde_derive::*;
 use std::{
     collections::HashMap,
-    fmt::Display,
+    fmt::Display as D,
     fs::File,
     io::{self, Write},
     path::Path,
@@ -13,7 +13,7 @@ pub struct Output {
 }
 
 impl Output {
-    pub fn add<T: Display>(&mut self, code: T) {
+    pub fn add<T: D>(&mut self, code: T) {
         *self = Self {
             code: format!("{}{}", self.code, code),
         };
@@ -40,7 +40,7 @@ pub struct Setting {
     dir: Dir,
     read: Read,
     exclude: Exclude,
-    name: Name,
+    display: Display,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -66,8 +66,9 @@ struct Exclude {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Name {
+struct Display {
     create_filename: String,
+    is_module: bool,
 }
 
 impl Setting {
@@ -85,7 +86,7 @@ impl Setting {
         &self.dir.create_dir
     }
     pub fn create_filename(&self) -> &str {
-        &self.name.create_filename
+        &self.display.create_filename
     }
     pub fn create_filepath(&self) -> String {
         if self.is_exist_create_filename() {
@@ -114,7 +115,10 @@ impl Setting {
         (self.exclude_file(), self.exclude_folder())
     }
     pub fn is_exist_create_filename(&self) -> bool {
-        !self.name.create_filename.is_empty()
+        !self.display.create_filename.is_empty()
+    }
+    pub fn is_module(&self) -> bool {
+        self.display.is_module
     }
     pub fn read_dir(&self) -> &str {
         &self.dir.read_dir
@@ -144,6 +148,7 @@ pub struct ReadData {
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
+    pub is_module: bool,
 }
 type Syntax = String;
 type TargetName = String;
@@ -214,6 +219,7 @@ impl ReadData {
             is_doc: false,
             is_content: false,
             read_dir: setting.dir.read_dir.to_owned(),
+            is_module: setting.is_module(),
         }
     }
     pub fn push_all(&mut self, filename: String) {

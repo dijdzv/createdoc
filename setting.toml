@@ -29,6 +29,8 @@ modifier = ["pub"]
 exclude_file = []
 exclude_folder = []
 
-[name]
+[display]
 # If empty, it will be "`read_lang`doc"
 create_filename = "createdoc"
+# Per module or per file
+is_module = true

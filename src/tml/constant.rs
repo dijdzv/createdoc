@@ -29,9 +29,11 @@ target_list = [""]
 exclude_file = [""]
 exclude_folder = [""]
 
-[name]
+[display]
 # If empty, it will be "`read_lang`doc"
-create_name = ""
+create_filename = "createdoc"
+# Per module or per file
+is_module = true
 "#;
 
 pub const TOML_PATH: &str = "./setting.toml";
