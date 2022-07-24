@@ -24,7 +24,7 @@ pub fn create_html(
     // wrap
     output.add(r#"<div class="wrap">"#);
 
-    nav::create_nav(&mut output, all, categorized, read_lang)?;
+    nav::create_nav(&mut output, categorized, read_lang)?;
 
     main::create_main(&mut output, all, categorized, read_lang)?;
 
