@@ -146,6 +146,11 @@ main {
   border-bottom: solid 3px var(--color-standard);
 }
 
+.m-syntax{
+  color: var(--color-syntax);
+  margin: 0.5rem 0 0 1.8rem;
+}
+
 .pair {
   margin-left: 1rem;
   padding: 1rem;

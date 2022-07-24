@@ -19,7 +19,7 @@ pub fn create_main(
     // search
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
-    let search_data = search::search_data(all)?;
+    let search_data = search::search_data(all, categorized)?;
     search::search_result(output, &search_data);
     let mut buf = Vec::new();
     for (k, v) in search_data {
@@ -39,7 +39,7 @@ pub fn create_main(
 
     output.add("</div>");
 
-    for (filename, syntax_hah) in categorized {
+    for (filename, syntax_hash) in categorized {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
@@ -50,12 +50,19 @@ pub fn create_main(
             .to_str()
             .with_context(|| ErrorMsg::ToStr.as_str())?;
 
+        let a = syntax_hash
+            .to_owned()
+            .into_keys()
+            .map(|k| k.as_str())
+            .collect::<Vec<_>>()
+            .join(" ");
+
         output.add(format!(
-            "<h2 class=\"m-filename\" id=\"f-{}\"><a href=\"#f-{}\">{}</a></h2>",
-            stem_name, stem_name, stem_name
+            "<h2 class=\"m-filename\" id=\"f-{0}\"><a href=\"#f-{0}\">{0}</a><p class=\"m-syntax\">{1}</p></h2>",
+            stem_name, a
         ));
 
-        for (syntax, target_vec) in syntax_hah {
+        for (syntax, target_vec) in syntax_hash {
             for &(target_name, doc, content) in target_vec {
                 // .pair
                 output.add(r#"<div class="pair">"#);
