@@ -33,11 +33,11 @@ pub fn create_nav(
             .with_context(|| ErrorMsg::ToStr.as_str())?;
 
         output.add(format!(
-            "<a href=\"#f-{}\"><h3 class=\"n-filename\" id=\"n-{}\">{}</h3></a>",
+            "<a href=\"#f-{}\"><h2 class=\"n-filename\" id=\"n-{}\">{}</h2></a>",
             stem_name, filename, stem_name
         ));
         for (syntax, target_vec) in syntax_hash {
-            output.add(format!("<h4 class=\"n-syntax\">{}</h4>", syntax));
+            output.add(format!("<h3 class=\"n-syntax\">{}</h3>", syntax));
 
             for (target_name, _, _) in target_vec {
                 // n-target

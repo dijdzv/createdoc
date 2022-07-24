@@ -4,11 +4,13 @@ pub const STYLE: &str = r#"<style>
   --ggy: 1;
   --ggk: 1.5;
   --color-standard: #dddddd;
-  --color-name: #6dcff0;
+  --color-name: #fdbf35;
+  --color-syntax: #2dbfb8;
   --color-background: #3d3d3d;
   --color-nav-background: #505050;
   --color-nav-border: #717171;
   --color-scrollbar: #717171;
+  --color-hover: #00000022;
   /* --color-tag: #2cc92c; */
   --color-tag: #f07df8;
   --color-type: #f4c61f;
@@ -71,18 +73,25 @@ nav {
   display: none;
 }
 
+.n-file{
+  margin-bottom: 2rem;
+}
+
 .n-filename {
   cursor: pointer;
   margin: 0.8rem 0 0 1.8rem;
-  padding: 0.2rem 0 0.3rem 0.2rem;
+  padding: 0.2rem 0 0.2rem 0.2rem;
 }
 .n-filename:hover{
-  background-color: #00000033;
+  background-color: var(--color-hover);
 }
 .n-syntax{
   margin: 0 0 0 1.8rem;
-  padding: 0.2rem 0 0.3rem 0.2rem;
-  color: lightgreen;
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  color: var(--color-syntax);
+}
+.n-syntax:hover{
+  background-color: var(--color-hover);
 }
 .n-target {
   list-style: none;
@@ -97,13 +106,13 @@ nav {
   font-weight: 600;
   font-family: "Fira Sans",Arial,NanumBarunGothic,sans-serif;
   margin-left: 1.8rem;
-  padding: 0.2rem 0 0.3rem 0.2rem;
+  padding: 0.2rem 0 0.2rem 0.2rem;
   overflow-x: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .n-target li:hover{
-  background-color: #00000033;
+  background-color: var(--color-hover);
 }
 
 .n-target li::-webkit-scrollbar {
