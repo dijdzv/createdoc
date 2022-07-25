@@ -5,11 +5,11 @@ use std::collections::HashMap;
 pub type SyntaxAndTarget<'a> = Vec<(&'a String, Vec<&'a String>)>;
 
 pub fn search_data<'a>(
-    categorized: &'a AllData,
+    all_data: &'a AllData,
 ) -> anyhow::Result<Vec<(&'a String, SyntaxAndTarget<'a>)>> {
     let mut hashmap = HashMap::new();
 
-    for (filename, syntax_vec) in categorized {
+    for (filename, syntax_vec) in all_data {
         let syntax_and_target = syntax_vec
             .iter()
             .map(|(s, t)| (*s, t.iter().map(|t| t.0).collect::<Vec<_>>()))

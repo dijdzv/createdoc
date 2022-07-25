@@ -2,11 +2,7 @@ use createdoc::{AllData, Output};
 
 use chrono::Local;
 
-pub fn create_nav(
-    output: &mut Output,
-    categorized: &AllData,
-    read_lang: &str,
-) -> anyhow::Result<()> {
+pub fn create_nav(output: &mut Output, all_data: &AllData, read_lang: &str) -> anyhow::Result<()> {
     // nav
     output.add("<nav>");
 
@@ -17,7 +13,7 @@ pub fn create_nav(
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, syntax_vec) in categorized {
+    for (filename, syntax_vec) in all_data {
         // n-file
         output.add(r#"<div class="n-file">"#);
 

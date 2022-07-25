@@ -4,22 +4,18 @@ use createdoc::{AllData, Output};
 
 use regex::Regex;
 
-pub fn create_main(
-    output: &mut Output,
-    categorized: &AllData,
-    read_lang: &str,
-) -> anyhow::Result<()> {
+pub fn create_main(output: &mut Output, all_data: &AllData, read_lang: &str) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
     // search
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
-    let search_data = search::search_data(categorized)?;
+    let search_data = search::search_data(all_data)?;
     search::search_result(output, search_data);
     output.add("</div>");
 
-    for (filename, syntax_vec) in categorized {
+    for (filename, syntax_vec) in all_data {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 

@@ -9,7 +9,7 @@ use std::fs::File;
 pub fn create_html(
     create_filepath: &str,
     read_lang: &str,
-    categorized: &AllData,
+    all_data: &AllData,
 ) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();
@@ -22,9 +22,9 @@ pub fn create_html(
     // wrap
     output.add(r#"<div class="wrap">"#);
 
-    nav::create_nav(&mut output, categorized, read_lang)?;
+    nav::create_nav(&mut output, all_data, read_lang)?;
 
-    main::create_main(&mut output, categorized, read_lang)?;
+    main::create_main(&mut output, all_data, read_lang)?;
 
     // /wrap
     output.add("</div>");
