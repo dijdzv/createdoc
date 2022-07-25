@@ -1,5 +1,5 @@
 use crate::error::ErrorMsg;
-use createdoc::{AllVec, Categorized};
+use createdoc::{All, AllVec};
 
 use anyhow::Context;
 use std::{collections::HashMap, path::Path};
@@ -8,7 +8,7 @@ type SyntaxAndTarget<'a> = Vec<(&'a String, &'a String)>;
 
 pub fn search_data<'a>(
     all: &'a AllVec,
-    categorized: &'a Categorized,
+    categorized: &'a All,
 ) -> anyhow::Result<Vec<(&'a str, SyntaxAndTarget<'a>)>> {
     let mut hashmap = HashMap::new();
 

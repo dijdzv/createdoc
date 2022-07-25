@@ -20,7 +20,5 @@ pub fn add_control(filepaths: Vec<String>, read_data: &mut ReadData) -> anyhow::
         add_file(read_data, filepath)?;
     }
 
-    read_data.sort_all();
-
     Ok(())
 }

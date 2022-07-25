@@ -1,7 +1,7 @@
 use super::search;
 use crate::create::constant;
 use crate::error::ErrorMsg;
-use createdoc::{AllVec, Categorized, Output};
+use createdoc::{All, AllVec, Output};
 
 use anyhow::Context;
 use regex::Regex;
@@ -10,7 +10,7 @@ use std::path::Path;
 pub fn create_main(
     output: &mut Output,
     all: &AllVec,
-    categorized: &Categorized,
+    categorized: &All,
     read_lang: &str,
 ) -> anyhow::Result<()> {
     // main
@@ -39,7 +39,7 @@ pub fn create_main(
 
     output.add("</div>");
 
-    for (filename, syntax_hash) in categorized {
+    for (filename, syntax_vec) in categorized {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
@@ -50,10 +50,9 @@ pub fn create_main(
             .to_str()
             .with_context(|| ErrorMsg::ToStr.as_str())?;
 
-        let syntax_list = syntax_hash
-            .to_owned()
-            .into_keys()
-            .map(|k| k.as_str())
+        let syntax_list = syntax_vec
+            .iter()
+            .map(|k| k.0.as_str())
             .collect::<Vec<_>>()
             .join(" - ");
 
@@ -62,7 +61,7 @@ pub fn create_main(
             stem_name, syntax_list
         ));
 
-        for (syntax, target_vec) in syntax_hash {
+        for (syntax, target_vec) in syntax_vec {
             for &(target_name, doc, content) in target_vec {
                 // .pair
                 output.add(r#"<div class="pair">"#);

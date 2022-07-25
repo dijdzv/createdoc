@@ -157,11 +157,13 @@ type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 pub type AllVec = Vec<(Filename, FileVec)>;
-pub type Categorized<'a> = HashMap<&'a Filename, SyntaxHash<'a>>;
 type SyntaxHash<'a> = HashMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
+type Categorized<'a> = HashMap<&'a Filename, SyntaxHash<'a>>;
+type SyntaxVec<'a> = Vec<(&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>)>;
+pub type All<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
 
 impl ReadData {
-    pub fn categorize_syntax(&self) -> Categorized {
+    pub fn categorize_syntax(&self) -> All {
         let mut mod_hash: Categorized = HashMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
@@ -177,7 +179,28 @@ impl ReadData {
                     });
             }
         }
-        mod_hash
+
+        // sorted初期化（HashMapをVecに）
+        let mut sorted = mod_hash
+            .into_iter()
+            .map(|m| (m.0, m.1.into_iter().collect::<Vec<_>>()))
+            .collect::<Vec<_>>();
+
+        // モジュール名ソート
+        sorted.sort_by(|a, b| a.0.cmp(b.0));
+
+        // 構文名でソート
+        sorted
+            .iter_mut()
+            .for_each(|(_, s)| s.sort_by(|a, b| a.0.cmp(b.0)));
+
+        // 対象名でソート
+        sorted.iter_mut().for_each(|(_, s)| {
+            s.iter_mut()
+                .for_each(|(_, s)| s.sort_by(|a, b| a.0.cmp(b.0)));
+        });
+
+        sorted
     }
     pub fn clear_content(&mut self) {
         self.content.clear();

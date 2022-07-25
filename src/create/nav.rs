@@ -1,15 +1,11 @@
 use crate::error::ErrorMsg;
-use createdoc::{Categorized, Output};
+use createdoc::{All, Output};
 
 use anyhow::Context;
 use chrono::Local;
 use std::path::Path;
 
-pub fn create_nav(
-    output: &mut Output,
-    categorized: &Categorized,
-    read_lang: &str,
-) -> anyhow::Result<()> {
+pub fn create_nav(output: &mut Output, categorized: &All, read_lang: &str) -> anyhow::Result<()> {
     // nav
     output.add("<nav>");
 
@@ -20,7 +16,7 @@ pub fn create_nav(
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, syntax_hash) in categorized {
+    for (filename, syntax_vec) in categorized {
         // n-file
         output.add(r#"<div class="n-file">"#);
 
@@ -35,7 +31,7 @@ pub fn create_nav(
             "<a href=\"#f-{}\"><h2 class=\"n-filename\" id=\"n-{}\">{}</h2></a>",
             stem_name, filename, stem_name
         ));
-        for (syntax, target_vec) in syntax_hash {
+        for (syntax, target_vec) in syntax_vec {
             output.add(format!("<h3 class=\"n-syntax\">{}</h3>", syntax));
 
             for (target_name, _, _) in target_vec {

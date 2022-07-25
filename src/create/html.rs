@@ -2,8 +2,7 @@ use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use createdoc::Categorized;
-use createdoc::{AllVec, Output};
+use createdoc::{All, AllVec, Output};
 
 use std::fs::File;
 
@@ -11,7 +10,7 @@ pub fn create_html(
     create_filepath: &str,
     read_lang: &str,
     all: &AllVec,
-    categorized: &Categorized,
+    categorized: &All,
 ) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();
