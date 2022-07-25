@@ -10,8 +10,8 @@ pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow
     }
     let filename = filepath
         .as_ref()
-        .file_name()
-        .with_context(|| ErrorMsg::FileName.as_str())?
+        .file_stem()
+        .with_context(|| ErrorMsg::FileStem.as_str())?
         .to_string_lossy()
         .into_owned();
     let parent_filepath = filepath

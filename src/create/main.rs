@@ -1,11 +1,8 @@
 use super::search;
 use crate::create::constant;
-use crate::error::ErrorMsg;
 use createdoc::{All, AllVec, Output};
 
-use anyhow::Context;
 use regex::Regex;
-use std::path::Path;
 
 pub fn create_main(
     output: &mut Output,
@@ -43,13 +40,6 @@ pub fn create_main(
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
-        // h2 m-filename
-        let stem_name = Path::new(filename)
-            .file_stem()
-            .with_context(|| ErrorMsg::FileStem.as_str())?
-            .to_str()
-            .with_context(|| ErrorMsg::ToStr.as_str())?;
-
         let syntax_list = syntax_vec
             .iter()
             .map(|k| k.0.as_str())
@@ -58,7 +48,7 @@ pub fn create_main(
 
         output.add(format!(
             "<h2 class=\"m-filename\" id=\"f-{0}\"><a href=\"#f-{0}\">{0}</a><span class=\"m-syntax\">{1}</span></h2>",
-            stem_name, syntax_list
+            filename, syntax_list
         ));
 
         for (syntax, target_vec) in syntax_vec {

@@ -26,6 +26,12 @@ pub fn search_data<'a>(
         hashmap.insert(stem_name, syntax_and_target);
     }
 
+    // for (filename, syntax_vec) in categorized {
+    //     for (syntax, target) in syntax_vec {
+
+    //     }
+    // }
+
     let mut search_data = hashmap.into_iter().collect::<Vec<_>>();
     search_data.sort_by(|a, b| a.0.cmp(b.0));
     Ok(search_data)

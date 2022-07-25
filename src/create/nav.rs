@@ -1,9 +1,6 @@
-use crate::error::ErrorMsg;
 use createdoc::{All, Output};
 
-use anyhow::Context;
 use chrono::Local;
-use std::path::Path;
 
 pub fn create_nav(output: &mut Output, categorized: &All, read_lang: &str) -> anyhow::Result<()> {
     // nav
@@ -21,15 +18,9 @@ pub fn create_nav(output: &mut Output, categorized: &All, read_lang: &str) -> an
         output.add(r#"<div class="n-file">"#);
 
         // n-filename
-        let stem_name = Path::new(filename)
-            .file_stem()
-            .with_context(|| ErrorMsg::FileStem.as_str())?
-            .to_str()
-            .with_context(|| ErrorMsg::ToStr.as_str())?;
-
         output.add(format!(
-            "<a href=\"#f-{}\"><h2 class=\"n-filename\" id=\"n-{}\">{}</h2></a>",
-            stem_name, filename, stem_name
+            "<a href=\"#f-{}\"><h2 class=\"n-filename\" id=\"n-{0}\">{0}</h2></a>",
+            filename
         ));
         for (syntax, target_vec) in syntax_vec {
             output.add(format!("<h3 class=\"n-syntax\">{}</h3>", syntax));
