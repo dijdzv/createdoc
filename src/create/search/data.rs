@@ -1,38 +1,25 @@
-use crate::error::ErrorMsg;
 use createdoc::{All, AllVec};
 
-use anyhow::Context;
-use std::{collections::HashMap, path::Path};
+use std::collections::HashMap;
 
-type SyntaxAndTarget<'a> = Vec<(&'a String, &'a String)>;
+type SyntaxAndTarget<'a> = Vec<(&'a String, Vec<&'a String>)>;
 
 pub fn search_data<'a>(
     all: &'a AllVec,
     categorized: &'a All,
-) -> anyhow::Result<Vec<(&'a str, SyntaxAndTarget<'a>)>> {
+) -> anyhow::Result<Vec<(&'a String, SyntaxAndTarget<'a>)>> {
     let mut hashmap = HashMap::new();
 
-    for (filename, file_vec) in all {
-        let syntax_and_target = file_vec
+    for (filename, syntax_vec) in categorized {
+        let syntax_and_target = syntax_vec
             .iter()
-            .map(|(s, t, _, _)| (s, t))
+            .map(|(s, t)| (*s, t.iter().map(|t| t.0).collect::<Vec<_>>()))
             .collect::<Vec<_>>();
-        let stem_name = Path::new(filename)
-            .file_stem()
-            .with_context(|| ErrorMsg::FileStem.as_str())?
-            .to_str()
-            .with_context(|| ErrorMsg::ToStr.as_str())?;
 
-        hashmap.insert(stem_name, syntax_and_target);
+        hashmap.insert(*filename, syntax_and_target);
     }
 
-    // for (filename, syntax_vec) in categorized {
-    //     for (syntax, target) in syntax_vec {
-
-    //     }
-    // }
-
     let mut search_data = hashmap.into_iter().collect::<Vec<_>>();
-    search_data.sort_by(|a, b| a.0.cmp(b.0));
+    search_data.sort_by(|a, b| a.0.cmp(&b.0));
     Ok(search_data)
 }

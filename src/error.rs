@@ -3,7 +3,6 @@ pub enum ErrorMsg {
     FileStem,
     Get,
     Parent,
-    ToStr,
 }
 
 impl ErrorMsg {
@@ -14,7 +13,6 @@ impl ErrorMsg {
             FileStem => "There is no file name.",
             Get => "Failed to obtain target name.",
             Parent => "The loaded Path ends with root or prefix.",
-            ToStr => "The loaded file name is not in valid Unicode.",
         }
     }
 }

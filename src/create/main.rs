@@ -17,23 +17,7 @@ pub fn create_main(
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
     let search_data = search::search_data(all, categorized)?;
-    search::search_result(output, &search_data);
-    let mut buf = Vec::new();
-    for (k, v) in search_data {
-        buf.push(format!(
-            "\"{}\",\"{}\"",
-            k,
-            v.iter()
-                .map(|(_, f)| format!("{} {}", k, f))
-                .collect::<Vec<_>>()
-                .join("\",\"")
-        ));
-    }
-    output.add(format!(
-        "<script>const searchData = [{}]\n</script>",
-        buf.join(",")
-    ));
-
+    search::search_result(output, search_data);
     output.add("</div>");
 
     for (filename, syntax_vec) in categorized {

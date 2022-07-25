@@ -252,18 +252,4 @@ impl ReadData {
             self.content.to_owned(),
         ))
     }
-    pub fn sort_all(&mut self) {
-        let mut sorted_file = self
-            .all
-            .iter_mut()
-            .map(|(f, file_vec)| {
-                file_vec.sort_by(|a, b| a.1.cmp(&b.1));
-                (f.to_owned(), file_vec.clone())
-            })
-            .collect::<Vec<_>>();
-
-        sorted_file.sort_by(|a, b| a.0.cmp(&b.0));
-
-        self.all = sorted_file;
-    }
 }
