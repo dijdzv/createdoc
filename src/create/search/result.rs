@@ -15,7 +15,7 @@ pub fn search_result(
             for target_name in target_names {
                 output.add(
                 format!(
-                    "<a href=\"#t-{0}-{1}\"><li class=\"search-list dn\">{2}{0}<span class=\"s-target_name\">{1}</span></li></a>",
+                    "<a href=\"#t-{0}-{1}\"><li class=\"search-list dn\">{2}<span class=\"s-syntax\">{0}</span><span class=\"s-target_name\">{1}</span></li></a>",
                    syntax, target_name, filename
                 )
             );

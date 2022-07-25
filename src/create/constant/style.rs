@@ -352,6 +352,11 @@ a {
   margin-left: 0.5rem;
 }
 
+.s-syntax{
+  color: var(--color-syntax);
+  margin-left: 0.5rem;
+}
+
 .gg-search {
     box-sizing: border-box;
     position: relative;
