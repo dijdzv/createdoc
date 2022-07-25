@@ -1,8 +1,7 @@
 # createdoc
 
-関数等のhtmlファイルの生成
+関数等の html ファイルの生成
 
 ### memo
 
-path.file_stemは全て(nightlyの)file_prefixnにした方が良い
-
+path.file_stem は全て(nightly の)file_prefix にした方が良い？
