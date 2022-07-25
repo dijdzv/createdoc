@@ -1,10 +1,14 @@
 use super::search;
 use crate::create::constant;
-use createdoc::{All, Output};
+use createdoc::{AllData, Output};
 
 use regex::Regex;
 
-pub fn create_main(output: &mut Output, categorized: &All, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_main(
+    output: &mut Output,
+    categorized: &AllData,
+    read_lang: &str,
+) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 

@@ -2,14 +2,14 @@ use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use createdoc::{All, Output};
+use createdoc::{AllData, Output};
 
 use std::fs::File;
 
 pub fn create_html(
     create_filepath: &str,
     read_lang: &str,
-    categorized: &All,
+    categorized: &AllData,
 ) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
     let mut output = Output::new();

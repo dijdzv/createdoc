@@ -1,8 +1,12 @@
-use createdoc::{All, Output};
+use createdoc::{AllData, Output};
 
 use chrono::Local;
 
-pub fn create_nav(output: &mut Output, categorized: &All, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_nav(
+    output: &mut Output,
+    categorized: &AllData,
+    read_lang: &str,
+) -> anyhow::Result<()> {
     // nav
     output.add("<nav>");
 

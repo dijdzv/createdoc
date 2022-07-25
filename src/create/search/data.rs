@@ -1,11 +1,11 @@
-use createdoc::All;
+use createdoc::AllData;
 
 use std::collections::HashMap;
 
 pub type SyntaxAndTarget<'a> = Vec<(&'a String, Vec<&'a String>)>;
 
 pub fn search_data<'a>(
-    categorized: &'a All,
+    categorized: &'a AllData,
 ) -> anyhow::Result<Vec<(&'a String, SyntaxAndTarget<'a>)>> {
     let mut hashmap = HashMap::new();
 

@@ -159,10 +159,10 @@ type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
 type SyntaxHash<'a> = HashMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
 type Categorized<'a> = HashMap<&'a Filename, SyntaxHash<'a>>;
 type SyntaxVec<'a> = Vec<(&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>)>;
-pub type All<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
+pub type AllData<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
 
 impl ReadData {
-    pub fn syntax_categorize(&self) -> All {
+    pub fn syntax_categorize(&self) -> AllData {
         let mut mod_hash: Categorized = HashMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
