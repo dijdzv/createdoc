@@ -50,16 +50,16 @@ pub fn create_main(
             .to_str()
             .with_context(|| ErrorMsg::ToStr.as_str())?;
 
-        let a = syntax_hash
+        let syntax_list = syntax_hash
             .to_owned()
             .into_keys()
             .map(|k| k.as_str())
             .collect::<Vec<_>>()
-            .join(" ");
+            .join(" - ");
 
         output.add(format!(
-            "<h2 class=\"m-filename\" id=\"f-{0}\"><a href=\"#f-{0}\">{0}</a><p class=\"m-syntax\">{1}</p></h2>",
-            stem_name, a
+            "<h2 class=\"m-filename\" id=\"f-{0}\"><a href=\"#f-{0}\">{0}</a><span class=\"m-syntax\">{1}</span></h2>",
+            stem_name, syntax_list
         ));
 
         for (syntax, target_vec) in syntax_hash {

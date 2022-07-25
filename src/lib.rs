@@ -175,16 +175,6 @@ impl ReadData {
                     .or_insert_with(|| {
                         HashMap::from([(syntax, vec![(target_name, doc, content)])])
                     });
-                // mod_hash
-                //     .entry(syntax)
-                //     .and_modify(|e| {
-                //         e.entry(filename)
-                //             .and_modify(|e| e.push((target_name, doc, content)))
-                //             .or_insert_with(|| vec![(target_name, doc, content)]);
-                //     })
-                //     .or_insert_with(|| {
-                //         HashMap::from([(filename, vec![(target_name, doc, content)])])
-                //     });
             }
         }
         mod_hash

@@ -90,9 +90,9 @@ nav {
   padding: 0.2rem 0 0.2rem 0.2rem;
   color: var(--color-syntax);
 }
-.n-syntax:hover{
+/* .n-syntax:hover{
   background-color: var(--color-hover);
-}
+} */
 .n-target {
   list-style: none;
   padding: 0;
@@ -149,6 +149,7 @@ main {
 .m-syntax{
   color: var(--color-syntax);
   margin: 0.5rem 0 0 1.8rem;
+  font-size: 1.2rem;
 }
 
 .pair {
