@@ -2,7 +2,7 @@ pub const TOML: &str = r#"## Only syntax enclosed in blocks can be documented
 
 [dir]
 read_dir = "./"
-# Can use `*`
+# Use `"*"` to read recursively all folders under `read_dir`
 # Specify by name or path
 read_folder = [""]
 create_dir = "./"
