@@ -1,6 +1,5 @@
 pub enum ErrorMsg {
     Captures,
-    FileName,
     FileStem,
     Get,
     Parent,
@@ -12,7 +11,6 @@ impl ErrorMsg {
         use ErrorMsg::*;
         match *self {
             Captures => "Contains invalid characters. [ASCII[a-zA-Z],digit,Unicode[(unknown)]]",
-            FileName => "The loaded path is terminated with `..`.",
             FileStem => "There is no file name.",
             Get => "Failed to obtain target name.",
             Parent => "The loaded Path ends with root or prefix.",
