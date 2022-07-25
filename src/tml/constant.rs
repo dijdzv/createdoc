@@ -23,6 +23,7 @@ cmt_start = "/**"
 # Target syntax
 # ["function","class",...]
 target_list = [""]
+modifier = [""]
 
 [exclude]
 # ["Name of the file to exclude", ...]
@@ -31,7 +32,7 @@ exclude_folder = [""]
 
 [display]
 # If empty, it will be "`read_lang`doc"
-create_filename = "createdoc"
+create_filename = ""
 # Per module or per file
 is_module = true
 "#;
