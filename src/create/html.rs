@@ -2,14 +2,13 @@ use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use createdoc::{All, AllVec, Output};
+use createdoc::{All, Output};
 
 use std::fs::File;
 
 pub fn create_html(
     create_filepath: &str,
     read_lang: &str,
-    all: &AllVec,
     categorized: &All,
 ) -> anyhow::Result<()> {
     let mut file = File::create(create_filepath)?;
@@ -25,7 +24,7 @@ pub fn create_html(
 
     nav::create_nav(&mut output, categorized, read_lang)?;
 
-    main::create_main(&mut output, all, categorized, read_lang)?;
+    main::create_main(&mut output, categorized, read_lang)?;
 
     // /wrap
     output.add("</div>");

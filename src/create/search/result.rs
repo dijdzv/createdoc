@@ -1,9 +1,7 @@
+use super::data::SyntaxAndTarget;
 use createdoc::Output;
 
-pub fn search_result(
-    output: &mut Output,
-    search_data: Vec<(&String, Vec<(&String, Vec<&String>)>)>,
-) {
+pub fn search_result(output: &mut Output, search_data: Vec<(&String, SyntaxAndTarget)>) {
     output.add(r#"<div class="search-result"><ul>"#);
     for (filename, syntax_and_target) in &search_data {
         output.add(format!(

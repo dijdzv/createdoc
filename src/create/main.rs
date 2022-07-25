@@ -1,22 +1,17 @@
 use super::search;
 use crate::create::constant;
-use createdoc::{All, AllVec, Output};
+use createdoc::{All, Output};
 
 use regex::Regex;
 
-pub fn create_main(
-    output: &mut Output,
-    all: &AllVec,
-    categorized: &All,
-    read_lang: &str,
-) -> anyhow::Result<()> {
+pub fn create_main(output: &mut Output, categorized: &All, read_lang: &str) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
     // search
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
-    let search_data = search::search_data(all, categorized)?;
+    let search_data = search::search_data(categorized)?;
     search::search_result(output, search_data);
     output.add("</div>");
 

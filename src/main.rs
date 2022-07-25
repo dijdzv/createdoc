@@ -26,7 +26,6 @@ fn app() -> anyhow::Result<String> {
     create::create_html(
         &setting.create_filepath(),
         setting.read_lang(),
-        &read_data.all,
         &read_data.categorize_syntax(),
     )?;
 
