@@ -6,6 +6,7 @@ pub const STYLE: &str = r#"<style>
   --color-standard: #dddddd;
   --color-name: #fdbf35;
   --color-syntax: #2dbfb8;
+  /* --color-syntax: #d7acf2; */
   --color-background: #3d3d3d;
   --color-nav-background: #505050;
   --color-nav-border: #717171;
