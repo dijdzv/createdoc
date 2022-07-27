@@ -1,13 +1,20 @@
 mod add;
+mod app;
 mod create;
 mod error;
 mod read;
 mod tml;
 
-use createdoc::ReadData;
+use clap::App;
 
 fn main() {
-    match app() {
+    App::new(env!("CARGO_PKG_NAME"))
+        .version(env!("CARGO_PKG_VERSION"))
+        .author(env!("CARGO_PKG_AUTHORS"))
+        .about(env!("CARGO_PKG_DESCRIPTION"))
+        .get_matches();
+
+    match app::run() {
         Ok(create_filepath) => {
             println!(
                 "\x1b[32mCreated \x1b[34m`{}`\x1b[32m successfully!\x1b[m",
@@ -16,20 +23,4 @@ fn main() {
         }
         Err(e) => eprintln!("\x1b[31merror:\x1b[m {}", e),
     }
-}
-
-fn app() -> anyhow::Result<String> {
-    let setting = tml::read_toml()?;
-    let filepaths = read::read_control(&setting)?;
-    let mut read_data = ReadData::new(&setting);
-
-    add::add_control(filepaths, &mut read_data)?;
-
-    create::create_html(
-        &setting.create_filepath(),
-        setting.read_lang(),
-        &read_data.syntax_categorize(),
-    )?;
-
-    Ok(setting.create_filepath())
 }
