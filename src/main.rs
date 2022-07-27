@@ -9,7 +9,10 @@ use createdoc::ReadData;
 fn main() {
     match app() {
         Ok(create_filepath) => {
-            println!("\x1b[32mCreated `{}` successfully!\x1b[m", create_filepath)
+            println!(
+                "\x1b[32mCreated \x1b[34m`{}`\x1b[32m successfully!\x1b[m",
+                create_filepath
+            )
         }
         Err(e) => eprintln!("\x1b[31merror:\x1b[m {}", e),
     }
