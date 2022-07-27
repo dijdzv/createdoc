@@ -1,6 +1,6 @@
 [package]
 name = "createdoc"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["@shsy"]
 edition = "2021"
 description = "Document Generation Tool"
