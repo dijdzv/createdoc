@@ -13,6 +13,7 @@ fn read_recursive<P: AsRef<Path>>(
     if !path.as_ref().exists() {
         return Ok(());
     }
+
     let (mut read_filename, exist_folder) = read_dir(&path, ext, (exclude_file, exclude_folder))?;
     current.append(&mut read_filename);
     if exist_folder.is_empty() {
@@ -24,6 +25,9 @@ fn read_recursive<P: AsRef<Path>>(
         }
     } else {
         for f in read_folder {
+            if f.is_empty() {
+                continue;
+            };
             read_recursive(
                 current,
                 path.as_ref().join(f),
