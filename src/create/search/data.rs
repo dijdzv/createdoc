@@ -2,7 +2,7 @@ use createdoc::FileMap;
 
 use std::collections::HashMap;
 
-pub type SyntaxAndTarget<'a> = Vec<(&'a String, Vec<&'a String>)>;
+pub type SyntaxAndTarget<'a> = Vec<(&'a str, Vec<&'a String>)>;
 
 pub fn search_data<'a>(
     file_map: &'a FileMap,

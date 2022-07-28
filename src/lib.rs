@@ -161,7 +161,8 @@ type Doc = Vec<String>;
 type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
-type SyntaxMap<'a> = BTreeMap<&'a Syntax, BTreeMap<&'a TargetName, (&'a Doc, &'a Content)>>;
+// &strはSyntax
+type SyntaxMap<'a> = BTreeMap<&'a str, BTreeMap<&'a TargetName, (&'a Doc, &'a Content)>>;
 pub type FileMap<'a> = BTreeMap<&'a Filename, SyntaxMap<'a>>;
 
 impl ReadData {
@@ -179,7 +180,10 @@ impl ReadData {
                             .or_insert_with(|| BTreeMap::from([(target_name, (doc, content))]));
                     })
                     .or_insert_with(|| {
-                        BTreeMap::from([(syntax, BTreeMap::from([(target_name, (doc, content))]))])
+                        BTreeMap::from([(
+                            syntax.as_str(),
+                            BTreeMap::from([(target_name, (doc, content))]),
+                        )])
                     });
             }
         }

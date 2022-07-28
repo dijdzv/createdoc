@@ -19,10 +19,9 @@ pub fn create_main(output: &mut Output, file_map: &FileMap, read_lang: &str) -> 
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
-        // TODO into key
         let syntax_list = syntax_map
-            .iter()
-            .map(|k| k.0.as_str())
+            .to_owned()
+            .into_keys()
             .collect::<Vec<_>>()
             .join(" - ");
 
