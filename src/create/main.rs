@@ -1,25 +1,26 @@
 use super::search;
 use crate::create::constant;
-use createdoc::{AllData, Output};
+use createdoc::{FileMap, Output};
 
 use regex::Regex;
 
-pub fn create_main(output: &mut Output, all_data: &AllData, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_main(output: &mut Output, file_map: &FileMap, read_lang: &str) -> anyhow::Result<()> {
     // main
     output.add("<main>");
 
     // search
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
-    let search_data = search::search_data(all_data)?;
+    let search_data = search::search_data(file_map)?;
     search::search_result(output, search_data);
     output.add("</div>");
 
-    for (filename, syntax_vec) in all_data {
+    for (filename, syntax_map) in file_map {
         // m-file
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
-        let syntax_list = syntax_vec
+        // TODO into key
+        let syntax_list = syntax_map
             .iter()
             .map(|k| k.0.as_str())
             .collect::<Vec<_>>()
@@ -30,8 +31,8 @@ pub fn create_main(output: &mut Output, all_data: &AllData, read_lang: &str) -> 
             filename, syntax_list
         ));
 
-        for (syntax, target_vec) in syntax_vec {
-            for &(target_name, doc, content) in target_vec {
+        for (syntax, target_map) in syntax_map {
+            for (target_name, &(doc, content)) in target_map {
                 // .pair
                 output.add(r#"<div class="pair">"#);
 

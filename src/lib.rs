@@ -161,50 +161,30 @@ type Doc = Vec<String>;
 type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
-type SyntaxHash<'a> = BTreeMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
-type Categorized<'a> = BTreeMap<&'a Filename, SyntaxHash<'a>>;
-type SyntaxVec<'a> = Vec<(&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>)>;
-pub type AllData<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
+type SyntaxMap<'a> = BTreeMap<&'a Syntax, BTreeMap<&'a TargetName, (&'a Doc, &'a Content)>>;
+pub type FileMap<'a> = BTreeMap<&'a Filename, SyntaxMap<'a>>;
 
 impl ReadData {
-    pub fn syntax_categorize(&self) -> AllData {
-        let mut mod_map: Categorized = BTreeMap::new();
+    pub fn syntax_categorize(&self) -> FileMap {
+        let mut mod_map: FileMap = BTreeMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
                 mod_map
                     .entry(filename)
                     .and_modify(|e| {
                         e.entry(syntax)
-                            .and_modify(|e| e.push((target_name, doc, content)))
-                            .or_insert_with(|| vec![(target_name, doc, content)]);
+                            .and_modify(|e| {
+                                e.insert(target_name, (doc, content));
+                            })
+                            .or_insert_with(|| BTreeMap::from([(target_name, (doc, content))]));
                     })
                     .or_insert_with(|| {
-                        BTreeMap::from([(syntax, vec![(target_name, doc, content)])])
+                        BTreeMap::from([(syntax, BTreeMap::from([(target_name, (doc, content))]))])
                     });
             }
         }
 
-        // sorted初期化（HashMapをVecに）
-        let mut sorted = mod_map
-            .into_iter()
-            .map(|m| (m.0, m.1.into_iter().collect::<Vec<_>>()))
-            .collect::<Vec<_>>();
-
-        // モジュール名ソート
-        sorted.sort_by(|a, b| a.0.cmp(b.0));
-
-        // 構文名でソート
-        sorted
-            .iter_mut()
-            .for_each(|(_, s)| s.sort_by(|a, b| a.0.cmp(b.0)));
-
-        // 対象名でソート
-        sorted.iter_mut().for_each(|(_, s)| {
-            s.iter_mut()
-                .for_each(|(_, s)| s.sort_by(|a, b| a.0.cmp(b.0)));
-        });
-
-        sorted
+        mod_map
     }
     pub fn clear_content(&mut self) {
         self.content.clear();

@@ -1,8 +1,8 @@
-use createdoc::{AllData, Output};
+use createdoc::{FileMap, Output};
 
 use chrono::Local;
 
-pub fn create_nav(output: &mut Output, all_data: &AllData, read_lang: &str) -> anyhow::Result<()> {
+pub fn create_nav(output: &mut Output, file_map: &FileMap, read_lang: &str) -> anyhow::Result<()> {
     // nav
     output.add("<nav>");
 
@@ -13,7 +13,7 @@ pub fn create_nav(output: &mut Output, all_data: &AllData, read_lang: &str) -> a
 
     //  n-folder
     output.add(r#"<div class="n-folder">"#);
-    for (filename, syntax_vec) in all_data {
+    for (filename, syntax_map) in file_map {
         // n-file
         output.add(r#"<div class="n-file">"#);
 
@@ -22,10 +22,10 @@ pub fn create_nav(output: &mut Output, all_data: &AllData, read_lang: &str) -> a
             "<a href=\"#f-{}\"><h2 class=\"n-filename\" id=\"n-{0}\">{0}</h2></a>",
             filename
         ));
-        for (syntax, target_vec) in syntax_vec {
+        for (syntax, target_map) in syntax_map {
             output.add(format!("<h3 class=\"n-syntax\">{}</h3>", syntax));
 
-            for (target_name, _, _) in target_vec {
+            for (target_name, _) in target_map {
                 // n-target
                 output.add(format!("<ul class=\"n-target n-{}\">", filename));
 
