@@ -25,7 +25,7 @@ pub fn create_nav(output: &mut Output, file_map: &FileMap, read_lang: &str) -> a
         for (syntax, target_map) in syntax_map {
             output.add(format!("<h3 class=\"n-syntax\">{}</h3>", syntax));
 
-            for (target_name, _) in target_map {
+            for target_name in target_map.keys() {
                 // n-target
                 output.add(format!("<ul class=\"n-target n-{}\">", filename));
 
