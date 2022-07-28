@@ -1,36 +1,39 @@
 use serde_derive::*;
-use std::{
-    collections::HashMap,
-    fmt::Display as D,
-    fs::File,
-    io::{self, Write},
-    path::Path,
-};
+use std::{collections::BTreeMap, path::Path};
 
-/// ファイル出力用のstruct
-pub struct Output {
-    code: String,
-}
+pub use output::*;
 
-impl Output {
-    pub fn add<T: D>(&mut self, code: T) {
-        *self = Self {
-            code: format!("{}{}", self.code, code),
-        };
+pub mod output {
+    use std::{
+        fmt::Display as D,
+        fs::File,
+        io::{self, Write},
+    };
+    /// ファイル出力用のstruct
+    pub struct Output {
+        code: String,
     }
-    pub fn new() -> Self {
-        Output {
-            code: String::new(),
+
+    impl Output {
+        pub fn add<T: D>(&mut self, code: T) {
+            *self = Self {
+                code: format!("{}{}", self.code, code),
+            };
+        }
+        pub fn new() -> Self {
+            Output {
+                code: String::new(),
+            }
+        }
+        pub fn write(&self, file: &mut File) -> io::Result<()> {
+            file.write_all(self.code.as_bytes())
         }
     }
-    pub fn write(&self, file: &mut File) -> io::Result<()> {
-        file.write_all(self.code.as_bytes())
-    }
-}
 
-impl Default for Output {
-    fn default() -> Self {
-        Self::new()
+    impl Default for Output {
+        fn default() -> Self {
+            Self::new()
+        }
     }
 }
 
@@ -72,8 +75,8 @@ struct Display {
 }
 
 impl Setting {
-    pub fn combine_modifier_and_target_list(&self) -> HashMap<String, Vec<String>> {
-        let mut h = HashMap::new();
+    pub fn combine_modifier_and_target_list(&self) -> BTreeMap<String, Vec<String>> {
+        let mut h = BTreeMap::new();
         for t in &self.read.target_list {
             let ptr = h.entry(t.to_owned()).or_insert_with(|| vec![t.to_owned()]);
             for m in &self.read.modifier {
@@ -144,7 +147,7 @@ pub struct ReadData {
     file_vec: Vec<(Syntax, TargetName, Doc, Content)>,
     pub all: Vec<(Filename, FileVec)>,
     pub cmt_start: String,
-    pub target_list: HashMap<Syntax, Vec<String>>,
+    pub target_list: BTreeMap<Syntax, Vec<String>>,
     pub is_doc: bool,
     pub is_content: bool,
     pub read_dir: String,
@@ -156,14 +159,14 @@ type Doc = Vec<String>;
 type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
-type SyntaxHash<'a> = HashMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
-type Categorized<'a> = HashMap<&'a Filename, SyntaxHash<'a>>;
+type SyntaxHash<'a> = BTreeMap<&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>>;
+type Categorized<'a> = BTreeMap<&'a Filename, SyntaxHash<'a>>;
 type SyntaxVec<'a> = Vec<(&'a Syntax, Vec<(&'a TargetName, &'a Doc, &'a Content)>)>;
 pub type AllData<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
 
 impl ReadData {
     pub fn syntax_categorize(&self) -> AllData {
-        let mut mod_hash: Categorized = HashMap::new();
+        let mut mod_hash: Categorized = BTreeMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
                 mod_hash
@@ -174,7 +177,7 @@ impl ReadData {
                             .or_insert_with(|| vec![(target_name, doc, content)]);
                     })
                     .or_insert_with(|| {
-                        HashMap::from([(syntax, vec![(target_name, doc, content)])])
+                        BTreeMap::from([(syntax, vec![(target_name, doc, content)])])
                     });
             }
         }
