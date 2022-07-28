@@ -76,14 +76,16 @@ struct Display {
 
 impl Setting {
     pub fn combine_modifier_and_target_list(&self) -> BTreeMap<String, Vec<String>> {
-        let mut h = BTreeMap::new();
+        let mut map = BTreeMap::new();
         for t in &self.read.target_list {
-            let ptr = h.entry(t.to_owned()).or_insert_with(|| vec![t.to_owned()]);
+            let ptr = map
+                .entry(t.to_owned())
+                .or_insert_with(|| vec![t.to_owned()]);
             for m in &self.read.modifier {
                 ptr.push(format!("{} {}", m, t));
             }
         }
-        h
+        map
     }
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
@@ -166,10 +168,10 @@ pub type AllData<'a> = Vec<(&'a Filename, SyntaxVec<'a>)>;
 
 impl ReadData {
     pub fn syntax_categorize(&self) -> AllData {
-        let mut mod_hash: Categorized = BTreeMap::new();
+        let mut mod_map: Categorized = BTreeMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
-                mod_hash
+                mod_map
                     .entry(filename)
                     .and_modify(|e| {
                         e.entry(syntax)
@@ -183,7 +185,7 @@ impl ReadData {
         }
 
         // sorted初期化（HashMapをVecに）
-        let mut sorted = mod_hash
+        let mut sorted = mod_map
             .into_iter()
             .map(|m| (m.0, m.1.into_iter().collect::<Vec<_>>()))
             .collect::<Vec<_>>();
