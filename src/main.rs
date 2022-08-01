@@ -1,11 +1,5 @@
-mod add;
-mod app;
-mod create;
-mod error;
-mod read;
-mod tml;
-
 use clap::App;
+use createdoc::app;
 
 fn main() {
     App::new(env!("CARGO_PKG_NAME"))

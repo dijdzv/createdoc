@@ -1,5 +1,5 @@
 use super::read_dir;
-use createdoc::Setting;
+use crate::Setting;
 
 use std::{io, path::Path};
 

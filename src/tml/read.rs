@@ -1,6 +1,6 @@
 use crate::tml;
+use crate::Setting;
 use anyhow::bail;
-use createdoc::Setting;
 use std::{fs::read_to_string, io::ErrorKind, path::Path};
 
 pub fn read_toml() -> anyhow::Result<Setting> {

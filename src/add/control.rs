@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 use super::{add_file, add_line};
-use createdoc::ReadData;
+use crate::ReadData;
 
 pub fn add_control(filepaths: Vec<String>, read_data: &mut ReadData) -> anyhow::Result<()> {
     // folderに格納

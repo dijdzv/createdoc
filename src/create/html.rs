@@ -2,7 +2,7 @@ use super::constant;
 use super::main;
 use super::nav;
 use super::search;
-use createdoc::{FileMap, Output};
+use crate::{FileMap, Output};
 
 use std::fs::File;
 

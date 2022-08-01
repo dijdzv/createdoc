@@ -1,5 +1,5 @@
 use super::data::SyntaxAndTarget;
-use createdoc::Output;
+use crate::Output;
 
 pub fn search_result(output: &mut Output, search_data: Vec<(&String, SyntaxAndTarget)>) {
     output.add(r#"<div class="search-result"><ul>"#);

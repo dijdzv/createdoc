@@ -2,7 +2,7 @@ use anyhow::Context;
 use std::path::Path;
 
 use crate::error::ErrorMsg;
-use createdoc::ReadData;
+use crate::ReadData;
 
 pub fn add_file<P: AsRef<Path>>(read_data: &mut ReadData, filepath: P) -> anyhow::Result<()> {
     if read_data.is_empty_file_vec() {
