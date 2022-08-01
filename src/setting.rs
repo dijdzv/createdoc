@@ -1,4 +1,5 @@
 use serde_derive::*;
+use std::iter;
 use std::{collections::BTreeMap, path::Path};
 
 /// toml用のstruct
@@ -43,16 +44,21 @@ impl Setting {
         &self.read.cmt_start
     }
     pub fn combine_modifier_and_target_list(&self) -> BTreeMap<String, Vec<String>> {
-        let mut map = BTreeMap::new();
-        for t in &self.read.target_list {
-            let ptr = map
-                .entry(t.to_owned())
-                .or_insert_with(|| vec![t.to_owned()]);
-            for m in &self.read.modifier {
-                ptr.push(format!("{} {}", m, t));
-            }
-        }
-        map
+        self.read
+            .target_list
+            .iter()
+            .map(|target_name| {
+                (
+                    target_name.to_owned(),
+                    self.read
+                        .modifier
+                        .iter()
+                        .map(|modifier| format!("{} {}", modifier, target_name))
+                        .chain(iter::once(target_name.to_owned()))
+                        .collect(),
+                )
+            })
+            .collect()
     }
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir
