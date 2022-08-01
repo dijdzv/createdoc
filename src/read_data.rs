@@ -56,7 +56,24 @@ impl ReadData {
         }
         mod_map
 
-        // self.all.iter().map(|(filename,file_vec)|(filename,)).collect()
+        // * 抽象化できず
+        // self.all
+        //     .iter()
+        //     .map(|(filename, file_vec)| {
+        //         (
+        //             filename.clone(),
+        //             file_vec
+        //                 .iter()
+        //                 .map(|(syntax, target_name, doc, content)| {
+        //                     (
+        //                         syntax.clone(),
+        //                         (target_name.clone(), (doc.clone(), content.clone())),
+        //                     )
+        //                 })
+        //                 .collect(),
+        //         )
+        //     })
+        //     .collect()
     }
     pub fn clear_content(&mut self) {
         self.content.clear();
