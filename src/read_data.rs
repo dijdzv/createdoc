@@ -116,32 +116,131 @@ mod tests {
 
     #[test]
     fn _file名とsyntax名毎にカテゴライズ() {
-        let all = vec![(
-            "add".to_string(),
-            vec![(
-                "function".to_string(),
-                "add_num".to_string(),
-                vec!["add_numのDoc".to_string()],
-                vec!["add_numのcontents".to_string()],
-            )],
-        )];
-        let categorized = BTreeMap::from([(
-            "add".to_string(),
-            vec![(
-                "function".to_string(),
-                "add_num".to_string(),
-                vec!["add_numのDoc".to_string()],
-                vec!["add_numのcontents".to_string()],
-            )],
-        )]);
+        let all = vec![
+            (
+                "add".to_string(),
+                vec![
+                    (
+                        "fn".to_string(),
+                        "add_int".to_string(),
+                        vec!["add_intのDoc".to_string()],
+                        vec!["add_intのContent".to_string()],
+                    ),
+                    // syntaxが同じ
+                    (
+                        "fn".to_string(),
+                        "add_float".to_string(),
+                        vec!["add_floatのDoc".to_string()],
+                        vec!["add_floatのContent".to_string()],
+                    ),
+                    // syntaxが異なる
+                    (
+                        "struct".to_string(),
+                        "Add".to_string(),
+                        vec!["AddのDoc".to_string()],
+                        vec!["AddのContent".to_string()],
+                    ),
+                ],
+            ),
+            // fileが同じ
+            (
+                "add".to_string(),
+                vec![
+                    // syntaxが同じ
+                    (
+                        "fn".to_string(),
+                        "add_int".to_string(),
+                        vec!["add_intのDoc".to_string()],
+                        vec!["add_intのContent".to_string()],
+                    ),
+                    // syntaxが異なる
+                    (
+                        "impl".to_string(),
+                        "Add".to_string(),
+                        vec!["AddのDoc".to_string()],
+                        vec!["AddのContent".to_string()],
+                    ),
+                ],
+            ),
+            // fileが異なる
+            (
+                "sub".to_string(),
+                vec![(
+                    "fn".to_string(),
+                    "sub_int".to_string(),
+                    vec!["sub_intのDoc".to_string()],
+                    vec!["sub_intのContent".to_string()],
+                )],
+            ),
+        ];
+        let categorized = BTreeMap::from([
+            (
+                "add".to_string(),
+                BTreeMap::from([
+                    (
+                        "fn".to_string(),
+                        BTreeMap::from([
+                            (
+                                "add_int".to_string(),
+                                (
+                                    vec!["add_intのDoc".to_string()],
+                                    vec!["add_intのContent".to_string()],
+                                ),
+                            ),
+                            (
+                                "add_float".to_string(),
+                                (
+                                    vec!["add_floatのDoc".to_string()],
+                                    vec!["add_floatのContent".to_string()],
+                                ),
+                            ),
+                        ]),
+                    ),
+                    (
+                        "struct".to_string(),
+                        BTreeMap::from([(
+                            "Add".to_string(),
+                            (
+                                vec!["AddのDoc".to_string()],
+                                vec!["AddのContent".to_string()],
+                            ),
+                        )]),
+                    ),
+                    (
+                        "impl".to_string(),
+                        BTreeMap::from([(
+                            "Add".to_string(),
+                            (
+                                vec!["AddのDoc".to_string()],
+                                vec!["AddのContent".to_string()],
+                            ),
+                        )]),
+                    ),
+                ]),
+            ),
+            (
+                "sub".to_string(),
+                BTreeMap::from([(
+                    "fn".to_string(),
+                    BTreeMap::from([(
+                        "sub_int".to_string(),
+                        (
+                            vec!["sub_intのDoc".to_string()],
+                            vec!["sub_intのContent".to_string()],
+                        ),
+                    )]),
+                )]),
+            ),
+        ]);
         let read_data = ReadData {
+            all,
+            // ↓使わない
             line: String::new(),
             doc: Vec::new(),
             content: Vec::new(),
             target_name: String::new(),
             syntax: String::new(),
             file_vec: Vec::new(),
-            all,
             cmt_start: String::new(),
             target_list: BTreeMap::new(),
             is_doc: false,
@@ -150,6 +249,6 @@ mod tests {
             is_module: false,
         };
 
-        // assert_eq!(read_data.file_and_syntax_categorize(), categorized);
+        assert_eq!(read_data.file_and_syntax_categorize(), categorized);
     }
 }
