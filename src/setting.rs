@@ -59,6 +59,18 @@ impl Setting {
                 )
             })
             .collect()
+
+        // * low level
+        // let mut map = BTreeMap::new();
+        // for t in &self.read.target_list {
+        //     let ptr = map
+        //         .entry(t.to_owned())
+        //         .or_insert_with(|| vec![t.to_owned()]);
+        //     for m in &self.read.modifier {
+        //         ptr.push(format!("{} {}", m, t));
+        //     }
+        // }
+        // map
     }
     pub fn create_dir(&self) -> &str {
         &self.dir.create_dir

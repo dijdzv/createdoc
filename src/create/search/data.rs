@@ -2,20 +2,20 @@ use crate::FileMap;
 
 use std::collections::HashMap;
 
-pub type SyntaxAndTarget<'a> = Vec<(&'a str, Vec<&'a String>)>;
+pub type SyntaxAndTarget<'a> = Vec<(&'a String, Vec<&'a String>)>;
 
 pub fn search_data<'a>(
     file_map: &'a FileMap,
-) -> anyhow::Result<Vec<(&'a String, SyntaxAndTarget<'a>)>> {
+) -> anyhow::Result<Vec<(&'a String, SyntaxAndTarget)>> {
     let mut hashmap = HashMap::new();
 
     for (filename, syntax_map) in file_map {
         let syntax_and_target = syntax_map
             .iter()
-            .map(|(s, t)| (*s, t.iter().map(|(&t, _)| t).collect::<Vec<_>>()))
+            .map(|(s, t)| (s, t.iter().map(|(t, _)| t).collect::<Vec<_>>()))
             .collect::<Vec<_>>();
 
-        hashmap.insert(*filename, syntax_and_target);
+        hashmap.insert(filename, syntax_and_target);
     }
 
     let mut search_data = hashmap.into_iter().collect::<Vec<_>>();

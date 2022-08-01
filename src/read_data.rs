@@ -7,8 +7,8 @@ type Doc = Vec<String>;
 type Content = Vec<String>;
 type Filename = String;
 type FileVec = Vec<(Syntax, TargetName, Doc, Content)>;
-type SyntaxMap<'a> = BTreeMap<&'a str, BTreeMap<&'a TargetName, (&'a Doc, &'a Content)>>;
-pub type FileMap<'a> = BTreeMap<&'a Filename, SyntaxMap<'a>>;
+type SyntaxMap = BTreeMap<Syntax, BTreeMap<TargetName, (Doc, Content)>>;
+pub type FileMap = BTreeMap<Filename, SyntaxMap>;
 
 #[derive(Debug)]
 pub struct ReadData {
@@ -28,29 +28,41 @@ pub struct ReadData {
 }
 
 impl ReadData {
-    pub fn syntax_categorize(&self) -> FileMap {
+    pub fn file_and_syntax_categorize(&self) -> FileMap {
         let mut mod_map: FileMap = BTreeMap::new();
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
                 mod_map
-                    .entry(filename)
+                    .entry(filename.to_owned())
                     .and_modify(|e| {
-                        e.entry(syntax)
+                        e.entry(syntax.to_owned())
                             .and_modify(|e| {
-                                e.insert(target_name, (doc, content));
+                                e.insert(
+                                    target_name.to_owned(),
+                                    (doc.to_owned(), content.to_owned()),
+                                );
                             })
-                            .or_insert_with(|| BTreeMap::from([(target_name, (doc, content))]));
+                            .or_insert_with(|| {
+                                BTreeMap::from([(
+                                    target_name.to_owned(),
+                                    (doc.to_owned(), content.to_owned()),
+                                )])
+                            });
                     })
                     .or_insert_with(|| {
                         BTreeMap::from([(
-                            syntax.as_str(),
-                            BTreeMap::from([(target_name, (doc, content))]),
+                            syntax.to_owned(),
+                            BTreeMap::from([(
+                                target_name.to_owned(),
+                                (doc.to_owned(), content.to_owned()),
+                            )]),
                         )])
                     });
             }
         }
-
         mod_map
+
+        // self.all.iter().map(|(filename,file_vec)|(filename,)).collect()
     }
     pub fn clear_content(&mut self) {
         self.content.clear();
@@ -101,5 +113,49 @@ impl ReadData {
             self.doc.to_owned(),
             self.content.to_owned(),
         ))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn _file名とsyntax名毎にカテゴライズ() {
+        let all = vec![(
+            "add".to_string(),
+            vec![(
+                "function".to_string(),
+                "add_num".to_string(),
+                vec!["add_numのDoc".to_string()],
+                vec!["add_numのcontents".to_string()],
+            )],
+        )];
+        let categorized = BTreeMap::from([(
+            "add".to_string(),
+            vec![(
+                "function".to_string(),
+                "add_num".to_string(),
+                vec!["add_numのDoc".to_string()],
+                vec!["add_numのcontents".to_string()],
+            )],
+        )]);
+        let read_data = ReadData {
+            line: String::new(),
+            doc: Vec::new(),
+            content: Vec::new(),
+            target_name: String::new(),
+            syntax: String::new(),
+            file_vec: Vec::new(),
+            all,
+            cmt_start: String::new(),
+            target_list: BTreeMap::new(),
+            is_doc: false,
+            is_content: false,
+            read_dir: String::new(),
+            is_module: false,
+        };
+
+        // assert_eq!(read_data.file_and_syntax_categorize(), categorized);
     }
 }

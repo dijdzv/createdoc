@@ -1,9 +1,9 @@
 use super::data::SyntaxAndTarget;
 use crate::Output;
 
-pub fn search_result(output: &mut Output, search_data: Vec<(&String, SyntaxAndTarget)>) {
+pub fn search_result(output: &mut Output, search_data: &[(&String, SyntaxAndTarget)]) {
     output.add(r#"<div class="search-result"><ul>"#);
-    for (filename, syntax_and_target) in &search_data {
+    for (filename, syntax_and_target) in search_data {
         output.add(format!(
             "<a href=\"#f-{}\"><li class=\"search-list dn\">{}</li></a>",
             filename, filename
@@ -23,7 +23,7 @@ pub fn search_result(output: &mut Output, search_data: Vec<(&String, SyntaxAndTa
     output.add("</ul></div>");
 
     let mut buf = Vec::new();
-    for (filename, syntax_and_target) in &search_data {
+    for (filename, syntax_and_target) in search_data {
         buf.push(format!("\"{}\"", filename));
         for (syntax, target_names) in syntax_and_target {
             for target_name in target_names {

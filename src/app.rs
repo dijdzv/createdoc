@@ -11,7 +11,7 @@ pub fn run() -> anyhow::Result<String> {
     create::create_html(
         &setting.create_filepath(),
         setting.read_lang(),
-        &read_data.syntax_categorize(),
+        &read_data.file_and_syntax_categorize(),
     )?;
 
     Ok(setting.create_filepath())

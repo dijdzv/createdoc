@@ -12,7 +12,7 @@ pub fn create_main(output: &mut Output, file_map: &FileMap, read_lang: &str) -> 
     output.add(r#"<div class="search-area">"#);
     output.add(search::SEARCH_INPUT);
     let search_data = search::search_data(file_map)?;
-    search::search_result(output, search_data);
+    search::search_result(output, &search_data);
     output.add("</div>");
 
     for (filename, syntax_map) in file_map {
@@ -31,7 +31,7 @@ pub fn create_main(output: &mut Output, file_map: &FileMap, read_lang: &str) -> 
         ));
 
         for (syntax, target_map) in syntax_map {
-            for (target_name, &(doc, content)) in target_map {
+            for (target_name, (doc, content)) in target_map {
                 // .pair
                 output.add(r#"<div class="pair">"#);
 
