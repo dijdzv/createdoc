@@ -28,6 +28,16 @@ pub struct ReadData {
 }
 
 impl ReadData {
+    pub fn clear_content(&mut self) {
+        self.content.clear();
+    }
+    pub fn clear_doc(&mut self) {
+        self.doc.clear();
+    }
+    pub fn clear_file_vec(&mut self) {
+        self.file_vec.clear();
+    }
+    /// Returns the file and syntax categorize of this [`ReadData`].
     pub fn file_and_syntax_categorize(&self) -> FileMap {
         let mut mod_map: FileMap = BTreeMap::new();
         for (filename, file_vec) in &self.all {
@@ -74,15 +84,6 @@ impl ReadData {
         //         )
         //     })
         //     .collect()
-    }
-    pub fn clear_content(&mut self) {
-        self.content.clear();
-    }
-    pub fn clear_doc(&mut self) {
-        self.doc.clear();
-    }
-    pub fn clear_file_vec(&mut self) {
-        self.file_vec.clear();
     }
     pub fn html_escape(&mut self) {
         self.line = self.line.replace('<', "&lt");
