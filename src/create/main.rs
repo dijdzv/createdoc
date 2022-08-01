@@ -20,7 +20,7 @@ pub fn create_main(output: &mut Output, file_map: &FileMap, read_lang: &str) -> 
         output.add(format!("<div class=\"m-file m-{}\">", filename));
 
         let syntax_list = syntax_map
-            .to_owned()
+            .clone()
             .into_keys()
             .collect::<Vec<_>>()
             .join(" - ");

@@ -6,7 +6,7 @@ use regex::Regex;
 
 /// 関数とDocのvecを生成
 pub fn add_line(read_data: &mut ReadData) -> anyhow::Result<()> {
-    let line = read_data.line.to_owned();
+    let line = read_data.line.clone();
     for (k, v) in read_data.target_list.clone().into_iter() {
         for t in &v {
             if line.starts_with(t) {

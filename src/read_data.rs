@@ -33,29 +33,23 @@ impl ReadData {
         for (filename, file_vec) in &self.all {
             for (syntax, target_name, doc, content) in file_vec {
                 mod_map
-                    .entry(filename.to_owned())
+                    .entry(filename.clone())
                     .and_modify(|e| {
-                        e.entry(syntax.to_owned())
+                        e.entry(syntax.clone())
                             .and_modify(|e| {
-                                e.insert(
-                                    target_name.to_owned(),
-                                    (doc.to_owned(), content.to_owned()),
-                                );
+                                e.insert(target_name.clone(), (doc.clone(), content.clone()));
                             })
                             .or_insert_with(|| {
                                 BTreeMap::from([(
-                                    target_name.to_owned(),
-                                    (doc.to_owned(), content.to_owned()),
+                                    target_name.clone(),
+                                    (doc.clone(), content.clone()),
                                 )])
                             });
                     })
                     .or_insert_with(|| {
                         BTreeMap::from([(
-                            syntax.to_owned(),
-                            BTreeMap::from([(
-                                target_name.to_owned(),
-                                (doc.to_owned(), content.to_owned()),
-                            )]),
+                            syntax.clone(),
+                            BTreeMap::from([(target_name.clone(), (doc.clone(), content.clone()))]),
                         )])
                     });
             }
@@ -98,20 +92,20 @@ impl ReadData {
         }
     }
     pub fn push_all(&mut self, filename: String) {
-        self.all.push((filename, self.file_vec.to_owned()));
+        self.all.push((filename, self.file_vec.clone()));
     }
     pub fn push_content(&mut self) {
-        self.content.push(self.line.to_owned());
+        self.content.push(self.line.clone());
     }
     pub fn push_doc(&mut self) {
-        self.doc.push(self.line.to_owned());
+        self.doc.push(self.line.clone());
     }
     pub fn push_file_vec(&mut self) {
         self.file_vec.push((
-            self.syntax.to_owned(),
-            self.target_name.to_owned(),
-            self.doc.to_owned(),
-            self.content.to_owned(),
+            self.syntax.clone(),
+            self.target_name.clone(),
+            self.doc.clone(),
+            self.content.clone(),
         ))
     }
 }

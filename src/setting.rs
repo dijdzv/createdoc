@@ -49,12 +49,12 @@ impl Setting {
             .iter()
             .map(|target_name| {
                 (
-                    target_name.to_owned(),
+                    target_name.clone(),
                     self.read
                         .modifier
                         .iter()
                         .map(|modifier| format!("{} {}", modifier, target_name))
-                        .chain(iter::once(target_name.to_owned()))
+                        .chain(iter::once(target_name.clone()))
                         .collect(),
                 )
             })
@@ -64,8 +64,8 @@ impl Setting {
         // let mut map = BTreeMap::new();
         // for t in &self.read.target_list {
         //     let ptr = map
-        //         .entry(t.to_owned())
-        //         .or_insert_with(|| vec![t.to_owned()]);
+        //         .entry(t.clone())
+        //         .or_insert_with(|| vec![t.clone()]);
         //     for m in &self.read.modifier {
         //         ptr.push(format!("{} {}", m, t));
         //     }
