@@ -5,6 +5,10 @@ authors = ["@shsy"]
 edition = "2021"
 description = "Document Generation Tool"
 
+[[bin]]
+name = "crd"
+path = "./src/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
